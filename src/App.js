@@ -1,6 +1,8 @@
 import React, {useState, useEffect} from 'react';
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
 import LandingPage from "./containers/LandingPageContainer/LandingPage";
+import TestPage from "./containers/LandingPageContainer/TestPage";
+
 
 
 const App = ()=> {
@@ -9,6 +11,7 @@ const App = ()=> {
   const [loggedInPassword, setLoggedInPassword] = useState();
   const [userData, setUserData] = useState({});
   const [currentCharacter, setCurrentCharacter] = useState({});
+  const [loggedIn, setLoggedIn] = useState(false);
 
   const usernameAndPassword = [
     {username: "Emily", password: "3mily"},
@@ -24,6 +27,7 @@ const App = ()=> {
         console.log("Success");
         setLoggedInUsername(data.username)
         setLoggedInPassword(data.password)
+        setLoggedIn(true);
       }else{
         console.log("Failure");
       }
@@ -38,16 +42,25 @@ const App = ()=> {
     // .then(() => setLoaded(true))
 }
 
-  useEffect(() => {
-    getUserData();
-  }, [loggedInUsername])
+  // useEffect(() => {
+  //   getUserData();
+  // }, [loggedInUsername])
+
+  const render = () => {
+    if (loggedIn) {
+        return <Redirect to="/home" />
+    }
+    // ... rest of render method code
+}
+
   
   return (
     <Router>
       <>
         {/* <NavBar /> */}
         <Switch>
-        <Route exact path="/" render={() => <LandingPage onSubmit = {handleSubmit}></LandingPage>} />
+        <Route exact path="/" render={() => loggedIn? <Redirect to= "/testpage" /> : <LandingPage onSubmit = {handleSubmit}></LandingPage>} />
+        <Route path="/testpage" component={TestPage}/>
         </Switch>
       </>
     </Router>
