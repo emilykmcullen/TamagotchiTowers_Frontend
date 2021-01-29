@@ -46,13 +46,6 @@ const App = ()=> {
   //   getUserData();
   // }, [loggedInUsername])
 
-  const render = () => {
-    if (loggedIn) {
-        return <Redirect to="/home" />
-    }
-    // ... rest of render method code
-}
-
   
   return (
     <Router>
