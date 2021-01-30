@@ -1,4 +1,5 @@
 import React, {useState} from "react";
+import { BrowserRouter as Router, Route, Switch, Redirect, Link } from "react-router-dom";
 
 const ChoicePage = ({onSubmit}) => {
   
@@ -17,11 +18,15 @@ const ChoicePage = ({onSubmit}) => {
 
   return (
   <div>
-    <h4>Load or Create</h4>
-    <p>Choose to load a previously saved Tamagotchi or create a new one </p>
+    <h4>Create or Load</h4>
+    <p>Choose wheather to create a new Tamagotchi or load a previously saved Tamagotchi</p>
     <br></br>
-    <button>Load</button>
-    <button>Create</button>
+    <Link  from="/choicepage" to="/createpage">
+      <button type="button">
+          Create
+      </button>
+    </Link>
+      <button>Load</button>
   </div>
   )};
 

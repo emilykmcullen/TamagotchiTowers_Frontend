@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-d
 import LandingPage from "./containers/LandingPageContainer/LandingPage";
 import TestPage from "./containers/LandingPageContainer/TestPage";
 import ChoicePage from "./containers/LoadCreateContainer/ChoicePage";
+import CreatePage from "./containers/LoadCreateContainer/CreatePage";
 
 
 
@@ -55,6 +56,7 @@ const App = ()=> {
         <Switch>
         <Route exact path="/" render={() => loggedIn? <Redirect to= "/choicepage" /> : <LandingPage onSubmit = {handleSubmit}></LandingPage>} />
         <Route path="/choicepage" component={ChoicePage}/>
+        <Route path="/createpage" component={CreatePage}/>
         </Switch>
       </>
     </Router>
