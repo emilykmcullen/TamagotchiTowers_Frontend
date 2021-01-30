@@ -1,4 +1,5 @@
 import React, {useState} from "react";
+import { BrowserRouter as Router, Route, Switch, Redirect, Link } from "react-router-dom";
 
 const LandingPage = ({onSubmit}) => {
   const [formData, setFormData] = useState({
@@ -44,6 +45,11 @@ const LandingPage = ({onSubmit}) => {
       </div>
       <input onClick={handleSubmit} type="submit" value="submit" />
     </form>
+    <Link  from="/" to="/createpage">
+      <button type="button">
+          I'm new here!
+      </button>
+    </Link>
   </div>
   )};
 

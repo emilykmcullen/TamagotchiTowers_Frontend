@@ -1,9 +1,11 @@
 import React, {useState, useEffect} from 'react';
 import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
+import NavBar from "./containers/LandingPageContainer/NavBar";
 import LandingPage from "./containers/LandingPageContainer/LandingPage";
 import ChoicePage from "./containers/LoadCreateContainer/ChoicePage";
 import CreatePage from "./containers/LoadCreateContainer/CreatePage";
 import LoadPage from "./containers/LoadCreateContainer/LoadPage";
+import Buttons from "./containers/CharacterContainer/Buttons";
 
 
 
@@ -52,12 +54,13 @@ const App = ()=> {
   return (
     <Router>
       <>
-        {/* <NavBar /> */}
+        <NavBar />
         <Switch>
         <Route exact path="/" render={() => loggedIn? <Redirect to= "/choicepage" /> : <LandingPage onSubmit = {handleSubmit}></LandingPage>} />
         <Route path="/choicepage" component={ChoicePage}/>
         <Route path="/createpage" component={CreatePage}/>
         <Route path="/loadpage" component={LoadPage}/>
+        <Route path="/buttons" component={Buttons}/>
         </Switch>
       </>
     </Router>
