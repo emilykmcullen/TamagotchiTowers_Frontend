@@ -6,7 +6,7 @@ const NavBar = () => {
   return (
     <ul>
       <li>
-        <Link to="/">Home</Link>
+        <Link style={{ textDecoration: 'none' }} to="/">Home</Link>
       </li>
     </ul>
   );

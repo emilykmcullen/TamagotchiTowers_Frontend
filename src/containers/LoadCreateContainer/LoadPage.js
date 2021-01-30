@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import DisplayAllCharacters from './DisplayAllCharacters'
+import DisplayAllCharacters from '../../components/LoadCreateComponents/DisplayAllCharacters'
 import { BrowserRouter as Router, Route, Switch, Redirect, Link } from "react-router-dom";
 
 const LoadPage = ({userAnimals, selectCurrentCharacter}) => {

@@ -18,4 +18,9 @@ header {
   justify-content: flex-end;
 }
 
+ul {
+  list-style-type: none;
+}
+
+
 

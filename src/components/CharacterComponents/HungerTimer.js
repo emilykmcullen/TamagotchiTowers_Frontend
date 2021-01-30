@@ -5,7 +5,7 @@ const HungerTimer = ({title, hungerAmount}) => {
     const [start, setStart] = useState(100);
 
     const getHungry = () => {
-        while(start>0){
+        while(setStart>0){
             setTimeout( () => {
                   start--;
                 },
@@ -14,7 +14,7 @@ const HungerTimer = ({title, hungerAmount}) => {
         }
     }
     const relieveHunger = () => {
-    setTotal(start + hungerAmount);
+    setStart(start + hungerAmount);
     }
 
     return(
