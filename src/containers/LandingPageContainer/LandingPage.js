@@ -19,14 +19,15 @@ const LandingPage = ({onSubmit}) => {
   };
 
   return (
-  <div>
+  <div className="page_container">
     <div id="welcome_message">
       <h2>Welcome to our magical homepage</h2>
     </div>
     <br></br>
     <form>
       <div className="form_wrap">
-        <label htmlFor="username">Username:</label>
+        <p>Username</p>
+        <label htmlFor="username"></label>
         <input
           onChange={handleChange}
           name="username"
@@ -36,7 +37,8 @@ const LandingPage = ({onSubmit}) => {
       </div>
 
       <div className="form_wrap">
-        <label htmlFor="password">Password:</label>
+        <p>Password</p>
+        <label htmlFor="password"></label>
         <input
           onChange={handleChange}
           name="password"
@@ -50,7 +52,7 @@ const LandingPage = ({onSubmit}) => {
     </form>
     <br/>
     <br/>
-    <Link className="form_wrap" from="/" to="/createpage">
+    <Link className="form_wrap" style={{ textDecoration: 'none' }} from="/" to="/createpage">
       <button type="button">
           I'm new here!
       </button>
