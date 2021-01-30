@@ -1,7 +1,9 @@
 import React, {useState, useEffect} from 'react';
 import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
 import LandingPage from "./containers/LandingPageContainer/LandingPage";
-import TestPage from "./containers/LandingPageContainer/TestPage";
+import ChoicePage from "./containers/LoadCreateContainer/ChoicePage";
+import CreatePage from "./containers/LoadCreateContainer/CreatePage";
+import LoadPage from "./containers/LoadCreateContainer/LoadPage";
 
 
 
@@ -52,8 +54,10 @@ const App = ()=> {
       <>
         {/* <NavBar /> */}
         <Switch>
-        <Route exact path="/" render={() => loggedIn? <Redirect to= "/testpage" /> : <LandingPage onSubmit = {handleSubmit}></LandingPage>} />
-        <Route path="/testpage" component={TestPage}/>
+        <Route exact path="/" render={() => loggedIn? <Redirect to= "/choicepage" /> : <LandingPage onSubmit = {handleSubmit}></LandingPage>} />
+        <Route path="/choicepage" component={ChoicePage}/>
+        <Route path="/createpage" component={CreatePage}/>
+        <Route path="/loadpage" component={LoadPage}/>
         </Switch>
       </>
     </Router>
