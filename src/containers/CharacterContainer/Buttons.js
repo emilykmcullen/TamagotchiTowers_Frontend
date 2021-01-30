@@ -5,7 +5,11 @@ const Buttons = () => {
   
 
   return(
-      <h1>BUTTONS!</h1>
+      <div>
+        <h1>
+        BUTTONS!
+        </h1>
+      </div>
   )
 };
 
