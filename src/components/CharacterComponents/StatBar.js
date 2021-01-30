@@ -1,14 +1,38 @@
 import React, {useState} from "react";
+import Button from './Button';
 
-const StatBar = () => {
-  
-  
+const StatBar = ({stat, statName}) => {
+
+    const containerStyles = {
+        height: 20,
+        width: '100%',
+        backgroundColor: "#e0e0de",
+        borderRadius: 50,
+        margin: 50
+      }
+    
+      const labelStyles = {
+        padding: 5,
+        color: 'white',
+        fontWeight: 'bold'
+      }
+
+      const fillerStyle = {
+        height: '100%',
+        width: `${stat}%`,
+        backgroundColor: `${stat>20 ? 'green':'red'}` ,
+        borderRadius: 'inherit',
+        textAlign: 'right'
+      }
 
   return(
       <div>
-        <h1>
-        Stat Bar!
-        </h1>
+            <div style={containerStyles}>
+                <div style={fillerStyle}>
+                    <span style={labelStyles}>{statName}: {`${stat}%`}</span>
+                    <Button/>
+                </div>
+            </div>
       </div>
   )
 };
