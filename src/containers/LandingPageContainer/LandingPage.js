@@ -1,4 +1,5 @@
 import React, {useState} from "react";
+import { BrowserRouter as Router, Route, Switch, Redirect, Link } from "react-router-dom";
 
 const LandingPage = ({onSubmit}) => {
   const [formData, setFormData] = useState({
@@ -18,13 +19,15 @@ const LandingPage = ({onSubmit}) => {
   };
 
   return (
-  <div>
-    <h4>Home</h4>
-    <p>Welcome to our magical homepage</p>
+  <div className="page_container">
+    <div id="welcome_message">
+      <h2>Welcome to our magical homepage</h2>
+    </div>
     <br></br>
     <form>
       <div className="form_wrap">
-        <label htmlFor="username">Username:</label>
+        <p>Username</p>
+        <label htmlFor="username"></label>
         <input
           onChange={handleChange}
           name="username"
@@ -34,7 +37,8 @@ const LandingPage = ({onSubmit}) => {
       </div>
 
       <div className="form_wrap">
-        <label htmlFor="password">Password:</label>
+        <p>Password</p>
+        <label htmlFor="password"></label>
         <input
           onChange={handleChange}
           name="password"
@@ -42,8 +46,17 @@ const LandingPage = ({onSubmit}) => {
           type="password"
           value={formData.password} />
       </div>
-      <input onClick={handleSubmit} type="submit" value="submit" />
+      <div className="form_wrap">
+        <input onClick={handleSubmit} type="submit" value="submit" />
+      </div>
     </form>
+    <br/>
+    <br/>
+    <Link className="form_wrap" style={{ textDecoration: 'none' }} from="/" to="/createpage">
+      <button type="button">
+          I'm new here!
+      </button>
+    </Link>
   </div>
   )};
 
