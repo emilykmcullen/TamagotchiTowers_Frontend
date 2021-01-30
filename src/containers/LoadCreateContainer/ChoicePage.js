@@ -5,17 +5,6 @@ const ChoicePage = ({onSubmit}) => {
   
   
 
-  // const handleChange = (event) => {
-  //   const newState = {...formData};
-  //   newState[event.target.name] = event.target.value;
-  //   setFormData(newState);
-  // }
-
-  // const handleSubmit = (event) => {
-  //   event.preventDefault();
-  //   onSubmit(formData);
-  // };
-
   return (
   <div>
     <h4>Create or Load</h4>
@@ -26,7 +15,11 @@ const ChoicePage = ({onSubmit}) => {
           Create
       </button>
     </Link>
-      <button>Load</button>
+    <Link  from="/choicepage" to="/loadpage">
+      <button type="button">
+          Load
+      </button>
+    </Link>
   </div>
   )};
 
