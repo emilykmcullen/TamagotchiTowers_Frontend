@@ -20,8 +20,9 @@ const LandingPage = ({onSubmit}) => {
 
   return (
   <div>
-    <h4>Home</h4>
-    <p>Welcome to our magical homepage</p>
+    <div id="welcome_message">
+      <h2>Welcome to our magical homepage</h2>
+    </div>
     <br></br>
     <form>
       <div className="form_wrap">
@@ -43,9 +44,13 @@ const LandingPage = ({onSubmit}) => {
           type="password"
           value={formData.password} />
       </div>
-      <input onClick={handleSubmit} type="submit" value="submit" />
+      <div className="form_wrap">
+        <input onClick={handleSubmit} type="submit" value="submit" />
+      </div>
     </form>
-    <Link  from="/" to="/createpage">
+    <br/>
+    <br/>
+    <Link className="form_wrap" from="/" to="/createpage">
       <button type="button">
           I'm new here!
       </button>

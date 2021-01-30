@@ -6,6 +6,8 @@ import ChoicePage from "./containers/LoadCreateContainer/ChoicePage";
 import CreatePage from "./containers/LoadCreateContainer/CreatePage";
 import LoadPage from "./containers/LoadCreateContainer/LoadPage";
 import Buttons from "./containers/CharacterContainer/Buttons";
+import "./App.css"
+import "./style/LandingPage.css";
 
 
 
@@ -97,7 +99,10 @@ const App = ()=> {
   return (
     <Router>
       <>
-        <NavBar />
+        <header>
+          <h1 id="title">Tamagotchi Towers</h1>
+          <NavBar id="navbar"/>
+        </header>
         <Switch>
         <Route exact path="/" render={() => loggedIn? <Redirect to= "/choicepage" /> : <LandingPage onSubmit = {handleSubmit}></LandingPage>} />
         <Route path="/choicepage" component={ChoicePage}/>

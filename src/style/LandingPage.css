@@ -1,0 +1,51 @@
+body {
+    font-family: 'Quicksand', sans-serif;
+}
+
+#welcome_message {
+    display: flex;
+    justify-content: center;
+}
+
+.form_wrap {
+    display: flex;
+    justify-content: center;
+    margin: 5px;
+}
+
+input {
+    appearance:none;
+    -webkit-appearance:none;
+    padding:10px;
+    border: 1px solid black;
+    background-color: white;
+    color:black;
+    font-family: inherit;
+    font-weight:600;
+    border-radius:5px;
+    border-color: black;
+  }
+  
+  input:hover {
+    background-color: black;
+    color: white;
+  }
+
+button {
+    appearance:none;
+    -webkit-appearance:none;
+    padding:10px;
+    border:none;
+    background-color: white;
+    color: black;
+    font-family: inherit;
+    font-weight:600;
+    border-radius:5px;
+    border-color: black;
+  }
+  
+  button:hover {
+    background-color: black;
+    color: white;
+  }
+
