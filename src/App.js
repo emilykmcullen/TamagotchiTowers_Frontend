@@ -21,41 +21,41 @@ const App = ()=> {
 
 
   const animals = [
-    {id: 1, animal_type: {dog: {
+    {id: 1, animal_type: { animal: "dog" , stats: {
       appetite: 0.5, grooming: 0.6, cheeriness: 0.2, activity_level: 0.9
     }}, images: ["https://art.pixilart.com/a407c6ad7e177d2.png"],
-    name: "Jellibobs", health: 20, happiness:20, cleanliness:20,
-    fitness:20, hunger:20
+    name: "Jellibobs", health: 100, happiness:100, cleanliness:100,
+    fitness:100, hunger:100
     },
-    {id: 2, animal_type: {cat: {
+    {id: 2, animal_type: {animal: "cat" , stats: {
       appetite: 0.3, grooming: 0.2, cheeriness: 0.7, activity_level: 0.6
     }}, images: ["../assets/images/cat.png"],
-    name: "Kitty Fursbags", health: 20, happiness:20, cleanliness:20,
-    fitness:20, hunger:20
+    name: "Kitty Fursbags", health: 100, happiness:100, cleanliness:100,
+    fitness:100, hunger:100
     },
-    {id: 3, animal_type: {monkey: {
+    {id: 3, animal_type: {animal: "monkey" , stats: {
       appetite: 0.9, grooming: 0.7, cheeriness: 0.5, activity_level: 1
     }}, images: ["../assets/images/cat.png"],
-    name: "Cheeky Chops", health: 20, happiness:20, cleanliness:20,
-    fitness:20, hunger:20
+    name: "Cheeky Chops", health: 100, happiness:100, cleanliness:100,
+    fitness:100, hunger:100
     },
-    {id: 4, animal_type: {unicorn: {
+    {id: 4, animal_type: {animal: "unicorn" , stats: {
       appetite: 0.5, grooming: 0.9, cheeriness: 0.6, activity_level: 0.7
     }}, images: ["../assets/images/cat.png"],
-    name: "Dolly", health: 20, happiness:20, cleanliness:20,
-    fitness:20, hunger:20
+    name: "Dolly", health: 100, happiness:100, cleanliness:100,
+    fitness:100, hunger:100
     },
-    {id: 5, animal_type: {dragon: {
+    {id: 5, animal_type: {animal: "dragon" , stats: {
       appetite: 0.9, grooming: 0.1, cheeriness: 0.1, activity_level: 0.7
     }}, images: ["../assets/images/cat.png"],
-    name: "Mr. Flamez", health: 20, happiness:20, cleanliness:20,
-    fitness:20, hunger:20
+    name: "Mr. Flamez", health: 100, happiness:100, cleanliness:100,
+    fitness:100, hunger:100
     },
-    {id: 6, animal_type: {penguin: {
+    {id: 6, animal_type: {animal: "penguin" , stats: {
       appetite: 0.5, grooming: 0.9, cheeriness: 0.6, activity_level: 0.7
     }}, images: ["../assets/images/cat.png"],
-    name: "Beany", health: 20, happiness:20, cleanliness:20,
-    fitness:20, hunger:20
+    name: "Beany", health: 100, happiness:100, cleanliness:100,
+    fitness:100, hunger:100
   }  
   ]
   //dummy data
