@@ -11,10 +11,11 @@ const CreatePage = ({allAnimals, setCurrentCharacter}) => {
     return(
       <div>
         <p>{animal.name}</p>
-        <img src="{animal.images[0]}" alt=""/>
-        <button type="submit" onSubmit={handleClick} value={animal}>
-          Select this pet
-        </button>
+        <img src={animal.images[0]} alt="animal pic" width="200"></img>
+        <form action="submit" onSubmit={handleClick}>
+        <input type="button" value={animal} onChange={handleClick}/>
+        <input type="submit" value="Submit comment"/>
+        </form>
       </div>
     )
 })
