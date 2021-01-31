@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import Button from './Button';
 
-const StatBar = ({stat, statName}) => {
+const StatBar = ({stat, statName, increaseStat, lowercaseStatName}) => {
 
     const statLabel = Math.round(stat);
 
@@ -33,7 +33,7 @@ const StatBar = ({stat, statName}) => {
                 <div style={fillerStyle}>
                     <span style={labelStyles}>{statName}: {`${statLabel}%`}</span>
                 </div>
-                <Button/>
+                <Button statName={statName} increaseStat={increaseStat} />
             </div>
       </div>
   )

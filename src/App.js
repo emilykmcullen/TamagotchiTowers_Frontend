@@ -87,7 +87,14 @@ const App = ()=> {
   }
   }
 
+
+
   clearInterval(intervalId);
+
+  const increaseStat = (stat) => {
+    console.log("INCREEEEASE")
+    currentCharacter[stat] += 5;
+  }
 
   const handleSubmit = (data) => {
     usernameAndPassword.forEach(element => {
@@ -145,7 +152,7 @@ const App = ()=> {
         <Route path="/choicepage" component={ChoicePage} />
         <Route path="/createpage" render={() => <CreatePage userAnimals={userData.animals}/>}/>
         <Route path="/loadpage"  render={() => <LoadPage userAnimals={userData.animals} selectCurrentCharacter={selectCurrentCharacter}/>} />
-        <Route path="/character" render={() => <Character currentCharacter={currentCharacter}/>}/>
+        <Route path="/character" render={() => <Character currentCharacter={currentCharacter} increaseStat={increaseStat}/>}/>
         
         </Switch>
       </>
