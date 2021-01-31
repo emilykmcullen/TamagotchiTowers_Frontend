@@ -7,6 +7,11 @@ import CreatePage from "./containers/LoadCreateContainer/CreatePage";
 import LoadPage from "./containers/LoadCreateContainer/LoadPage";
 import Character from "./containers/CharacterContainer/Character";
 import dogHeart  from "./gifs/dog/dog_heart.gif"
+import catMeow from "./gifs/cat/cat_meow.gif"
+import monkeySpeak from "./gifs/monkey/monkey_speak.gif"
+import unicornRainbow from "./gifs/unicorn/unicorn_rainbow.gif"
+import dinoRawr from "./gifs/dino/dinosaur_rawr.gif"
+import penguinHeart from "./gifs/penguin/penguin_heart.gif"
 import "./App.css"
 import "./style/LandingPage.css"
 import SaveForm from "./components/LoadCreateComponents/SaveForm";
@@ -39,31 +44,31 @@ const App = ()=> {
     },
     {id: 2, animal_type: {animal: "cat" , stats: {
       appetite: 0.3, grooming: 0.2, cheeriness: 0.7, activity_level: 0.6
-    }}, images: ["../assets/images/cat.png"],
+    }}, images: [catMeow],
     name: "Kitty Fursbags", health: 100, happiness:100, cleanliness:100,
     fitness:100, hunger:100
     },
     {id: 3, animal_type: {animal: "monkey" , stats: {
       appetite: 0.9, grooming: 0.7, cheeriness: 0.5, activity_level: 1
-    }}, images: ["../assets/images/cat.png"],
+    }}, images: [monkeySpeak],
     name: "Cheeky Chops", health: 100, happiness:100, cleanliness:100,
     fitness:100, hunger:100
     },
     {id: 4, animal_type: {animal: "unicorn" , stats: {
       appetite: 0.5, grooming: 0.9, cheeriness: 0.6, activity_level: 0.7
-    }}, images: ["../assets/images/cat.png"],
+    }}, images: [unicornRainbow],
     name: "Dolly", health: 100, happiness:100, cleanliness:100,
     fitness:100, hunger:100
     },
-    {id: 5, animal_type: {animal: "dragon" , stats: {
+    {id: 5, animal_type: {animal: "dinosaur" , stats: {
       appetite: 0.9, grooming: 0.1, cheeriness: 0.1, activity_level: 0.7
-    }}, images: ["../assets/images/cat.png"],
+    }}, images: [dinoRawr],
     name: "Mr. Flamez", health: 100, happiness:100, cleanliness:100,
     fitness:100, hunger:100
     },
     {id: 6, animal_type: {animal: "penguin" , stats: {
       appetite: 0.5, grooming: 0.9, cheeriness: 0.6, activity_level: 0.7
-    }}, images: ["../assets/images/cat.png"],
+    }}, images: [penguinHeart],
     name: "Beany", health: 100, happiness:100, cleanliness:100,
     fitness:100, hunger:100
   }  
