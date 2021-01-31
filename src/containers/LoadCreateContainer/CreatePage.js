@@ -19,7 +19,7 @@ const CreatePage = ({allAnimals, setCurrentCharacter, userData, loggedInUsername
       <div className="animal_container">
         <p>{animal.name}</p>
         <img src={animal.images[0]} alt="animal pic" width="200"></img>
-        <button onClick={() => handleClick(animal)}>{animal.name}</button>
+        <button id="choose_animal_button" onClick={() => handleClick(animal)}>{animal.name}</button>
       </div>
     )
 })

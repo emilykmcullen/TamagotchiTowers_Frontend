@@ -7,9 +7,16 @@
     display: flex;
     flex-direction: column;
     background-color: chartreuse;
+    border: solid black 1px;
+    margin: 2px;
 }
 
 .link_container {
     display: flex;
     justify-content: center;
+}
+
+#choose_animal_button:focus {
+    background-color: darkgreen;
+    color: white;
 }
