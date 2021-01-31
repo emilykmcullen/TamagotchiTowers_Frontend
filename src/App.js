@@ -125,7 +125,7 @@ const App = ()=> {
   clearInterval(intervalId);
 
   const increaseStat = (stat) => {
-    if (currentCharacter.happiness<95){
+    if (currentCharacter[stat]<95){
       currentCharacter[stat] += 5;
     }
     else (currentCharacter[stat] = 100)
