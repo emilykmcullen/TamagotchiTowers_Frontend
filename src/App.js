@@ -117,7 +117,7 @@ const App = ()=> {
         <Switch>
         <Route exact path="/" render={() => loggedIn? <Redirect to= "/choicepage" /> : <LandingPage onSubmit = {handleSubmit}></LandingPage>} />
         <Route path="/choicepage" component={ChoicePage} />
-        <Route path="/createpage" render={() => <CreatePage userAnimals={userData.animals}/>}/>
+        <Route path="/createpage" render={() => <CreatePage userAnimals={userData.animals, animals}/>}/>
         <Route path="/loadpage"  render={() => <LoadPage userAnimals={userData.animals} selectCurrentCharacter={selectCurrentCharacter}/>} />
         <Route path="/character" render={() => <Character currentCharacter={currentCharacter}/>}/>
         

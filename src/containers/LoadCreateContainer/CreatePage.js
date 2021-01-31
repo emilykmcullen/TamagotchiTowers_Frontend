@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import { BrowserRouter as Router, Route, Switch, Redirect, Link } from "react-router-dom";
 
-const CreatePage = () => {
+const CreatePage = (props) => {
   
   
 
