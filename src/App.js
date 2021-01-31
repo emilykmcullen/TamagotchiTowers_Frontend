@@ -99,9 +99,9 @@ const App = ()=> {
 
   const increaseStat = (stat) => {
     if (currentCharacter.happiness<95){
-      console.log("INCREEEEASE")
       currentCharacter[stat] += 5;
     }
+    else (currentCharacter[stat] = 100)
   }
 
   const handleSubmit = (data) => {
