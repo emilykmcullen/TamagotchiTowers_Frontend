@@ -107,17 +107,6 @@ const App = ()=> {
     getUserData();
   }, [loggedInUsername])
 
-//   const saveNewUser = () => {
-//     // Simple PUT request with a JSON body using fetch
-//     const requestOptions = {
-//         method: 'PUT',
-//         headers: { 'Content-Type': 'application/json' },
-//         body: JSON.stringify({ username: 'React PUT Request Example' })
-//     };
-//     fetch('https://jsonplaceholder.typicode.com/posts/1', requestOptions)
-//         .then(response => response.json())
-//         .then(data => this.setState({ postId: data.id }));
-// }
 
   const logInNewUser = (userDeets) => {
     setLoggedInUsername(userDeets.username);
@@ -137,7 +126,7 @@ const App = ()=> {
         <Route exact path="/" render={() => loggedIn? <Redirect to= "/choicepage" /> : <LandingPage onSubmit = {handleSubmit}></LandingPage>} />
         <Route path="/choicepage" component={ChoicePage} />
         <Route path="/newuser" render={() => loggedIn? <Redirect to="/createpage" /> : <SaveForm onNewUserSubmit={(userDeets) => logInNewUser(userDeets)}/>}/>
-        <Route path="/createpage" render={() => <CreatePage allAnimals={animals} currentCharacter={currentCharacter} setCurrentCharacter={setCurrentCharacter}/>}/>
+        <Route path="/createpage" render={() => <CreatePage allAnimals={animals} currentCharacter={currentCharacter} setCurrentCharacter={setCurrentCharacter} userData={userData} loggedInUsername={loggedInUsername} setLoggedInPassword={loggedInPassword}/>}/>
         <Route path="/loadpage"  render={() => <LoadPage userAnimals={userData.animals} selectCurrentCharacter={selectCurrentCharacter}/>} />
         <Route path="/character" render={() => <Character currentCharacter={currentCharacter}/>}/>
         </Switch>
