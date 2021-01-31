@@ -16,7 +16,7 @@ const Character = ({currentCharacter}) => {
           
           </h2>
           <p>Species: {currentCharacter.animal_type.animal}</p>
-          <img src={cat} alt="animal pic" width="200"></img>
+          <img src={currentCharacter.images[0]} alt="animal pic" width="200"></img>
 
           
           

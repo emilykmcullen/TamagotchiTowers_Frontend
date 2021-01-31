@@ -3,6 +3,8 @@ import Button from './Button';
 
 const StatBar = ({stat, statName}) => {
 
+    const statLabel = Math.round(stat);
+
     const containerStyles = {
         height: 20,
         width: '100%',
@@ -29,9 +31,9 @@ const StatBar = ({stat, statName}) => {
       <div>
             <div style={containerStyles}>
                 <div style={fillerStyle}>
-                    <span style={labelStyles}>{statName}: {`${stat}%`}</span>
-                    <Button/>
+                    <span style={labelStyles}>{statName}: {`${statLabel}%`}</span>
                 </div>
+                <Button/>
             </div>
       </div>
   )
