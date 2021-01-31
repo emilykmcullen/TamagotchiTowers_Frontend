@@ -1,21 +1,38 @@
 import React, {useState} from "react";
 import { BrowserRouter as Router, Route, Switch, Redirect, Link } from "react-router-dom";
 
-const CreatePage = (props) => {
+const CreatePage = ({allAnimals, setCurrentCharacter}) => {
+
+  const handleClick = (animal) => {
+    setCurrentCharacter(animal)
+  }
+
+  const animalArray = allAnimals.map(animal => {
+    return(
+      <div>
+        <p>{animal.name}</p>
+        <img src="{animal.images[0]}" alt=""/>
+        <button type="submit" onSubmit={handleClick} value={animal}>
+          Select this pet
+        </button>
+      </div>
+    )
+})
+
   
   
 
   return(
+    <>
     <div>
-      <h1>Create Page</h1>
-      <p>If you would like to save your pet please create a username and password in the form below</p>
-      <p>Otherwise, just leave these fields blank</p>
-        <Link  from="/createpage" to="/character">
-            <button type="button">
-                Look after your pet
-            </button>
-        </Link>
+        {animalArray}
     </div>
+    <Link  from="/createpage" to="/character">
+      <button type="button">
+        Look after this pet
+      </button>
+    </Link>
+    </>
   )
 };
 

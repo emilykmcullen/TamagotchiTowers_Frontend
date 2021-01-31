@@ -52,7 +52,7 @@ const LandingPage = ({onSubmit}) => {
     </form>
     <br/>
     <br/>
-    <Link className="form_wrap" style={{ textDecoration: 'none' }} from="/" to="/createpage">
+    <Link className="form_wrap" style={{ textDecoration: 'none' }} from="/" to="/newuser">
       <button type="button">
           I'm new here!
       </button>

@@ -6,6 +6,7 @@ import ChoicePage from "./containers/LoadCreateContainer/ChoicePage";
 import CreatePage from "./containers/LoadCreateContainer/CreatePage";
 import LoadPage from "./containers/LoadCreateContainer/LoadPage";
 import Character from "./containers/CharacterContainer/Character";
+import SaveForm from "./components/LoadCreateComponents/SaveForm";
 import "./App.css"
 import "./style/LandingPage.css"
 
@@ -106,6 +107,24 @@ const App = ()=> {
     getUserData();
   }, [loggedInUsername])
 
+//   const saveNewUser = () => {
+//     // Simple PUT request with a JSON body using fetch
+//     const requestOptions = {
+//         method: 'PUT',
+//         headers: { 'Content-Type': 'application/json' },
+//         body: JSON.stringify({ username: 'React PUT Request Example' })
+//     };
+//     fetch('https://jsonplaceholder.typicode.com/posts/1', requestOptions)
+//         .then(response => response.json())
+//         .then(data => this.setState({ postId: data.id }));
+// }
+
+  const logInNewUser = (userDeets) => {
+    setLoggedInUsername(userDeets.username);
+    setLoggedInPassword(userDeets.password);
+    setLoggedIn(true);
+  }
+
   
   return (
     <Router>
@@ -117,10 +136,10 @@ const App = ()=> {
         <Switch>
         <Route exact path="/" render={() => loggedIn? <Redirect to= "/choicepage" /> : <LandingPage onSubmit = {handleSubmit}></LandingPage>} />
         <Route path="/choicepage" component={ChoicePage} />
-        <Route path="/createpage" render={() => <CreatePage userAnimals={userData.animals, animals}/>}/>
+        <Route path="/newuser" render={() => loggedIn? <Redirect to="/createpage" /> : <SaveForm onNewUserSubmit={(userDeets) => logInNewUser(userDeets)}/>}/>
+        <Route path="/createpage" render={() => <CreatePage allAnimals={animals} currentCharacter={currentCharacter} setCurrentCharacter={setCurrentCharacter}/>}/>
         <Route path="/loadpage"  render={() => <LoadPage userAnimals={userData.animals} selectCurrentCharacter={selectCurrentCharacter}/>} />
         <Route path="/character" render={() => <Character currentCharacter={currentCharacter}/>}/>
-        
         </Switch>
       </>
     </Router>
