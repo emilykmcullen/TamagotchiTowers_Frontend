@@ -20,6 +20,10 @@ const App = ()=> {
   const [currentCharacter, setCurrentCharacter] = useState({});
   const [loggedIn, setLoggedIn] = useState(false);
   const [ccHappiness, setCCHappiness] = useState();
+  const [ccHealth, setCCHealth] = useState();
+  const [cccleanliness, setCCCleanliness] = useState();
+  const [ccFitness, setCCFitness] = useState();
+  const [ccHunger, settCCHunger] = useState();
   const [intervalId, setIntervalId] = useState(null);
   
 
@@ -92,8 +96,10 @@ const App = ()=> {
   clearInterval(intervalId);
 
   const increaseStat = (stat) => {
-    console.log("INCREEEEASE")
-    currentCharacter[stat] += 5;
+    if (currentCharacter.happiness<95){
+      console.log("INCREEEEASE")
+      currentCharacter[stat] += 5;
+    }
   }
 
   const handleSubmit = (data) => {
@@ -112,6 +118,7 @@ const App = ()=> {
   const selectCurrentCharacter = (characterId) => {
     setCurrentCharacter(animals.find(animal => animal.id === characterId))
     setCCHappiness(currentCharacter.happiness)
+    setCCHealth(currentCharacter.health)
   }
 
   const getUserData = () => {
