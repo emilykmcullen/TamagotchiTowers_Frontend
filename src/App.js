@@ -14,6 +14,7 @@ import dinoRawr from "./gifs/dino/dinosaur_rawr.gif"
 import penguinHeart from "./gifs/penguin/penguin_heart.gif"
 import "./App.css"
 import "./style/LandingPage.css"
+import "./style/CreatePage.css"
 import SaveForm from "./components/LoadCreateComponents/SaveForm";
 
 
