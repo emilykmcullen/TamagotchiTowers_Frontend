@@ -1,18 +1,24 @@
 import React, {useState} from "react";
-import Buttons from "../../components/CharacterComponents/Buttons";
 import StatBar from "../../components/CharacterComponents/StatBar";
-import cat  from "../../assets/images/cat.png"
 
-const Character = ({currentCharacter}) => {
+
+
+const Character = ({currentCharacter, increaseStat}) => {
 
     return(
         <div>
           <h2>
           {currentCharacter.name}
+          
           </h2>
-          <img src={cat} alt="animal pic" width="200"></img>
-          <StatBar currentCharacter={currentCharacter}></StatBar>
-          <Buttons currentCharacter={currentCharacter}></Buttons>
+          <p>Species: {currentCharacter.animal_type.animal}</p>
+          <img src={currentCharacter.images[0]} alt="animal pic" width="200"></img>
+            <StatBar stat={currentCharacter.health} statName="Health" increaseStat={increaseStat}/>
+            <StatBar stat={currentCharacter.happiness} statName="Happiness" increaseStat={increaseStat}/>
+            <StatBar stat={currentCharacter.cleanliness} statName="Cleanliness" increaseStat={increaseStat}/>
+            <StatBar stat={currentCharacter.fitness} statName="Fitness" increaseStat={increaseStat}/>
+            <StatBar stat={currentCharacter.hunger} statName="Hunger" increaseStat={increaseStat}/>
+            
         </div>
     )
   };

@@ -1,21 +1,60 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import { BrowserRouter as Router, Route, Switch, Redirect, Link } from "react-router-dom";
 
-const CreatePage = () => {
+const CreatePage = ({allAnimals, setCurrentCharacter, userData, loggedInUsername, loggedInPassword, currentCharacter, getUserData}) => {
+
+  const handleClick = (animal) => {
+    setCurrentCharacter(animal)
+    if (!userData && loggedInUsername){
+      console.log("Saving new user");
+      // saveNewUser();
+      // getUserData();
+    }
+  }
+
+
+  const animalArray = allAnimals.map(animal => {
+    return(
+      <div>
+        <p>{animal.name}</p>
+        <img src={animal.images[0]} alt="animal pic" width="200"></img>
+        <button onClick={() => handleClick(animal)}>{animal.name}</button>
+      </div>
+    )
+})
+
+
+
+//   const saveNewUser = () => {
+//   // Simple PUT request with a JSON body using fetch
+//   const requestOptions = {
+//       method: 'PUT',
+//       headers: { 'Content-Type': 'application/json' },
+//       body: JSON.stringify({ 
+//         username: loggedInUsername,
+//         password: loggedInPassword,
+//         animals: [currentCharacter]
+//       })
+//   };
+//   fetch('https://jsonplaceholder.typicode.com/posts/1', requestOptions)
+//       .then(response => response.json())
+//       .then(data => this.setState({ postId: data.id }));
+// }
+
   
   
 
   return(
+    <>
     <div>
-      <h1>Create Page</h1>
-      <p>If you would like to save your pet please create a username and password in the form below</p>
-      <p>Otherwise, just leave these fields blank</p>
-        <Link  from="/createpage" to="/character">
-            <button type="button">
-                Look after your pet
-            </button>
-        </Link>
+        {animalArray}
     </div>
+    <Link  from="/createpage" to="/character">
+      <button type="button">
+        Look after this pet
+      </button>
+    </Link>
+    </>
   )
 };
 

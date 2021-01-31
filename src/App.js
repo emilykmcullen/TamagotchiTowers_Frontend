@@ -6,8 +6,11 @@ import ChoicePage from "./containers/LoadCreateContainer/ChoicePage";
 import CreatePage from "./containers/LoadCreateContainer/CreatePage";
 import LoadPage from "./containers/LoadCreateContainer/LoadPage";
 import Character from "./containers/CharacterContainer/Character";
+import dogHeart  from "./gifs/dog/dog_heart.gif"
 import "./App.css"
 import "./style/LandingPage.css"
+import SaveForm from "./components/LoadCreateComponents/SaveForm";
+
 
 
 
@@ -18,44 +21,51 @@ const App = ()=> {
   const [userData, setUserData] = useState({});
   const [currentCharacter, setCurrentCharacter] = useState({});
   const [loggedIn, setLoggedIn] = useState(false);
+  const [ccHappiness, setCCHappiness] = useState();
+  const [ccHealth, setCCHealth] = useState();
+  const [ccCleanliness, setCCCleanliness] = useState();
+  const [ccFitness, setCCFitness] = useState();
+  const [ccHunger, setCCHunger] = useState();
+  const [intervalId, setIntervalId] = useState(null);
+  
 
 
   const animals = [
-    {id: 1, animal_type: {dog: {
+    {id: 1, animal_type: { animal: "dog" , stats: {
       appetite: 0.5, grooming: 0.6, cheeriness: 0.2, activity_level: 0.9
-    }}, images: ["https://art.pixilart.com/a407c6ad7e177d2.png"],
-    name: "Jellibobs", health: 20, happiness:20, cleanliness:20,
-    fitness:20, hunger:20
+    }}, images: [dogHeart],
+    name: "Jellibobs", health: 100, happiness:100, cleanliness:100,
+    fitness:100, hunger:100
     },
-    {id: 2, animal_type: {cat: {
+    {id: 2, animal_type: {animal: "cat" , stats: {
       appetite: 0.3, grooming: 0.2, cheeriness: 0.7, activity_level: 0.6
     }}, images: ["../assets/images/cat.png"],
-    name: "Kitty Fursbags", health: 20, happiness:20, cleanliness:20,
-    fitness:20, hunger:20
+    name: "Kitty Fursbags", health: 100, happiness:100, cleanliness:100,
+    fitness:100, hunger:100
     },
-    {id: 3, animal_type: {monkey: {
+    {id: 3, animal_type: {animal: "monkey" , stats: {
       appetite: 0.9, grooming: 0.7, cheeriness: 0.5, activity_level: 1
     }}, images: ["../assets/images/cat.png"],
-    name: "Cheeky Chops", health: 20, happiness:20, cleanliness:20,
-    fitness:20, hunger:20
+    name: "Cheeky Chops", health: 100, happiness:100, cleanliness:100,
+    fitness:100, hunger:100
     },
-    {id: 4, animal_type: {unicorn: {
+    {id: 4, animal_type: {animal: "unicorn" , stats: {
       appetite: 0.5, grooming: 0.9, cheeriness: 0.6, activity_level: 0.7
     }}, images: ["../assets/images/cat.png"],
-    name: "Dolly", health: 20, happiness:20, cleanliness:20,
-    fitness:20, hunger:20
+    name: "Dolly", health: 100, happiness:100, cleanliness:100,
+    fitness:100, hunger:100
     },
-    {id: 5, animal_type: {dragon: {
+    {id: 5, animal_type: {animal: "dragon" , stats: {
       appetite: 0.9, grooming: 0.1, cheeriness: 0.1, activity_level: 0.7
     }}, images: ["../assets/images/cat.png"],
-    name: "Mr. Flamez", health: 20, happiness:20, cleanliness:20,
-    fitness:20, hunger:20
+    name: "Mr. Flamez", health: 100, happiness:100, cleanliness:100,
+    fitness:100, hunger:100
     },
-    {id: 6, animal_type: {penguin: {
+    {id: 6, animal_type: {animal: "penguin" , stats: {
       appetite: 0.5, grooming: 0.9, cheeriness: 0.6, activity_level: 0.7
     }}, images: ["../assets/images/cat.png"],
-    name: "Beany", health: 20, happiness:20, cleanliness:20,
-    fitness:20, hunger:20
+    name: "Beany", health: 100, happiness:100, cleanliness:100,
+    fitness:100, hunger:100
   }  
   ]
   //dummy data
@@ -70,7 +80,56 @@ const App = ()=> {
   //if they get dirty quickly/don't groom often, grooming = high
   //if they are unhappy animals, cheeriness = high
   //if they need a lot of exercise, activity level = high
-  
+
+  const reduceStats = () => {
+    if (currentCharacter.happiness>0){
+      
+    const interval = setInterval(() => {
+      
+      setCCHappiness(currentCharacter.happiness -=.01);
+      setIntervalId(interval)
+      if(currentCharacter.happiness === 0) {
+    }}, 10);
+  }
+  if (currentCharacter.cleanliness>0){
+      
+    const interval = setInterval(() => {
+      
+      setCCCleanliness(currentCharacter.cleanliness -=.01);
+      setIntervalId(interval)
+      if(currentCharacter.cleanliness === 0) {
+    }}, 10);
+  }
+  if (currentCharacter.hunger>0){
+      
+    const interval = setInterval(() => {
+      
+      setCCHunger(currentCharacter.hunger -=.01);
+      setIntervalId(interval)
+      if(currentCharacter.hunger === 0) {
+    }}, 10);
+  }
+  if (currentCharacter.fitness>0){
+      
+    const interval = setInterval(() => {
+      
+      setCCFitness(currentCharacter.fitness -=.01);
+      setIntervalId(interval)
+      if(currentCharacter.fitness === 0) {
+    }}, 10);
+  }
+  }
+
+
+
+  clearInterval(intervalId);
+
+  const increaseStat = (stat) => {
+    if (currentCharacter[stat]<95){
+      currentCharacter[stat] += 5;
+    }
+    else (currentCharacter[stat] = 100)
+  }
 
   const handleSubmit = (data) => {
     usernameAndPassword.forEach(element => {
@@ -87,6 +146,8 @@ const App = ()=> {
 
   const selectCurrentCharacter = (characterId) => {
     setCurrentCharacter(animals.find(animal => animal.id === characterId))
+    setCCHappiness(currentCharacter.happiness)
+    setCCHealth(currentCharacter.health)
   }
 
   const getUserData = () => {
@@ -106,6 +167,20 @@ const App = ()=> {
     getUserData();
   }, [loggedInUsername])
 
+  useEffect(() => {
+    if (currentCharacter){
+    reduceStats()
+    }
+  }, [currentCharacter.happiness])
+
+  const logInNewUser = (userDeets) => {
+    setLoggedInUsername(userDeets.username);
+    setLoggedInPassword(userDeets.password);
+    setLoggedIn(true);
+  }
+
+
+
   
   return (
     <Router>
@@ -117,9 +192,10 @@ const App = ()=> {
         <Switch>
         <Route exact path="/" render={() => loggedIn? <Redirect to= "/choicepage" /> : <LandingPage onSubmit = {handleSubmit}></LandingPage>} />
         <Route path="/choicepage" component={ChoicePage} />
-        <Route path="/createpage" render={() => <CreatePage userAnimals={userData.animals}/>}/>
+        <Route path="/newuser" render={() => loggedIn? <Redirect to="/createpage" /> : <SaveForm onNewUserSubmit={(userDeets) => logInNewUser(userDeets)}/>}/>
+        <Route path="/createpage" render={() => <CreatePage allAnimals={animals} currentCharacter={currentCharacter} setCurrentCharacter={setCurrentCharacter} userData={userData} loggedInUsername={loggedInUsername} setLoggedInPassword={loggedInPassword} getUserData={getUserData}/>}/>
         <Route path="/loadpage"  render={() => <LoadPage userAnimals={userData.animals} selectCurrentCharacter={selectCurrentCharacter}/>} />
-        <Route path="/character" render={() => <Character currentCharacter={currentCharacter}/>}/>
+        <Route path="/character" render={() => <Character currentCharacter={currentCharacter} increaseStat={increaseStat}/>}/>
         
         </Switch>
       </>
