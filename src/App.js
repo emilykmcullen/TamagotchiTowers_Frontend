@@ -6,9 +6,11 @@ import ChoicePage from "./containers/LoadCreateContainer/ChoicePage";
 import CreatePage from "./containers/LoadCreateContainer/CreatePage";
 import LoadPage from "./containers/LoadCreateContainer/LoadPage";
 import Character from "./containers/CharacterContainer/Character";
-import SaveForm from "./components/LoadCreateComponents/SaveForm";
+import dogHeart  from "./gifs/dog/dog_heart.gif"
 import "./App.css"
 import "./style/LandingPage.css"
+import SaveForm from "./components/LoadCreateComponents/SaveForm";
+
 
 
 
@@ -19,12 +21,19 @@ const App = ()=> {
   const [userData, setUserData] = useState({});
   const [currentCharacter, setCurrentCharacter] = useState({});
   const [loggedIn, setLoggedIn] = useState(false);
+  const [ccHappiness, setCCHappiness] = useState();
+  const [ccHealth, setCCHealth] = useState();
+  const [cccleanliness, setCCCleanliness] = useState();
+  const [ccFitness, setCCFitness] = useState();
+  const [ccHunger, settCCHunger] = useState();
+  const [intervalId, setIntervalId] = useState(null);
+  
 
 
   const animals = [
     {id: 1, animal_type: { animal: "dog" , stats: {
       appetite: 0.5, grooming: 0.6, cheeriness: 0.2, activity_level: 0.9
-    }}, images: ["https://art.pixilart.com/a407c6ad7e177d2.png"],
+    }}, images: [dogHeart],
     name: "Jellibobs", health: 100, happiness:100, cleanliness:100,
     fitness:100, hunger:100
     },
@@ -71,7 +80,29 @@ const App = ()=> {
   //if they get dirty quickly/don't groom often, grooming = high
   //if they are unhappy animals, cheeriness = high
   //if they need a lot of exercise, activity level = high
-  
+
+  const reduceStats = () => {
+    if (currentCharacter.happiness>0){
+      
+    const interval = setInterval(() => {
+      
+      setCCHappiness(currentCharacter.happiness -=.01);
+      setIntervalId(interval)
+      if(currentCharacter.happiness === 0) {
+    }}, 10);
+  }
+  }
+
+
+
+  clearInterval(intervalId);
+
+  const increaseStat = (stat) => {
+    if (currentCharacter.happiness<95){
+      console.log("INCREEEEASE")
+      currentCharacter[stat] += 5;
+    }
+  }
 
   const handleSubmit = (data) => {
     usernameAndPassword.forEach(element => {
@@ -88,6 +119,8 @@ const App = ()=> {
 
   const selectCurrentCharacter = (characterId) => {
     setCurrentCharacter(animals.find(animal => animal.id === characterId))
+    setCCHappiness(currentCharacter.happiness)
+    setCCHealth(currentCharacter.health)
   }
 
   const getUserData = () => {
@@ -107,12 +140,19 @@ const App = ()=> {
     getUserData();
   }, [loggedInUsername])
 
+  useEffect(() => {
+    if (currentCharacter){
+    reduceStats()
+    }
+  }, [currentCharacter.happiness])
 
   const logInNewUser = (userDeets) => {
     setLoggedInUsername(userDeets.username);
     setLoggedInPassword(userDeets.password);
     setLoggedIn(true);
   }
+
+
 
   
   return (
@@ -126,9 +166,10 @@ const App = ()=> {
         <Route exact path="/" render={() => loggedIn? <Redirect to= "/choicepage" /> : <LandingPage onSubmit = {handleSubmit}></LandingPage>} />
         <Route path="/choicepage" component={ChoicePage} />
         <Route path="/newuser" render={() => loggedIn? <Redirect to="/createpage" /> : <SaveForm onNewUserSubmit={(userDeets) => logInNewUser(userDeets)}/>}/>
-        <Route path="/createpage" render={() => <CreatePage allAnimals={animals} currentCharacter={currentCharacter} setCurrentCharacter={setCurrentCharacter} userData={userData} loggedInUsername={loggedInUsername} setLoggedInPassword={loggedInPassword}/>}/>
+        <Route path="/createpage" render={() => <CreatePage allAnimals={animals} currentCharacter={currentCharacter} setCurrentCharacter={setCurrentCharacter} userData={userData} loggedInUsername={loggedInUsername} setLoggedInPassword={loggedInPassword} getUserData={getUserData}/>}/>
         <Route path="/loadpage"  render={() => <LoadPage userAnimals={userData.animals} selectCurrentCharacter={selectCurrentCharacter}/>} />
-        <Route path="/character" render={() => <Character currentCharacter={currentCharacter}/>}/>
+        <Route path="/character" render={() => <Character currentCharacter={currentCharacter} increaseStat={increaseStat}/>}/>
+        
         </Switch>
       </>
     </Router>

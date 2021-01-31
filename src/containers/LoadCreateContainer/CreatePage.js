@@ -1,15 +1,17 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import { BrowserRouter as Router, Route, Switch, Redirect, Link } from "react-router-dom";
 
-const CreatePage = ({allAnimals, setCurrentCharacter, userData, loggedInUsername, loggedInPassword, currentCharacter}) => {
+const CreatePage = ({allAnimals, setCurrentCharacter, userData, loggedInUsername, loggedInPassword, currentCharacter, getUserData}) => {
 
   const handleClick = (animal) => {
     setCurrentCharacter(animal)
     if (!userData && loggedInUsername){
       console.log("Saving new user");
       // saveNewUser();
+      // getUserData();
     }
   }
+
 
   const animalArray = allAnimals.map(animal => {
     return(
