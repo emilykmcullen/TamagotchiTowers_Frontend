@@ -9,6 +9,8 @@ import Character from "./containers/CharacterContainer/Character";
 import dogHeart  from "./gifs/dog/dog_heart.gif"
 import "./App.css"
 import "./style/LandingPage.css"
+import SaveForm from "./components/LoadCreateComponents/SaveForm";
+
 
 
 
@@ -171,6 +173,12 @@ const App = ()=> {
     }
   }, [currentCharacter.happiness])
 
+  const logInNewUser = (userDeets) => {
+    setLoggedInUsername(userDeets.username);
+    setLoggedInPassword(userDeets.password);
+    setLoggedIn(true);
+  }
+
 
 
   
@@ -184,7 +192,8 @@ const App = ()=> {
         <Switch>
         <Route exact path="/" render={() => loggedIn? <Redirect to= "/choicepage" /> : <LandingPage onSubmit = {handleSubmit}></LandingPage>} />
         <Route path="/choicepage" component={ChoicePage} />
-        <Route path="/createpage" render={() => <CreatePage userAnimals={userData.animals}/>}/>
+        <Route path="/newuser" render={() => loggedIn? <Redirect to="/createpage" /> : <SaveForm onNewUserSubmit={(userDeets) => logInNewUser(userDeets)}/>}/>
+        <Route path="/createpage" render={() => <CreatePage allAnimals={animals} currentCharacter={currentCharacter} setCurrentCharacter={setCurrentCharacter} userData={userData} loggedInUsername={loggedInUsername} setLoggedInPassword={loggedInPassword} getUserData={getUserData}/>}/>
         <Route path="/loadpage"  render={() => <LoadPage userAnimals={userData.animals} selectCurrentCharacter={selectCurrentCharacter}/>} />
         <Route path="/character" render={() => <Character currentCharacter={currentCharacter} increaseStat={increaseStat}/>}/>
         
