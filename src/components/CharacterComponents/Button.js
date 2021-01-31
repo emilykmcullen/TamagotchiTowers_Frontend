@@ -1,12 +1,13 @@
 import React, {useState} from "react";
 
-const Button = () => {
-  
-  
+const Button = ({statName, increaseStat}) => {
+
+  let lowerCaseStatName = statName.toString().toLowerCase()
+
 
   return(
       <div>
-        <button>Click me</button>
+        <button type="button" onClick={() => increaseStat(lowerCaseStatName)}> Increase {statName}</button>
       </div>
   )
 };

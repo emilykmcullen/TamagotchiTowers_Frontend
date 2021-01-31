@@ -1,7 +1,9 @@
 import React, {useState} from "react";
 import Button from './Button';
 
-const StatBar = ({stat, statName}) => {
+const StatBar = ({stat, statName, increaseStat}) => {
+
+    const statLabel = Math.round(stat);
 
     const containerStyles = {
         height: 20,
@@ -24,29 +26,14 @@ const StatBar = ({stat, statName}) => {
         borderRadius: 'inherit',
         textAlign: 'right'
       }
-      function move() {
-        var elem = document.getElementById("containerStyles");   
-        var width = 0;
-        var id = setInterval(frame, 1);
-        // i want it to be done in 7 seconds
-        var time = 7000;
-        function frame() {
-          if (width >= time) {
-            clearInterval(id);
-          } else {
-            width++; 
-            elem.style.width = 100-(100*width)/time + '%'; 
-            elem.innerHTML = 100-Math.round((100*width)/time)  + '%';
-          }
-        }
-      }
+      
   return(
       <div>
             <div style={containerStyles}>
                 <div style={fillerStyle}>
-                    <span style={labelStyles}>{statName}: {`${stat}%`}</span>
-                    <Button/>
+                    <span style={labelStyles}>{statName}: {`${statLabel}%`}</span>
                 </div>
+                <Button statName={statName} increaseStat={increaseStat} />
             </div>
       </div>
   )
