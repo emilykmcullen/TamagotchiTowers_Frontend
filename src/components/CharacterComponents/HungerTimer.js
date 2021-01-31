@@ -1,21 +1,21 @@
 import React, {useState} from 'react';
 
-const HungerTimer = ({title, hungerAmount}) => {
+const HungerTimer = ({title, hungerAmount, feedAmount}) => {
 
-    const [start, setStart] = useState(100);
+    const [start, setStart] = useState(10000);
 
-    const getHungry = () => {
-        while(setStart>0){
-            setTimeout( () => {
-                  start--;
-                },
-                4 * 1000
-              );
+    
+    const relieveHunger = () => {
+        if(setStart!=100){
+            setStart(start + feedAmount);
         }
     }
-    const relieveHunger = () => {
-    setStart(start + hungerAmount);
-    }
+    const getHungry = () => {
+        if(setStart!=0){
+            setStart(start- hungerAmount);
+        }
+    }    
+    requestAnimationFrame(getHungry);
 
     return(
         <>

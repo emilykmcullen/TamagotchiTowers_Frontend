@@ -32,7 +32,8 @@ const Character = ({currentCharacter}) => {
             <StatBar stat={currentCharacter.hunger} statName="Hunger"/>
             <HungerTimer 
             title ="Hunger bar" 
-            hungerAmount ={3}/>
+            hungerAmount ={5}
+            feedAmount = {200} />
           
         </div>
     )
