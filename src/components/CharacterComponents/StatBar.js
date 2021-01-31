@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import Button from './Button';
 
-const StatBar = ({stat, statName, increaseStat, lowercaseStatName}) => {
+const StatBar = ({stat, statName, increaseStat}) => {
 
     const statLabel = Math.round(stat);
 
@@ -26,7 +26,7 @@ const StatBar = ({stat, statName, increaseStat, lowercaseStatName}) => {
         borderRadius: 'inherit',
         textAlign: 'right'
       }
-
+      
   return(
       <div>
             <div style={containerStyles}>
