@@ -23,9 +23,9 @@ const App = ()=> {
   const [loggedIn, setLoggedIn] = useState(false);
   const [ccHappiness, setCCHappiness] = useState();
   const [ccHealth, setCCHealth] = useState();
-  const [cccleanliness, setCCCleanliness] = useState();
+  const [ccCleanliness, setCCCleanliness] = useState();
   const [ccFitness, setCCFitness] = useState();
-  const [ccHunger, settCCHunger] = useState();
+  const [ccHunger, setCCHunger] = useState();
   const [intervalId, setIntervalId] = useState(null);
   
 
@@ -89,6 +89,33 @@ const App = ()=> {
       setCCHappiness(currentCharacter.happiness -=.01);
       setIntervalId(interval)
       if(currentCharacter.happiness === 0) {
+    }}, 10);
+  }
+  if (currentCharacter.cleanliness>0){
+      
+    const interval = setInterval(() => {
+      
+      setCCCleanliness(currentCharacter.cleanliness -=.01);
+      setIntervalId(interval)
+      if(currentCharacter.cleanliness === 0) {
+    }}, 10);
+  }
+  if (currentCharacter.hunger>0){
+      
+    const interval = setInterval(() => {
+      
+      setCCHunger(currentCharacter.hunger -=.01);
+      setIntervalId(interval)
+      if(currentCharacter.hunger === 0) {
+    }}, 10);
+  }
+  if (currentCharacter.fitness>0){
+      
+    const interval = setInterval(() => {
+      
+      setCCFitness(currentCharacter.fitness -=.01);
+      setIntervalId(interval)
+      if(currentCharacter.fitness === 0) {
     }}, 10);
   }
   }
