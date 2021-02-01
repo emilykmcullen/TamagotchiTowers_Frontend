@@ -3,56 +3,48 @@ import { BrowserRouter as Router, Route, Switch, Redirect, Link } from "react-ro
 
 const SaveForm = ({onNewUserSubmit, animals, currentCharacter, setCurrentCharacter, userData, loggedInUsername, loggedInPassword, setLoggedInPassword, getUserData, setLoggedIn}) => {
 
-    const [username, setUsername] = useState("");
-    const [password, setPassword] = useState("");
-    // const [user, setUser] = useState({
-    //     userName: "",
-    //     password: "",
-    //     imageURL: "",
-    //     animals: []
-    //   })
+    const [newUsername, setNewUsername] = useState("");
+    const [newPassword, setNewPassword] = useState("");
 
     const handleUsernameChange = (evt) => {
-        setUsername(evt.target.value);
+        setNewUsername(evt.target.value);
     };
 
     const handlePasswordChange = (evt) => {
-        setPassword(evt.target.value);
+        setNewPassword(evt.target.value);
     };
 
     const handleFormSubmit = (evt) => {
         evt.preventDefault();
-        const usernameToSubmit = username.trim();
-        const passwordToSubmit = password.trim();
+        const usernameToSubmit = newUsername.trim();
+        const passwordToSubmit = newPassword.trim();
         onNewUserSubmit({
-            username: usernameToSubmit,
-            password: passwordToSubmit
+            newUsername: usernameToSubmit,
+            newPassword: passwordToSubmit
         });
         
-        // setUsername("");
-        // setPassword("");
+        // setNewUsername("");
+        // setNewPassword("");
     }
 
     const saveNewUser = () => {
         // Simple POST request with a JSON body using fetch
         const requestOptions = {
-            
             method: 'POST',
             headers: {'Content-Type': 'application/json' },
             body: JSON.stringify({ 
-              userName: username,
-              password: password,
+              userName: loggedInUsername,
+              password: loggedInPassword,
               imageURL: "fakeImgUrl",
               animals: []
             })
         };
         return fetch('http://localhost:8080/api/users', requestOptions)
-            .then(setLoggedIn(true))
-            // .then(data => this.setState({ postId: data.id }));
+            // .then(setLoggedIn(true))
       }
 
       const handleClick = () => {
-        if (!userData && username && password){
+        if (loggedInUsername && loggedInPassword){
           console.log("Saving new user");
           saveNewUser();
         }
@@ -70,13 +62,13 @@ const SaveForm = ({onNewUserSubmit, animals, currentCharacter, setCurrentCharact
         <form className="comment-form" onSubmit={handleFormSubmit}>
             <input type="text"
             placeholder="Your username"
-            value={username}
+            value={newUsername}
             onChange={handleUsernameChange}/>
             
 
             <input type="text"
             placeholder="Your password"
-            value={password}
+            value={newPassword}
             onChange={handlePasswordChange}/>
 
             <input type="submit"

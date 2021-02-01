@@ -266,9 +266,8 @@ const App = ()=> {
   }, [ currentCharacter.happiness || currentCharacter.fitness || currentCharacter.cleanliness || currentCharacter.hunger ])
 
   const logInNewUser = (userDeets) => {
-    setLoggedInUsername(userDeets.username);
-    setLoggedInPassword(userDeets.password);
-    setLoggedIn(false);
+    setLoggedInUsername(userDeets.newUsername);
+    setLoggedInPassword(userDeets.newPassword);
   }
 
 
@@ -284,7 +283,6 @@ const App = ()=> {
         <Switch>
         <Route exact path="/" render={() => loggedIn? <Redirect to= "/choicepage" /> : <LandingPage onSubmit = {handleSubmit}></LandingPage>} />
         <Route path="/choicepage" render={() => <ChoicePage unsetSelectedCharacter={unsetSelectedCharacter} />}/>
-        
         <Route path="/newuser" render={() => loggedIn? <Redirect to= "/choicepage" /> :<SaveForm onNewUserSubmit={(userDeets) => logInNewUser(userDeets)} allAnimals={animals} currentCharacter={currentCharacter} setCurrentCharacter={setCurrentCharacter} userData={userData} loggedInUsername={loggedInUsername} setLoggedInPassword={loggedInPassword} getUserData={getUserData}/>}/>
         <Route path="/createpage" render={() => hasSelectedCharacter? <Redirect to="/character"/>: <CreatePage allAnimals={adoptableAnimals} handleAdoptAnimal={handleAdoptAnimal}/>} />
         <Route path="/loadpage"  render={() => <LoadPage userAnimals={userData.animals} selectCurrentCharacter={selectCurrentCharacter}/>} />
