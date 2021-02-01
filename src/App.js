@@ -6,12 +6,18 @@ import ChoicePage from "./containers/LoadCreateContainer/ChoicePage";
 import CreatePage from "./containers/LoadCreateContainer/CreatePage";
 import LoadPage from "./containers/LoadCreateContainer/LoadPage";
 import Character from "./containers/CharacterContainer/Character";
+import dogExclamation from './gifs/dog/dog_exclamation.gif'
 import dogHeart  from "./gifs/dog/dog_heart.gif"
 import catMeow from "./gifs/cat/cat_meow.gif"
+import catExclamation from './gifs/cat/cat_exclamation.gif'
 import monkeySpeak from "./gifs/monkey/monkey_speak.gif"
+import monkeyExclamation from "./gifs/monkey/monkey_exclamation.gif"
 import unicornRainbow from "./gifs/unicorn/unicorn_rainbow.gif"
+import unicornExclamation from "./gifs/unicorn/unicorn_exclamation.gif"
 import dinoRawr from "./gifs/dino/dinosaur_rawr.gif"
+import dinoExclamation from "./gifs/dino/Dinosaur_exclamation.gif"
 import penguinHeart from "./gifs/penguin/penguin_heart.gif"
+import penguinExclamation from './gifs/penguin/penguin_exclamation.gif'
 import "./App.css"
 import "./style/LandingPage.css"
 import "./style/CreatePage.css"
@@ -35,37 +41,37 @@ const App = ()=> {
   const animals = [
     {id: 1, animal_type: { animal: "dog" , stats: {
       appetite: 0.5, grooming: 0.6, cheeriness: 0.2, activity_level: 0.9
-    }}, images: "https://i.gifer.com/4xjK.gif",
+    }}, main_image: [dogHeart], sad_image:[dogExclamation],
     name: "Jellibobs", health: 100, happiness:100, cleanliness:100,
     fitness:100, hunger:100
     },
     {id: 2, animal_type: {animal: "cat" , stats: {
       appetite: 0.3, grooming: 0.2, cheeriness: 0.7, activity_level: 0.6
-    }}, main_image: "https://i.gifer.com/4xjK.gif", sad_image:"https://i.pinimg.com/originals/20/67/65/20676527bc584f82177d749c59cfdc70.gif",
+    }}, main_image: [catMeow], sad_image:[catExclamation],
     name: "Kitty Fursbags", health: 100, happiness:100, cleanliness:100,
     fitness:100, hunger:100
     },
     {id: 3, animal_type: {animal: "monkey" , stats: {
       appetite: 0.9, grooming: 0.7, cheeriness: 0.5, activity_level: 1
-    }}, images: "https://i.gifer.com/4xjK.gif",
+    }}, main_image: [monkeySpeak], sad_image:[monkeyExclamation],
     name: "Cheeky Chops", health: 100, happiness:100, cleanliness:100,
     fitness:100, hunger:100
     },
     {id: 4, animal_type: {animal: "unicorn" , stats: {
       appetite: 0.5, grooming: 0.9, cheeriness: 0.6, activity_level: 0.7
-    }}, images: "https://i.gifer.com/4xjK.gif",
+    }}, main_image: [unicornRainbow], sad_image:[unicornExclamation],
     name: "Dolly", health: 100, happiness:100, cleanliness:100,
     fitness:100, hunger:100
     },
     {id: 5, animal_type: {animal: "dinosaur" , stats: {
       appetite: 0.9, grooming: 0.1, cheeriness: 0.1, activity_level: 0.7
-    }}, images: "https://i.gifer.com/4xjK.gif",
+    }}, main_image: [dinoRawr], sad_image:[dinoExclamation],
     name: "Mr. Flamez", health: 100, happiness:100, cleanliness:100,
     fitness:100, hunger:100
     },
     {id: 6, animal_type: {animal: "penguin" , stats: {
       appetite: 0.5, grooming: 0.9, cheeriness: 0.6, activity_level: 0.7
-    }}, images: "https://i.gifer.com/4xjK.gif",
+    }}, main_image: [penguinHeart], sad_image:[penguinExclamation],
     name: "Beany", health: 100, happiness:100, cleanliness:100,
     fitness:100, hunger:100
   }  
@@ -122,7 +128,7 @@ const App = ()=> {
   
   const characterGif = () => {
     if (currentCharacter){
-      if (currentCharacter.happiness<80){
+      if (currentCharacter.happiness<50){
       setCurrentImage(currentCharacter.sad_image)
       } 
       else{
