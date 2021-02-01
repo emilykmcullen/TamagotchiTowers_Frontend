@@ -7,16 +7,22 @@ import CreatePage from "./containers/LoadCreateContainer/CreatePage";
 import LoadPage from "./containers/LoadCreateContainer/LoadPage";
 import Character from "./containers/CharacterContainer/Character";
 import dogExclamation from './gifs/dog/dog_exclamation.gif'
+import dogSpeak from './gifs/dog/dog_woof.gif'
 import dogHeart  from "./gifs/dog/dog_heart.gif"
+import catHeart from "./gifs/cat/cat_heart.gif"
 import catMeow from "./gifs/cat/cat_meow.gif"
 import catExclamation from './gifs/cat/cat_exclamation.gif'
+import monkeyHeart from "./gifs/monkey/monkey_heart.gif"
 import monkeySpeak from "./gifs/monkey/monkey_speak.gif"
 import monkeyExclamation from "./gifs/monkey/monkey_exclamation.gif"
+import unicornHeart from "./gifs/unicorn/unicorn_heart.gif"
 import unicornRainbow from "./gifs/unicorn/unicorn_rainbow.gif"
 import unicornExclamation from "./gifs/unicorn/unicorn_exclamation.gif"
+import dinoHeart from "./gifs/dino/dinosaur_heart.gif"
 import dinoRawr from "./gifs/dino/dinosaur_rawr.gif"
 import dinoExclamation from "./gifs/dino/Dinosaur_exclamation.gif"
 import penguinHeart from "./gifs/penguin/penguin_heart.gif"
+import penguinSpeak from "./gifs/penguin/penguin_speak.gif"
 import penguinExclamation from './gifs/penguin/penguin_exclamation.gif'
 import "./App.css"
 import "./style/LandingPage.css"
@@ -41,37 +47,37 @@ const App = ()=> {
   const animals = [
     {id: 1, animal_type: { animal: "dog" , stats: {
       appetite: 0.5, grooming: 0.6, cheeriness: 0.2, activity_level: 0.9
-    }}, main_image: [dogHeart], sad_image:[dogExclamation],
+    }}, main_image: [dogHeart], speak_image: [dogSpeak], sad_image:[dogExclamation],
     name: "Jellibobs", health: 100, happiness:100, cleanliness:100,
     fitness:100, hunger:100
     },
     {id: 2, animal_type: {animal: "cat" , stats: {
       appetite: 0.3, grooming: 0.2, cheeriness: 0.7, activity_level: 0.6
-    }}, main_image: [catMeow], sad_image:[catExclamation],
+    }}, main_image: [catHeart], speak_image: [catMeow], sad_image:[catExclamation],
     name: "Kitty Fursbags", health: 100, happiness:100, cleanliness:100,
     fitness:100, hunger:100
     },
     {id: 3, animal_type: {animal: "monkey" , stats: {
       appetite: 0.9, grooming: 0.7, cheeriness: 0.5, activity_level: 1
-    }}, main_image: [monkeySpeak], sad_image:[monkeyExclamation],
+    }}, main_image: [monkeyHeart], speak_image:[monkeySpeak], sad_image:[monkeyExclamation],
     name: "Cheeky Chops", health: 100, happiness:100, cleanliness:100,
     fitness:100, hunger:100
     },
     {id: 4, animal_type: {animal: "unicorn" , stats: {
       appetite: 0.5, grooming: 0.9, cheeriness: 0.6, activity_level: 0.7
-    }}, main_image: [unicornRainbow], sad_image:[unicornExclamation],
+    }}, main_image: [unicornHeart], speak_image:[unicornRainbow], sad_image:[unicornExclamation],
     name: "Dolly", health: 100, happiness:100, cleanliness:100,
     fitness:100, hunger:100
     },
     {id: 5, animal_type: {animal: "dinosaur" , stats: {
       appetite: 0.9, grooming: 0.1, cheeriness: 0.1, activity_level: 0.7
-    }}, main_image: [dinoRawr], sad_image:[dinoExclamation],
+    }}, main_image: [dinoHeart], speak_image:[dinoRawr], sad_image:[dinoExclamation],
     name: "Mr. Flamez", health: 100, happiness:100, cleanliness:100,
     fitness:100, hunger:100
     },
     {id: 6, animal_type: {animal: "penguin" , stats: {
       appetite: 0.5, grooming: 0.9, cheeriness: 0.6, activity_level: 0.7
-    }}, main_image: [penguinHeart], sad_image:[penguinExclamation],
+    }}, main_image: [penguinHeart], speak_image: [penguinSpeak], sad_image:[penguinExclamation],
     name: "Beany", health: 100, happiness:100, cleanliness:100,
     fitness:100, hunger:100
   }  
@@ -131,6 +137,9 @@ const App = ()=> {
       if (currentCharacter.happiness<50){
       setCurrentImage(currentCharacter.sad_image)
       } 
+      // if (currentCharacter.hunger<80){
+      //   setCurrentImage(currentCharacter.speak_image)
+      // } 
       else{
       setCurrentImage(currentCharacter.main_image)
       }  
