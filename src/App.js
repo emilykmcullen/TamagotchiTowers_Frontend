@@ -134,12 +134,13 @@ const App = ()=> {
   
   const characterGif = () => {
     if (currentCharacter){
+
       if (currentCharacter.happiness<50){
       setCurrentImage(currentCharacter.sad_image)
       } 
-      // if (currentCharacter.hunger<80){
-      //   setCurrentImage(currentCharacter.speak_image)
-      // } 
+      else if (currentCharacter.hunger<80){
+        setCurrentImage(currentCharacter.speak_image)
+      } 
       else{
       setCurrentImage(currentCharacter.main_image)
       }  
