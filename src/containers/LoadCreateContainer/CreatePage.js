@@ -4,14 +4,23 @@ import { BrowserRouter as Router, Route, Switch, Redirect, Link } from "react-ro
 
 const CreatePage = ({allAnimals, setCurrentCharacter, userData, loggedInUsername, loggedInPassword, currentCharacter, getUserData}) => {
 
+  // const [user, setUser] = useState({
+  //   userName: "",
+  //   password: "",
+  //   imageURL: "",
+  //   animals: []
+  // })
+
+
+
   const handleClick = (animal) => {
     setCurrentCharacter(animal)
-    if (!userData && loggedInUsername){
-      console.log("Saving new user");
-      // saveNewUser();
+    // if (!userData && loggedInUsername){
+    //   console.log("Saving new user");
+    //   saveNewUser();
       // getUserData();
     }
-  }
+  
 
 
   const animalArray = allAnimals.map(animal => {
@@ -26,20 +35,22 @@ const CreatePage = ({allAnimals, setCurrentCharacter, userData, loggedInUsername
 
 
 
-//   const saveNewUser = () => {
-//   // Simple PUT request with a JSON body using fetch
-//   const requestOptions = {
-//       method: 'PUT',
-//       headers: { 'Content-Type': 'application/json' },
-//       body: JSON.stringify({ 
-//         username: loggedInUsername,
-//         password: loggedInPassword,
-//         animals: [currentCharacter]
-//       })
-//   };
-//   fetch('https://jsonplaceholder.typicode.com/posts/1', requestOptions)
-//       .then(response => response.json())
-//       .then(data => this.setState({ postId: data.id }));
+//   // const saveNewUser = () => {
+//   // // Simple POST request with a JSON body using fetch
+//   // const requestOptions = {
+//   //     mode: 'no-cors',
+//   //     method: 'POST',
+//   //     headers: { 'Content-Type': 'application/json' },
+//   //     body: JSON.stringify({ 
+//   //       userName: loggedInUsername,
+//   //       password: loggedInPassword,
+//   //       imageURL: "fakeImgUrl",
+//   //       animals: []
+//   //     })
+//   // };
+//   // fetch('http://localhost:8080/api/users/', requestOptions)
+//   //     .then(response => response.json())
+//   //     .then(data => this.setState({ postId: data.id }));
 // }
 
   

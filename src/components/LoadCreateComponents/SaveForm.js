@@ -1,10 +1,16 @@
 import React, {useState} from 'react';
 import { BrowserRouter as Router, Route, Switch, Redirect, Link } from "react-router-dom";
 
-const SaveForm = ({onNewUserSubmit}) => {
+const SaveForm = ({onNewUserSubmit, animals, currentCharacter, setCurrentCharacter, userData, loggedInUsername, loggedInPassword, setLoggedInPassword, getUserData}) => {
 
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const [user, setUser] = useState({
+        userName: "",
+        password: "",
+        imageURL: "",
+        animals: []
+      })
 
     const handleUsernameChange = (evt) => {
         setUsername(evt.target.value);
@@ -26,6 +32,32 @@ const SaveForm = ({onNewUserSubmit}) => {
         setUsername("");
         setPassword("");
     }
+
+    const saveNewUser = () => {
+        // Simple POST request with a JSON body using fetch
+        const requestOptions = {
+            mode: 'no-cors',
+            method: 'POST',
+            headers: {'Content-Type': 'application/json' },
+            body: JSON.stringify({ 
+              userName: loggedInUsername,
+              password: loggedInPassword,
+              imageURL: "fakeImgUrl",
+              animals: []
+            })
+        };
+        return fetch('http://localhost:8080/api/users', requestOptions)
+            // .then(response => response.json())
+            // .then(data => this.setState({ postId: data.id }));
+      }
+
+      const handleClick = () => {
+        if (!userData && loggedInUsername){
+          console.log("Saving new user");
+          saveNewUser();
+          // getUserData();
+        }
+      }
 
     return(
         <>
@@ -51,6 +83,7 @@ const SaveForm = ({onNewUserSubmit}) => {
             <input type="submit"
             value="Create Account and Log in"/>
         </form>
+        <button onClick={handleClick}>Save user</button>
         </>
     )
 };
