@@ -83,6 +83,14 @@ const App = ()=> {
   //if they need a lot of exercise, activity level = high
 
   const reduceStats = () => {
+    if (currentCharacter.health>0){
+      
+      const interval = setInterval(() => {
+        currentCharacter.health = (currentCharacter.happiness + currentCharacter.fitness + currentCharacter.cleanliness + currentCharacter.hunger)/4;
+        setIntervalId(interval)
+        console.log(currentCharacter.health)
+        });
+    }
     if (currentCharacter.happiness>0){
       
     const interval = setInterval(() => {
@@ -167,7 +175,7 @@ const App = ()=> {
     if (currentCharacter){
     reduceStats()
     }
-  }, [currentCharacter.happiness, currentCharacter.fitness, currentCharacter.cleanliness, currentCharacter.hunger])
+  }, [currentCharacter.health, currentCharacter.happiness, currentCharacter.fitness, currentCharacter.cleanliness, currentCharacter.hunger])
 
   const logInNewUser = (userDeets) => {
     setLoggedInUsername(userDeets.username);
