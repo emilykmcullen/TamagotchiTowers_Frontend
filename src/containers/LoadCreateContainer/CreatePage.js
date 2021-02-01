@@ -34,24 +34,24 @@ const saveNewAnimal = () => {
       method: 'POST',
       headers: {'Content-Type': 'application/json' },
       body: JSON.stringify({ 
-        "animalName": currentCharacter.name,
-        "animalType": currentCharacter.type,
-        "health": currentCharacter.health,
-        "happiness": currentCharacter.happiness,
-        "cleanliness": currentCharacter.cleanliness,
-        "fitness": currentCharacter.fitness,
-        "hunger": currentCharacter.hunger,
-        "user": {
-          "id": 5,
-          "userName": userData.userName,
-          "password": userData.password,
-          "imageURL": userData.imageURL
+        animalName: currentCharacter.name,
+        animalType: currentCharacter.type,
+        health: currentCharacter.health,
+        happiness: currentCharacter.happiness,
+        cleanliness: currentCharacter.cleanliness,
+        fitness: currentCharacter.fitness,
+        hunger: currentCharacter.hunger,
+        user: {
+          id: 5,
+          userName: userData.userName,
+          password: userData.password,
+          imageURL: userData.imageURL
                 },
-        "images": [],
-        "appetite": currentCharacter.appetite,
-        "grooming": currentCharacter.grooming,
-        "cheeriness": currentCharacter.cheeriness,
-        "activityLevel": currentCharacter.activityLevel
+        images: [],
+        appetite: 0.05,
+        grooming: 0.06,
+        cheeriness: 0.02,
+        activityLevel: 0.09
       })
   };
   return fetch('http://localhost:8080/api/animals', requestOptions)
