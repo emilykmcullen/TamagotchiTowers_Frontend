@@ -111,7 +111,6 @@ const App = ()=> {
       const interval = setInterval(() => {
         currentCharacter.health = (currentCharacter.happiness + currentCharacter.fitness + currentCharacter.cleanliness + currentCharacter.hunger)/4;
         setIntervalId(interval)
-        console.log(currentCharacter.health)
         });
     }
     if (currentCharacter.happiness>0){
@@ -197,12 +196,13 @@ const App = ()=> {
     });
   }
 
-  const handleAdoptAnimal = (nameForm, animalType) => {
+  const handleAdoptAnimal = (data) => {
+    console.log("ANIMAL IS:" + data.animaltype)
     const newAnimal = 
-    {id: 1, animal_type: { animal: animalType , stats: {
+    {id: 1, animal_type: { animal: data.animaltype , stats: {
       appetite: 0.5, grooming: 0.6, cheeriness: 0.2, activity_level: 0.9
     }}, images: [dogHeart],
-    name: nameForm.name, health: 100, happiness:100, cleanliness:100,
+    name: data.name, health: 100, happiness:100, cleanliness:100,
     fitness:100, hunger:100
     }
 
@@ -219,6 +219,11 @@ const App = ()=> {
   const selectCurrentCharacter = (characterId) => {
     setCurrentCharacter(animals.find(animal => animal.id === characterId))
     setHasSelectedCharacter(true)
+  }
+
+  const unsetSelectedCharacter = () => {
+    setCurrentCharacter({})
+    setHasSelectedCharacter(false)
   }
 
   const getUserData = () => {
@@ -263,11 +268,12 @@ const App = ()=> {
         </header>
         <Switch>
         <Route exact path="/" render={() => loggedIn? <Redirect to= "/choicepage" /> : <LandingPage onSubmit = {handleSubmit}></LandingPage>} />
-        <Route path="/choicepage" component={ChoicePage} />
+        <Route path="/choicepage" render={() => <ChoicePage unsetSelectedCharacter={unsetSelectedCharacter} />}/>
         <Route path="/newuser" render={() => loggedIn? <Redirect to="/createpage" /> : <SaveForm onNewUserSubmit={(userDeets) => logInNewUser(userDeets)}/>}/>
         <Route path="/createpage" render={() => hasSelectedCharacter? <Redirect to="/character"/>: <CreatePage allAnimals={adoptableAnimals} currentCharacter={currentCharacter} setCurrentCharacter={setCurrentCharacter}
                                                  userData={userData} loggedInUsername={loggedInUsername} setLoggedInPassword={loggedInPassword}
-                                                getUserData={getUserData} handleAdoptAnimal={handleAdoptAnimal}/>}/>
+                                                getUserData={getUserData} handleAdoptAnimal={handleAdoptAnimal}/>}
+                                                />
         <Route path="/loadpage"  render={() => <LoadPage userAnimals={userData.animals} selectCurrentCharacter={selectCurrentCharacter}/>} />
         <Route path="/character" render={() => <Character currentCharacter={currentCharacter} currentImage={currentImage} increaseStat={increaseStat}/>}/>
         

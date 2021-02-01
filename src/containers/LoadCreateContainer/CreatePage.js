@@ -5,19 +5,15 @@ import { BrowserRouter as Router, Route, Switch, Redirect, Link } from "react-ro
 const CreatePage = ({allAnimals, setCurrentCharacter, userData, loggedInUsername, loggedInPassword, currentCharacter, getUserData, handleAdoptAnimal}) => {
 
   const [formData, setFormData] = useState({
-    name: ''
+    name: '',
+    animaltype: ''
   });
 
-  let animalType;
-
   const handleClick = (animal) => {
-    // setCurrentCharacter(animal)
-    animalType = animal.animal
-    if (!userData && loggedInUsername){
-      console.log("Saving new user");
-      // saveNewUser();
-      // getUserData();
-    }
+    formData.animaltype = animal.animal
+    // if (!userData && loggedInUsername){
+    //   console.log("Saving new user");
+    // }
   }
 
   const handleChange = (event) => {
@@ -26,12 +22,10 @@ const CreatePage = ({allAnimals, setCurrentCharacter, userData, loggedInUsername
     setFormData(newState);
   }
 
-
   const handleSubmit = (event) => {
     event.preventDefault();
-    handleAdoptAnimal(formData, animalType)
+    handleAdoptAnimal(formData)
   }
-
 
   const animalArray = allAnimals.map(animal => {
     return(
@@ -65,19 +59,6 @@ const CreatePage = ({allAnimals, setCurrentCharacter, userData, loggedInUsername
   
 
   return(
-    // <>
-    // <div className="animal_array_container">
-    //     {animalArray}
-    // </div>
-    // <div className="link_container">
-    // <Link  from="/createpage" to="/character">
-    //   <button type="button">
-    //     Look after this pet
-    //   </button>
-    // </Link>
-    // </div>
-    // </>
-
     <>
     <div className="animal_array_container">
         {animalArray}
@@ -91,13 +72,11 @@ const CreatePage = ({allAnimals, setCurrentCharacter, userData, loggedInUsername
             name="name"
             id="name"
             type="text"
-            value={formData.name}/>
+            value={formData.name}
+            placeholder="Enter name"/>
+          <input type="hidden" id="animaltype" name="animaltype" value={formData.animaltype} onChange={handleChange}></input>
           <input type="submit" value="Look after this pet" onClick={handleSubmit}/>
-         
-
         </form>
-    
-   
     </div>
     </>
       )

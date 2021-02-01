@@ -1,7 +1,11 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import { BrowserRouter as Router, Route, Switch, Redirect, Link } from "react-router-dom";
 
-const ChoicePage = ({onSubmit}) => {
+const ChoicePage = ({unsetSelectedCharacter}) => {
+
+  useEffect(() => {
+    unsetSelectedCharacter();
+  }, [])
   
   
 
