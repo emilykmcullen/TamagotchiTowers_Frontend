@@ -3,7 +3,9 @@ import StatBar from "../../components/CharacterComponents/StatBar";
 
 
 
-const Character = ({currentCharacter, increaseStat}) => {
+
+const Character = ({currentCharacter, increaseStat, currentImage}) => {
+
 
     return(
         <div>
@@ -12,8 +14,8 @@ const Character = ({currentCharacter, increaseStat}) => {
           
           </h2>
           <p>Species: {currentCharacter.animal_type.animal}</p>
-          <img src={currentCharacter.images[0]} alt="animal pic" width="200"></img>
-            <StatBar stat={currentCharacter.health} statName="Health"
+          <img src={currentImage} alt="animal pic" width="200"></img>
+            <StatBar stat={currentCharacter.health}  statName="Health"
              increaseStat={increaseStat}/>
             <StatBar stat={currentCharacter.happiness} statName="Happiness" 
             buttonLabel="Play with" increaseStat={increaseStat} />

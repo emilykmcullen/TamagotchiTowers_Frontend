@@ -6,12 +6,24 @@ import ChoicePage from "./containers/LoadCreateContainer/ChoicePage";
 import CreatePage from "./containers/LoadCreateContainer/CreatePage";
 import LoadPage from "./containers/LoadCreateContainer/LoadPage";
 import Character from "./containers/CharacterContainer/Character";
+import dogExclamation from './gifs/dog/dog_exclamation.gif'
+import dogSpeak from './gifs/dog/dog_woof.gif'
 import dogHeart  from "./gifs/dog/dog_heart.gif"
+import catHeart from "./gifs/cat/cat_heart.gif"
 import catMeow from "./gifs/cat/cat_meow.gif"
+import catExclamation from './gifs/cat/cat_exclamation.gif'
+import monkeyHeart from "./gifs/monkey/monkey_heart.gif"
 import monkeySpeak from "./gifs/monkey/monkey_speak.gif"
+import monkeyExclamation from "./gifs/monkey/monkey_exclamation.gif"
+import unicornHeart from "./gifs/unicorn/unicorn_heart.gif"
 import unicornRainbow from "./gifs/unicorn/unicorn_rainbow.gif"
+import unicornExclamation from "./gifs/unicorn/unicorn_exclamation.gif"
+import dinoHeart from "./gifs/dino/dinosaur_heart.gif"
 import dinoRawr from "./gifs/dino/dinosaur_rawr.gif"
+import dinoExclamation from "./gifs/dino/Dinosaur_exclamation.gif"
 import penguinHeart from "./gifs/penguin/penguin_heart.gif"
+import penguinSpeak from "./gifs/penguin/penguin_speak.gif"
+import penguinExclamation from './gifs/penguin/penguin_exclamation.gif'
 import "./App.css"
 import "./style/LandingPage.css"
 import "./style/CreatePage.css"
@@ -29,6 +41,7 @@ const App = ()=> {
   const [loggedIn, setLoggedIn] = useState(false);
   const [intervalId, setIntervalId] = useState(null);
   const [hasSelectedCharacter, setHasSelectedCharacter] = useState(false);
+  const [currentImage, setCurrentImage] = useState('');
   
   
   const adoptableAnimals = [
@@ -44,37 +57,37 @@ const App = ()=> {
   let animals = [
     {id: 1, animal_type: { animal: "dog" , stats: {
       appetite: 0.5, grooming: 0.6, cheeriness: 0.2, activity_level: 0.9
-    }}, images: [dogHeart],
+    }}, main_image: [dogHeart], speak_image: [dogSpeak], sad_image:[dogExclamation],
     name: "Jellibobs", health: 100, happiness:100, cleanliness:100,
     fitness:100, hunger:100
     },
     {id: 2, animal_type: {animal: "cat" , stats: {
       appetite: 0.3, grooming: 0.2, cheeriness: 0.7, activity_level: 0.6
-    }}, images: [catMeow],
+    }}, main_image: [catHeart], speak_image: [catMeow], sad_image:[catExclamation],
     name: "Kitty Fursbags", health: 100, happiness:100, cleanliness:100,
     fitness:100, hunger:100
     },
     {id: 3, animal_type: {animal: "monkey" , stats: {
       appetite: 0.9, grooming: 0.7, cheeriness: 0.5, activity_level: 1
-    }}, images: [monkeySpeak],
+    }}, main_image: [monkeyHeart], speak_image:[monkeySpeak], sad_image:[monkeyExclamation],
     name: "Cheeky Chops", health: 100, happiness:100, cleanliness:100,
     fitness:100, hunger:100
     },
     {id: 4, animal_type: {animal: "unicorn" , stats: {
       appetite: 0.5, grooming: 0.9, cheeriness: 0.6, activity_level: 0.7
-    }}, images: [unicornRainbow],
+    }}, main_image: [unicornHeart], speak_image:[unicornRainbow], sad_image:[unicornExclamation],
     name: "Dolly", health: 100, happiness:100, cleanliness:100,
     fitness:100, hunger:100
     },
     {id: 5, animal_type: {animal: "dinosaur" , stats: {
       appetite: 0.9, grooming: 0.1, cheeriness: 0.1, activity_level: 0.7
-    }}, images: [dinoRawr],
+    }}, main_image: [dinoHeart], speak_image:[dinoRawr], sad_image:[dinoExclamation],
     name: "Mr. Flamez", health: 100, happiness:100, cleanliness:100,
     fitness:100, hunger:100
     },
     {id: 6, animal_type: {animal: "penguin" , stats: {
       appetite: 0.5, grooming: 0.9, cheeriness: 0.6, activity_level: 0.7
-    }}, images: [penguinHeart],
+    }}, main_image: [penguinHeart], speak_image: [penguinSpeak], sad_image:[penguinExclamation],
     name: "Beany", health: 100, happiness:100, cleanliness:100,
     fitness:100, hunger:100
   }  
@@ -93,6 +106,14 @@ const App = ()=> {
   //if they need a lot of exercise, activity level = high
 
   const reduceStats = () => {
+    if (currentCharacter.health>0){
+      
+      const interval = setInterval(() => {
+        currentCharacter.health = (currentCharacter.happiness + currentCharacter.fitness + currentCharacter.cleanliness + currentCharacter.hunger)/4;
+        setIntervalId(interval)
+        console.log(currentCharacter.health)
+        });
+    }
     if (currentCharacter.happiness>0){
       
     const interval = setInterval(() => {
@@ -132,9 +153,27 @@ const App = ()=> {
   }
   }
 
-
-
   clearInterval(intervalId);
+
+  
+  const characterGif = () => {
+    if (currentCharacter){
+
+      if (currentCharacter.happiness<50){
+      setCurrentImage(currentCharacter.sad_image)
+      } 
+      else if (currentCharacter.hunger<80){
+        setCurrentImage(currentCharacter.speak_image)
+      } 
+      else{
+      setCurrentImage(currentCharacter.main_image)
+      }  
+    }
+  }
+
+
+
+  
 
   const increaseStat = (stat) => {
     if (currentCharacter[stat]<95){
@@ -142,6 +181,8 @@ const App = ()=> {
     }
     else (currentCharacter[stat] = 100)
   }
+
+
 
   const handleSubmit = (data) => {
     usernameAndPassword.forEach(element => {
@@ -200,8 +241,9 @@ const App = ()=> {
   useEffect(() => {
     if (currentCharacter){
     reduceStats()
+    characterGif()
     }
-  }, [currentCharacter.happiness])
+  }, [currentCharacter.happiness || currentCharacter.fitness || currentCharacter.cleanliness || currentCharacter.hunger || currentCharacter.health])
 
   const logInNewUser = (userDeets) => {
     setLoggedInUsername(userDeets.username);
@@ -227,7 +269,7 @@ const App = ()=> {
                                                  userData={userData} loggedInUsername={loggedInUsername} setLoggedInPassword={loggedInPassword}
                                                 getUserData={getUserData} handleAdoptAnimal={handleAdoptAnimal}/>}/>
         <Route path="/loadpage"  render={() => <LoadPage userAnimals={userData.animals} selectCurrentCharacter={selectCurrentCharacter}/>} />
-        <Route path="/character" render={() => <Character currentCharacter={currentCharacter} increaseStat={increaseStat}/>}/>
+        <Route path="/character" render={() => <Character currentCharacter={currentCharacter} currentImage={currentImage} increaseStat={increaseStat}/>}/>
         
         </Switch>
       </>
