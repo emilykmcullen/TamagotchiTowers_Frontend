@@ -213,7 +213,6 @@ const App = ()=> {
   }
 
   const handleAdoptAnimal = (data) => {
-    console.log("ANIMAL IS:" + data.animaltype)
     const newAnimal = 
     {id: 1, animal_type: { animal: data.animaltype , stats: {
       appetite: 0.5, grooming: 0.6, cheeriness: 0.2, activity_level: 0.9
