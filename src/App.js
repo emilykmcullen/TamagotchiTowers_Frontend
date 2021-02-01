@@ -44,40 +44,39 @@ const App = ()=> {
   const [currentImage, setCurrentImage] = useState('');
   
 
-
   const animals = [
     {id: 1, animal_type: { animal: "dog" , stats: {
-      appetite: 0.5, grooming: 0.6, cheeriness: 0.2, activity_level: 0.9
+      appetite: 0.05, grooming: 0.06, cheeriness: 0.02, activity_level: 0.09
     }}, main_image: [dogHeart], speak_image: [dogSpeak], sad_image:[dogExclamation],
     name: "Jellibobs", health: 100, happiness:100, cleanliness:100,
     fitness:100, hunger:100
     },
     {id: 2, animal_type: {animal: "cat" , stats: {
-      appetite: 0.3, grooming: 0.2, cheeriness: 0.7, activity_level: 0.6
+      appetite: 0.03, grooming: 0.02, cheeriness: 0.07, activity_level: 0.06
     }}, main_image: [catHeart], speak_image: [catMeow], sad_image:[catExclamation],
     name: "Kitty Fursbags", health: 100, happiness:100, cleanliness:100,
     fitness:100, hunger:100
     },
     {id: 3, animal_type: {animal: "monkey" , stats: {
-      appetite: 0.9, grooming: 0.7, cheeriness: 0.5, activity_level: 1
+      appetite: 0.09, grooming: 0.07, cheeriness: 0.05, activity_level: 0.1
     }}, main_image: [monkeyHeart], speak_image:[monkeySpeak], sad_image:[monkeyExclamation],
     name: "Cheeky Chops", health: 100, happiness:100, cleanliness:100,
     fitness:100, hunger:100
     },
     {id: 4, animal_type: {animal: "unicorn" , stats: {
-      appetite: 0.5, grooming: 0.9, cheeriness: 0.6, activity_level: 0.7
+      appetite: 0.05, grooming: 0.09, cheeriness: 0.06, activity_level: 0.07
     }}, main_image: [unicornHeart], speak_image:[unicornRainbow], sad_image:[unicornExclamation],
     name: "Dolly", health: 100, happiness:100, cleanliness:100,
     fitness:100, hunger:100
     },
     {id: 5, animal_type: {animal: "dinosaur" , stats: {
-      appetite: 0.9, grooming: 0.1, cheeriness: 0.1, activity_level: 0.7
+      appetite: 0.09, grooming: 0.01, cheeriness: 0.01, activity_level: 0.07
     }}, main_image: [dinoHeart], speak_image:[dinoRawr], sad_image:[dinoExclamation],
     name: "Mr. Flamez", health: 100, happiness:100, cleanliness:100,
     fitness:100, hunger:100
     },
     {id: 6, animal_type: {animal: "penguin" , stats: {
-      appetite: 0.5, grooming: 0.9, cheeriness: 0.6, activity_level: 0.7
+      appetite: 0.05, grooming: 0.09, cheeriness: 0.06, activity_level: 0.07
     }}, main_image: [penguinHeart], speak_image: [penguinSpeak], sad_image:[penguinExclamation],
     name: "Beany", health: 100, happiness:100, cleanliness:100,
     fitness:100, hunger:100
@@ -119,7 +118,7 @@ const App = ()=> {
     if (currentCharacter.happiness>0){
       
     const interval = setInterval(() => {
-      currentCharacter.happiness -=.01;
+      currentCharacter.happiness -= currentCharacter.animal_type.stats.cheeriness;
       setIntervalId(interval)
       if(currentCharacter.happiness === 0) {
     }}, 10);
@@ -128,7 +127,7 @@ const App = ()=> {
       
     const interval = setInterval(() => {
       
-      currentCharacter.cleanliness -=.01;
+      currentCharacter.cleanliness -= currentCharacter.animal_type.stats.grooming;
       setIntervalId(interval)
       if(currentCharacter.cleanliness === 0) {
     }}, 10);
@@ -136,7 +135,7 @@ const App = ()=> {
   if (currentCharacter.hunger>0){
       
     const interval = setInterval(() => {
-      currentCharacter.hunger -=.01;
+      currentCharacter.hunger -= currentCharacter.animal_type.stats.appetite;
       setIntervalId(interval)
       if(currentCharacter.hunger === 0) {
     }}, 10);
@@ -144,7 +143,7 @@ const App = ()=> {
   if (currentCharacter.fitness>0){
       
     const interval = setInterval(() => {
-      currentCharacter.fitness -=.01;
+      currentCharacter.fitness -=currentCharacter.animal_type.stats.activity_level;
       setIntervalId(interval)
       if(currentCharacter.fitness === 0) {
     }}, 10);
@@ -152,6 +151,9 @@ const App = ()=> {
   }
 
   clearInterval(intervalId);
+
+
+  
 
   
   const characterGif = () => {
@@ -179,6 +181,8 @@ const App = ()=> {
     }
     else (currentCharacter[stat] = 100)
   }
+
+
 
 
 
@@ -220,7 +224,7 @@ const App = ()=> {
     reduceStats()
     characterGif()
     }
-  }, [currentCharacter.happiness || currentCharacter.fitness || currentCharacter.cleanliness || currentCharacter.hunger || currentCharacter.health])
+  }, [ currentCharacter.happiness || currentCharacter.fitness || currentCharacter.cleanliness || currentCharacter.hunger ])
 
   const logInNewUser = (userDeets) => {
     setLoggedInUsername(userDeets.username);
