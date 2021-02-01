@@ -27,11 +27,6 @@ const App = ()=> {
   const [userData, setUserData] = useState({});
   const [currentCharacter, setCurrentCharacter] = useState({});
   const [loggedIn, setLoggedIn] = useState(false);
-  const [ccHappiness, setCCHappiness] = useState();
-  const [ccHealth, setCCHealth] = useState();
-  const [ccCleanliness, setCCCleanliness] = useState();
-  const [ccFitness, setCCFitness] = useState();
-  const [ccHunger, setCCHunger] = useState();
   const [intervalId, setIntervalId] = useState(null);
   
 
@@ -91,8 +86,7 @@ const App = ()=> {
     if (currentCharacter.happiness>0){
       
     const interval = setInterval(() => {
-      
-      setCCHappiness(currentCharacter.happiness -=.01);
+      currentCharacter.happiness -=.01;
       setIntervalId(interval)
       if(currentCharacter.happiness === 0) {
     }}, 10);
@@ -101,7 +95,7 @@ const App = ()=> {
       
     const interval = setInterval(() => {
       
-      setCCCleanliness(currentCharacter.cleanliness -=.01);
+      currentCharacter.cleanliness -=.01;
       setIntervalId(interval)
       if(currentCharacter.cleanliness === 0) {
     }}, 10);
@@ -109,8 +103,7 @@ const App = ()=> {
   if (currentCharacter.hunger>0){
       
     const interval = setInterval(() => {
-      
-      setCCHunger(currentCharacter.hunger -=.01);
+      currentCharacter.hunger -=.01;
       setIntervalId(interval)
       if(currentCharacter.hunger === 0) {
     }}, 10);
@@ -118,8 +111,7 @@ const App = ()=> {
   if (currentCharacter.fitness>0){
       
     const interval = setInterval(() => {
-      
-      setCCFitness(currentCharacter.fitness -=.01);
+      currentCharacter.fitness -=.01;
       setIntervalId(interval)
       if(currentCharacter.fitness === 0) {
     }}, 10);
@@ -152,8 +144,6 @@ const App = ()=> {
 
   const selectCurrentCharacter = (characterId) => {
     setCurrentCharacter(animals.find(animal => animal.id === characterId))
-    setCCHappiness(currentCharacter.happiness)
-    setCCHealth(currentCharacter.health)
   }
 
   const getUserData = () => {
@@ -177,7 +167,7 @@ const App = ()=> {
     if (currentCharacter){
     reduceStats()
     }
-  }, [currentCharacter.happiness])
+  }, [currentCharacter.happiness, currentCharacter.fitness, currentCharacter.cleanliness, currentCharacter.hunger])
 
   const logInNewUser = (userDeets) => {
     setLoggedInUsername(userDeets.username);
