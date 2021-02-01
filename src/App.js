@@ -229,7 +229,7 @@ const App = ()=> {
     user.animals.push(animals[index])
     setCurrentCharacter(animals[index])
     setHasSelectedCharacter(true)
-    getUserData();
+    // getUserData();
   }
 
   const selectCurrentCharacter = (characterId) => {
@@ -244,19 +244,18 @@ const App = ()=> {
 
   const getUserData = () => {
     console.log("getting user data");
-    if (loggedIn){
-      setUserData(usernameAndPassword.find(element => element.username === loggedInUsername && element.password === loggedInPassword))
-    }
-//this would mean there cannot be duplicate usernames!
     return fetch(`http://localhost:8080/api/users?username=${loggedInUsername}`)
     .then(res => res.json())
     .then(data => setUserData(data))
-    .then(() => setLoggedIn(true))
 }
 
   // useEffect(() => {
   //   getUserData();
   // }, [loggedInUsername && loggedInPassword])
+
+  // useEffect(()=> {
+  //   setLoggedIn(true)
+  // },[setUserData])
 
   useEffect(() => {
     if (currentCharacter){
@@ -283,7 +282,7 @@ const App = ()=> {
         <Switch>
         <Route exact path="/" render={() => loggedIn? <Redirect to= "/choicepage" /> : <LandingPage onSubmit = {handleSubmit}></LandingPage>} />
         <Route path="/choicepage" render={() => <ChoicePage unsetSelectedCharacter={unsetSelectedCharacter} />}/>
-        <Route path="/newuser" render={() => loggedIn? <Redirect to= "/choicepage" /> :<SaveForm onNewUserSubmit={(userDeets) => logInNewUser(userDeets)} allAnimals={animals} currentCharacter={currentCharacter} setCurrentCharacter={setCurrentCharacter} userData={userData} loggedInUsername={loggedInUsername} setLoggedInPassword={loggedInPassword} getUserData={getUserData}/>}/>
+        <Route path="/newuser" render={() => <SaveForm logInNewUser={(userDeets) => logInNewUser(userDeets)} allAnimals={animals} currentCharacter={currentCharacter} setCurrentCharacter={setCurrentCharacter} userData={userData} loggedInUsername={loggedInUsername} setLoggedInPassword={loggedInPassword} getUserData={getUserData}/>}/>
         <Route path="/createpage" render={() => hasSelectedCharacter? <Redirect to="/character"/>: <CreatePage allAnimals={adoptableAnimals} handleAdoptAnimal={handleAdoptAnimal}/>} />
         <Route path="/loadpage"  render={() => <LoadPage userAnimals={userData.animals} selectCurrentCharacter={selectCurrentCharacter}/>} />
         <Route path="/character" render={() => <Character currentCharacter={currentCharacter} currentImage={currentImage} increaseStat={increaseStat}/>}/>

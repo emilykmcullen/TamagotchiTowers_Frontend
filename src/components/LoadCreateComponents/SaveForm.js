@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import { BrowserRouter as Router, Route, Switch, Redirect, Link } from "react-router-dom";
 
-const SaveForm = ({onNewUserSubmit, animals, currentCharacter, setCurrentCharacter, userData, loggedInUsername, loggedInPassword, setLoggedInPassword, getUserData, setLoggedIn}) => {
+const SaveForm = ({logInNewUser, animals, currentCharacter, setCurrentCharacter, userData, loggedInUsername, loggedInPassword, setLoggedInPassword, setLoggedIn, getUserData}) => {
 
     const [newUsername, setNewUsername] = useState("");
     const [newPassword, setNewPassword] = useState("");
@@ -18,7 +18,7 @@ const SaveForm = ({onNewUserSubmit, animals, currentCharacter, setCurrentCharact
         evt.preventDefault();
         const usernameToSubmit = newUsername.trim();
         const passwordToSubmit = newPassword.trim();
-        onNewUserSubmit({
+        logInNewUser({
             newUsername: usernameToSubmit,
             newPassword: passwordToSubmit
         });
@@ -34,19 +34,22 @@ const SaveForm = ({onNewUserSubmit, animals, currentCharacter, setCurrentCharact
             headers: {'Content-Type': 'application/json' },
             body: JSON.stringify({ 
               userName: loggedInUsername,
-              password: loggedInPassword,
+              password: newPassword,
               imageURL: "fakeImgUrl",
               animals: []
             })
         };
         return fetch('http://localhost:8080/api/users', requestOptions)
-            // .then(setLoggedIn(true))
+            .then(setNewUsername(""))
+            .then(setNewPassword(""))
+            .then(getUserData());
       }
 
       const handleClick = () => {
-        if (loggedInUsername && loggedInPassword){
+        if (loggedInUsername && newPassword){
           console.log("Saving new user");
           saveNewUser();
+          getUserData();
         }
       }
 
@@ -66,7 +69,7 @@ const SaveForm = ({onNewUserSubmit, animals, currentCharacter, setCurrentCharact
             onChange={handleUsernameChange}/>
             
 
-            <input type="text"
+            <input type="password"
             placeholder="Your password"
             value={newPassword}
             onChange={handlePasswordChange}/>
@@ -75,6 +78,11 @@ const SaveForm = ({onNewUserSubmit, animals, currentCharacter, setCurrentCharact
             value="Create Account and Log in"/>
         </form>
         <button onClick={handleClick}>Save user</button>
+        <Link  from="/newuser" to="/createpage">
+            <button type="button">
+                Create a new pet
+            </button>
+        </Link>
         </>
     )
 };
