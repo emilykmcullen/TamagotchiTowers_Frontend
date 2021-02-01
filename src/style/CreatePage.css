@@ -20,3 +20,7 @@
     background-color: darkgreen;
     color: white;
 }
+
+.animal_type {
+    text-transform: capitalize;
+}
