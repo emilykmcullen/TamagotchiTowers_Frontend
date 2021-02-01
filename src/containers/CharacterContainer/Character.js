@@ -15,15 +15,15 @@ const Character = ({currentCharacter, increaseStat, currentImage}) => {
           </h2>
           <p>Species: {currentCharacter.animal_type.animal}</p>
           <img src={currentImage} alt="animal pic" width="200"></img>
-            <StatBar stat={currentCharacter.health}statName="Health"
+            <StatBar stat={currentCharacter.health} statName="Health"
              increaseStat={increaseStat}/>
-            <StatBar stat={currentCharacter.happiness} rate={currentCharacter.animal_type.stats.cheeriness} statName="Happiness" 
+            <StatBar stat={currentCharacter.happiness} statName="Happiness" 
             buttonLabel="Play with" increaseStat={increaseStat} />
-            <StatBar stat={currentCharacter.cleanliness} rate={currentCharacter.animal_type.stats.grooming} statName="Cleanliness"
+            <StatBar stat={currentCharacter.cleanliness} statName="Cleanliness"
              increaseStat={increaseStat} buttonLabel="Put in the bath"/>
-            <StatBar stat={currentCharacter.fitness} rate={currentCharacter.animal_type.stats.activity_level} statName="Fitness"
+            <StatBar stat={currentCharacter.fitness} statName="Fitness"
              increaseStat={increaseStat} buttonLabel="Take for walk"/>
-            <StatBar stat={currentCharacter.hunger} rate={currentCharacter.animal_type.stats.appetite} statName="Hunger"
+            <StatBar stat={currentCharacter.hunger} statName="Hunger"
              increaseStat={increaseStat} buttonLabel="Feed"/>
             
         </div>

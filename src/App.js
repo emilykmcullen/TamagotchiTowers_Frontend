@@ -163,20 +163,14 @@ const App = ()=> {
 
   
 
-  // const increaseStat = (stat) => {
-  //   if (currentCharacter[stat]<95){
-  //     currentCharacter[stat] += 5;
-  //   }
-  //   else (currentCharacter[stat] = 100)
-  // }
-
-  const increaseStat = (stat, rate) => {
-    
+  const increaseStat = (stat) => {
     if (currentCharacter[stat]<95){
-      currentCharacter[stat] += rate * 50;
+      currentCharacter[stat] += 5;
     }
     else (currentCharacter[stat] = 100)
   }
+
+
 
 
 

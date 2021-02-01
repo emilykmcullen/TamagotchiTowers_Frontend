@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 
-const Button = ({statName, increaseStat, buttonLabel, rate}) => {
+const Button = ({statName, increaseStat, buttonLabel}) => {
 
 
   let lowerCaseStatName = statName.toString().toLowerCase()
@@ -8,7 +8,7 @@ const Button = ({statName, increaseStat, buttonLabel, rate}) => {
 
   return(
       <div>
-        <button type="button" onClick={() => increaseStat(lowerCaseStatName, rate)}>{buttonLabel}</button>
+        <button type="button" onClick={() => increaseStat(lowerCaseStatName)}>{buttonLabel}</button>
       </div>
   )
 };
