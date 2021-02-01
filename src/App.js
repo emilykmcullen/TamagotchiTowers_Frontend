@@ -41,8 +41,18 @@ const App = ()=> {
   const [currentCharacter, setCurrentCharacter] = useState({});
   const [loggedIn, setLoggedIn] = useState(false);
   const [intervalId, setIntervalId] = useState(null);
+  const [hasSelectedCharacter, setHasSelectedCharacter] = useState(false);
   const [currentImage, setCurrentImage] = useState('');
   
+  
+  const adoptableAnimals = [
+    {animal: "dog", image: [dogHeart]},
+    {animal: "cat", image: [catMeow]},
+    {animal: "monkey", image: [monkeySpeak]},
+    {animal: "dragon", image: [dinoRawr]},
+    {animal: "unicorn", image: [unicornRainbow]},
+    {animal: "penguin", image: [penguinHeart]}
+  ]
 
   const animals = [
     {id: 1, animal_type: { animal: "dog" , stats: {
@@ -83,7 +93,7 @@ const App = ()=> {
   }  
   ]
   //dummy data
-  const usernameAndPassword = [
+  let usernameAndPassword = [
     {id: 100, username: "Emily", password: "3mily", animals: [animals[0]]},
     {id: 99, username: "Stuart", password: "5tuart",  animals: [animals[1]]},
     {id: 98, username: "Ruth", password: "7uth", animals: [animals[2], animals[3]]},
@@ -112,7 +122,6 @@ const App = ()=> {
       const interval = setInterval(() => {
         currentCharacter.health = (currentCharacter.happiness + currentCharacter.fitness + currentCharacter.cleanliness + currentCharacter.hunger)/4;
         setIntervalId(interval)
-        console.log(currentCharacter.health)
         });
     }
     if (currentCharacter.happiness>0){
@@ -121,6 +130,7 @@ const App = ()=> {
       currentCharacter.happiness -= currentCharacter.animal_type.stats.cheeriness;
       setIntervalId(interval)
       if(currentCharacter.happiness === 0) {
+        
     }}, 10);
   }
   if (currentCharacter.cleanliness>0){
@@ -130,6 +140,7 @@ const App = ()=> {
       currentCharacter.cleanliness -= currentCharacter.animal_type.stats.grooming;
       setIntervalId(interval)
       if(currentCharacter.cleanliness === 0) {
+        
     }}, 10);
   }
   if (currentCharacter.hunger>0){
@@ -138,6 +149,7 @@ const App = ()=> {
       currentCharacter.hunger -= currentCharacter.animal_type.stats.appetite;
       setIntervalId(interval)
       if(currentCharacter.hunger === 0) {
+        
     }}, 10);
   }
   if (currentCharacter.fitness>0){
@@ -146,6 +158,7 @@ const App = ()=> {
       currentCharacter.fitness -=currentCharacter.animal_type.stats.activity_level;
       setIntervalId(interval)
       if(currentCharacter.fitness === 0) {
+       
     }}, 10);
   }
   }
@@ -200,8 +213,33 @@ const App = ()=> {
     });
   }
 
+  const handleAdoptAnimal = (data) => {
+    const newAnimal = 
+    {id: 1, animal_type: { animal: data.animaltype , stats: {
+      appetite: 0.5, grooming: 0.6, cheeriness: 0.2, activity_level: 0.9
+    }}, images: [dogHeart],
+    name: data.name, health: 100, happiness:100, cleanliness:100,
+    fitness:100, hunger:100
+    }
+
+    animals.push(newAnimal)
+    const index = animals.indexOf(newAnimal)
+
+    const user = usernameAndPassword.find(user => user.username === loggedInUsername)
+    user.animals.push(animals[index])
+    setCurrentCharacter(animals[index])
+    setHasSelectedCharacter(true)
+    getUserData();
+  }
+
   const selectCurrentCharacter = (characterId) => {
     setCurrentCharacter(animals.find(animal => animal.id === characterId))
+    setHasSelectedCharacter(true)
+  }
+
+  const unsetSelectedCharacter = () => {
+    setCurrentCharacter({})
+    setHasSelectedCharacter(false)
   }
 
   const getUserData = () => {
@@ -245,9 +283,10 @@ const App = ()=> {
         </header>
         <Switch>
         <Route exact path="/" render={() => loggedIn? <Redirect to= "/choicepage" /> : <LandingPage onSubmit = {handleSubmit}></LandingPage>} />
-        <Route path="/choicepage" component={ChoicePage} />
+        <Route path="/choicepage" render={() => <ChoicePage unsetSelectedCharacter={unsetSelectedCharacter} />}/>
+        
         <Route path="/newuser" render={() => loggedIn? <Redirect to= "/choicepage" /> :<SaveForm onNewUserSubmit={(userDeets) => logInNewUser(userDeets)} allAnimals={animals} currentCharacter={currentCharacter} setCurrentCharacter={setCurrentCharacter} userData={userData} loggedInUsername={loggedInUsername} setLoggedInPassword={loggedInPassword} getUserData={getUserData}/>}/>
-        <Route path="/createpage" render={() => <CreatePage allAnimals={animals} currentCharacter={currentCharacter} setCurrentCharacter={setCurrentCharacter} userData={userData} loggedInUsername={loggedInUsername} setLoggedInPassword={loggedInPassword} getUserData={getUserData} setLoggedIn={setLoggedIn}/>}/>
+        <Route path="/createpage" render={() => hasSelectedCharacter? <Redirect to="/character"/>: <CreatePage allAnimals={adoptableAnimals} handleAdoptAnimal={handleAdoptAnimal}/>} />
         <Route path="/loadpage"  render={() => <LoadPage userAnimals={userData.animals} selectCurrentCharacter={selectCurrentCharacter}/>} />
         <Route path="/character" render={() => <Character currentCharacter={currentCharacter} currentImage={currentImage} increaseStat={increaseStat}/>}/>
         

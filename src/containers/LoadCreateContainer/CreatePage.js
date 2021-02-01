@@ -2,25 +2,38 @@ import React, {useEffect, useState} from "react";
 import { BrowserRouter as Router, Route, Switch, Redirect, Link } from "react-router-dom";
 
 
-const CreatePage = ({allAnimals, setCurrentCharacter, userData, loggedInUsername, loggedInPassword, currentCharacter, getUserData}) => {
+const CreatePage = ({allAnimals, handleAdoptAnimal, userData, currentCharacter}) => {
+
+  const [formData, setFormData] = useState({
+    name: '',
+    animaltype: ''
+  });
 
 
   const handleClick = (animal) => {
-    setCurrentCharacter(animal)
+    formData.animaltype = animal.animal
     // if (!userData && loggedInUsername){
     //   console.log("Saving new user");
-    //   saveNewUser();
-      // getUserData();
-    }
-  
+    // }
+  }
 
+  const handleChange = (event) => {
+    const newState = {...formData};
+    newState[event.target.name] = event.target.value;
+    setFormData(newState);
+  }
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    handleAdoptAnimal(formData)
+  }
 
   const animalArray = allAnimals.map(animal => {
     return(
       <div className="animal_container">
-        <p>{animal.name}</p>
-        <img src={animal.main_image} alt="animal pic" width="200"></img>
-        <button id="choose_animal_button" onClick={() => handleClick(animal)}>{animal.name}</button>
+        <p className="animal_type">{animal.animal}</p>
+        <img src={animal.image[0]} alt="animal pic" width="200"></img>
+        <button id="choose_animal_button" onClick={() => handleClick(animal)}>Adopt</button>
       </div>
     )
 })
@@ -66,14 +79,22 @@ const saveNewAnimal = () => {
         {animalArray}
     </div>
     <div className="link_container">
-    <Link  from="/createpage" to="/character">
-      <button type="button" onClick={saveNewAnimal}>
-        Look after this pet
-      </button>
-    </Link>
+  
+      <form>
+        <label htmlFor="name"></label>
+          <input 
+            onChange={handleChange}
+            name="name"
+            id="name"
+            type="text"
+            value={formData.name}
+            placeholder="Enter name"/>
+          <input type="hidden" id="animaltype" name="animaltype" value={formData.animaltype} onChange={handleChange}></input>
+          <input type="submit" value="Look after this pet" onClick={handleSubmit}/>
+        </form>
     </div>
     </>
-  )
+      )
 };
 
 export default CreatePage;
