@@ -43,7 +43,6 @@ const App = ()=> {
   const [currentImage, setCurrentImage] = useState('');
   
 
-
   const animals = [
     {id: 1, animal_type: { animal: "dog" , stats: {
       appetite: 0.5, grooming: 0.6, cheeriness: 0.2, activity_level: 0.9
@@ -124,7 +123,7 @@ const App = ()=> {
   if (currentCharacter.hunger>0){
       
     const interval = setInterval(() => {
-      currentCharacter.hunger -=.01;
+      currentCharacter.hunger -= currentCharacter.animal_type.stats.appetite;
       setIntervalId(interval)
       if(currentCharacter.hunger === 0) {
     }}, 10);
@@ -140,6 +139,9 @@ const App = ()=> {
   }
 
   clearInterval(intervalId);
+
+
+  
 
   
   const characterGif = () => {
@@ -209,7 +211,7 @@ const App = ()=> {
     reduceStats()
     characterGif()
     }
-  }, [currentCharacter.happiness || currentCharacter.fitness || currentCharacter.cleanliness || currentCharacter.hunger || currentCharacter.health])
+  }, [ currentCharacter.happiness || currentCharacter.fitness || currentCharacter.cleanliness || currentCharacter.hunger ])
 
   const logInNewUser = (userDeets) => {
     setLoggedInUsername(userDeets.username);
