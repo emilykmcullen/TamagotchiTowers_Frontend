@@ -15,7 +15,7 @@ const Character = ({currentCharacter, increaseStat, currentImage}) => {
           </h2>
           <p>Species: {currentCharacter.animal_type.animal}</p>
           <img src={currentImage} alt="animal pic" width="200"></img>
-            <StatBar stat={currentCharacter.health}  statName="Health"
+            <StatBar stat={currentCharacter.health} statName="Health"
              increaseStat={increaseStat}/>
             <StatBar stat={currentCharacter.happiness} statName="Happiness" 
             buttonLabel="Play with" increaseStat={increaseStat} />

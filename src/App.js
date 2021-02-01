@@ -34,8 +34,9 @@ import SaveForm from "./components/LoadCreateComponents/SaveForm";
 
 const App = ()=> {
 
-  const [loggedInUsername, setLoggedInUsername] = useState('');
-  const [loggedInPassword, setLoggedInPassword] = useState('');
+  const [allUserData, setAllUserData] = useState([]);
+  const [loggedInUsername, setLoggedInUsername] = useState();
+  const [loggedInPassword, setLoggedInPassword] = useState();
   const [userData, setUserData] = useState({});
   const [currentCharacter, setCurrentCharacter] = useState({});
   const [loggedIn, setLoggedIn] = useState(false);
@@ -53,40 +54,39 @@ const App = ()=> {
     {animal: "penguin", image: [penguinHeart]}
   ]
 
-
-  let animals = [
+  const animals = [
     {id: 1, animal_type: { animal: "dog" , stats: {
-      appetite: 0.5, grooming: 0.6, cheeriness: 0.2, activity_level: 0.9
+      appetite: 0.05, grooming: 0.06, cheeriness: 0.02, activity_level: 0.09
     }}, main_image: [dogHeart], speak_image: [dogSpeak], sad_image:[dogExclamation],
     name: "Jellibobs", health: 100, happiness:100, cleanliness:100,
     fitness:100, hunger:100
     },
     {id: 2, animal_type: {animal: "cat" , stats: {
-      appetite: 0.3, grooming: 0.2, cheeriness: 0.7, activity_level: 0.6
+      appetite: 0.03, grooming: 0.02, cheeriness: 0.07, activity_level: 0.06
     }}, main_image: [catHeart], speak_image: [catMeow], sad_image:[catExclamation],
     name: "Kitty Fursbags", health: 100, happiness:100, cleanliness:100,
     fitness:100, hunger:100
     },
     {id: 3, animal_type: {animal: "monkey" , stats: {
-      appetite: 0.9, grooming: 0.7, cheeriness: 0.5, activity_level: 1
+      appetite: 0.09, grooming: 0.07, cheeriness: 0.05, activity_level: 0.1
     }}, main_image: [monkeyHeart], speak_image:[monkeySpeak], sad_image:[monkeyExclamation],
     name: "Cheeky Chops", health: 100, happiness:100, cleanliness:100,
     fitness:100, hunger:100
     },
     {id: 4, animal_type: {animal: "unicorn" , stats: {
-      appetite: 0.5, grooming: 0.9, cheeriness: 0.6, activity_level: 0.7
+      appetite: 0.05, grooming: 0.09, cheeriness: 0.06, activity_level: 0.07
     }}, main_image: [unicornHeart], speak_image:[unicornRainbow], sad_image:[unicornExclamation],
     name: "Dolly", health: 100, happiness:100, cleanliness:100,
     fitness:100, hunger:100
     },
     {id: 5, animal_type: {animal: "dinosaur" , stats: {
-      appetite: 0.9, grooming: 0.1, cheeriness: 0.1, activity_level: 0.7
+      appetite: 0.09, grooming: 0.01, cheeriness: 0.01, activity_level: 0.07
     }}, main_image: [dinoHeart], speak_image:[dinoRawr], sad_image:[dinoExclamation],
     name: "Mr. Flamez", health: 100, happiness:100, cleanliness:100,
     fitness:100, hunger:100
     },
     {id: 6, animal_type: {animal: "penguin" , stats: {
-      appetite: 0.5, grooming: 0.9, cheeriness: 0.6, activity_level: 0.7
+      appetite: 0.05, grooming: 0.09, cheeriness: 0.06, activity_level: 0.07
     }}, main_image: [penguinHeart], speak_image: [penguinSpeak], sad_image:[penguinExclamation],
     name: "Beany", health: 100, happiness:100, cleanliness:100,
     fitness:100, hunger:100
@@ -105,6 +105,17 @@ const App = ()=> {
   //if they are unhappy animals, cheeriness = high
   //if they need a lot of exercise, activity level = high
 
+  const getAllUserData = () => {
+    console.log("getting all user data");
+    return fetch('http://localhost:8080/api/users')
+    .then(res => res.json())
+    .then(data => setAllUserData(data))
+}
+
+    useEffect(() => {
+      getAllUserData();
+    }, [])
+
   const reduceStats = () => {
     if (currentCharacter.health>0){
       
@@ -116,7 +127,7 @@ const App = ()=> {
     if (currentCharacter.happiness>0){
       
     const interval = setInterval(() => {
-      currentCharacter.happiness -=.01
+      currentCharacter.happiness -= currentCharacter.animal_type.stats.cheeriness;
       setIntervalId(interval)
       if(currentCharacter.happiness === 0) {
         
@@ -126,7 +137,7 @@ const App = ()=> {
       
     const interval = setInterval(() => {
       
-      currentCharacter.cleanliness -=.01;
+      currentCharacter.cleanliness -= currentCharacter.animal_type.stats.grooming;
       setIntervalId(interval)
       if(currentCharacter.cleanliness === 0) {
         
@@ -135,7 +146,7 @@ const App = ()=> {
   if (currentCharacter.hunger>0){
       
     const interval = setInterval(() => {
-      currentCharacter.hunger -=.01;
+      currentCharacter.hunger -= currentCharacter.animal_type.stats.appetite;
       setIntervalId(interval)
       if(currentCharacter.hunger === 0) {
         
@@ -144,7 +155,7 @@ const App = ()=> {
   if (currentCharacter.fitness>0){
       
     const interval = setInterval(() => {
-      currentCharacter.fitness -=.01;
+      currentCharacter.fitness -=currentCharacter.animal_type.stats.activity_level;
       setIntervalId(interval)
       if(currentCharacter.fitness === 0) {
        
@@ -153,6 +164,9 @@ const App = ()=> {
   }
 
   clearInterval(intervalId);
+
+
+  
 
   
   const characterGif = () => {
@@ -183,9 +197,11 @@ const App = ()=> {
 
 
 
+
+
   const handleSubmit = (data) => {
-    usernameAndPassword.forEach(element => {
-      if (element.username === data.username && element.password === data.password){
+    allUserData.forEach(element => {
+      if (element.userName === data.username && element.password === data.password){
         console.log("Success");
         setLoggedInUsername(data.username)
         setLoggedInPassword(data.password)
@@ -229,31 +245,30 @@ const App = ()=> {
   const getUserData = () => {
     console.log("getting user data");
     if (loggedIn){
-      setUserData(usernameAndPassword.find(element => element.username === loggedInUsername))
+      setUserData(usernameAndPassword.find(element => element.username === loggedInUsername && element.password === loggedInPassword))
     }
 //this would mean there cannot be duplicate usernames!
-
-    // fetch(`https://localhost:3000/tamagotchi?username=${loggedInUsername}`)
-    // .then(res => res.json())
-    // .then(data => setUserData(data))
-    // .then(() => setLoaded(true))
+    return fetch(`http://localhost:8080/api/users?username=${loggedInUsername}`)
+    .then(res => res.json())
+    .then(data => setUserData(data))
+    .then(() => setLoggedIn(true))
 }
 
-  useEffect(() => {
-    getUserData();
-  }, [loggedInUsername])
+  // useEffect(() => {
+  //   getUserData();
+  // }, [loggedInUsername && loggedInPassword])
 
   useEffect(() => {
     if (currentCharacter){
     reduceStats()
     characterGif()
     }
-  }, [currentCharacter.happiness || currentCharacter.fitness || currentCharacter.cleanliness || currentCharacter.hunger || currentCharacter.health])
+  }, [ currentCharacter.happiness || currentCharacter.fitness || currentCharacter.cleanliness || currentCharacter.hunger ])
 
   const logInNewUser = (userDeets) => {
     setLoggedInUsername(userDeets.username);
     setLoggedInPassword(userDeets.password);
-    setLoggedIn(true);
+    setLoggedIn(false);
   }
 
 
@@ -269,11 +284,9 @@ const App = ()=> {
         <Switch>
         <Route exact path="/" render={() => loggedIn? <Redirect to= "/choicepage" /> : <LandingPage onSubmit = {handleSubmit}></LandingPage>} />
         <Route path="/choicepage" render={() => <ChoicePage unsetSelectedCharacter={unsetSelectedCharacter} />}/>
-        <Route path="/newuser" render={() => loggedIn? <Redirect to="/createpage" /> : <SaveForm onNewUserSubmit={(userDeets) => logInNewUser(userDeets)}/>}/>
-        <Route path="/createpage" render={() => hasSelectedCharacter? <Redirect to="/character"/>: <CreatePage allAnimals={adoptableAnimals} currentCharacter={currentCharacter} setCurrentCharacter={setCurrentCharacter}
-                                                 userData={userData} loggedInUsername={loggedInUsername} setLoggedInPassword={loggedInPassword}
-                                                getUserData={getUserData} handleAdoptAnimal={handleAdoptAnimal}/>}
-                                                />
+        
+        <Route path="/newuser" render={() => loggedIn? <Redirect to= "/choicepage" /> :<SaveForm onNewUserSubmit={(userDeets) => logInNewUser(userDeets)} allAnimals={animals} currentCharacter={currentCharacter} setCurrentCharacter={setCurrentCharacter} userData={userData} loggedInUsername={loggedInUsername} setLoggedInPassword={loggedInPassword} getUserData={getUserData}/>}/>
+        <Route path="/createpage" render={() => hasSelectedCharacter? <Redirect to="/character"/>: <CreatePage allAnimals={adoptableAnimals} handleAdoptAnimal={handleAdoptAnimal}/>} />
         <Route path="/loadpage"  render={() => <LoadPage userAnimals={userData.animals} selectCurrentCharacter={selectCurrentCharacter}/>} />
         <Route path="/character" render={() => <Character currentCharacter={currentCharacter} currentImage={currentImage} increaseStat={increaseStat}/>}/>
         

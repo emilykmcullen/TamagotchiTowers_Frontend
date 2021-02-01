@@ -1,10 +1,16 @@
 import React, {useState} from 'react';
 import { BrowserRouter as Router, Route, Switch, Redirect, Link } from "react-router-dom";
 
-const SaveForm = ({onNewUserSubmit}) => {
+const SaveForm = ({onNewUserSubmit, animals, currentCharacter, setCurrentCharacter, userData, loggedInUsername, loggedInPassword, setLoggedInPassword, getUserData, setLoggedIn}) => {
 
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    // const [user, setUser] = useState({
+    //     userName: "",
+    //     password: "",
+    //     imageURL: "",
+    //     animals: []
+    //   })
 
     const handleUsernameChange = (evt) => {
         setUsername(evt.target.value);
@@ -14,7 +20,7 @@ const SaveForm = ({onNewUserSubmit}) => {
         setPassword(evt.target.value);
     };
 
-    const handleSubmit = (evt) => {
+    const handleFormSubmit = (evt) => {
         evt.preventDefault();
         const usernameToSubmit = username.trim();
         const passwordToSubmit = password.trim();
@@ -23,9 +29,34 @@ const SaveForm = ({onNewUserSubmit}) => {
             password: passwordToSubmit
         });
         
-        setUsername("");
-        setPassword("");
+        // setUsername("");
+        // setPassword("");
     }
+
+    const saveNewUser = () => {
+        // Simple POST request with a JSON body using fetch
+        const requestOptions = {
+            
+            method: 'POST',
+            headers: {'Content-Type': 'application/json' },
+            body: JSON.stringify({ 
+              userName: username,
+              password: password,
+              imageURL: "fakeImgUrl",
+              animals: []
+            })
+        };
+        return fetch('http://localhost:8080/api/users', requestOptions)
+            .then(setLoggedIn(true))
+            // .then(data => this.setState({ postId: data.id }));
+      }
+
+      const handleClick = () => {
+        if (!userData && username && password){
+          console.log("Saving new user");
+          saveNewUser();
+        }
+      }
 
     return(
         <>
@@ -36,7 +67,7 @@ const SaveForm = ({onNewUserSubmit}) => {
                 Continue without creating account
             </button>
         </Link>
-        <form className="comment-form" onSubmit={handleSubmit}>
+        <form className="comment-form" onSubmit={handleFormSubmit}>
             <input type="text"
             placeholder="Your username"
             value={username}
@@ -51,6 +82,7 @@ const SaveForm = ({onNewUserSubmit}) => {
             <input type="submit"
             value="Create Account and Log in"/>
         </form>
+        <button onClick={handleClick}>Save user</button>
         </>
     )
 };
