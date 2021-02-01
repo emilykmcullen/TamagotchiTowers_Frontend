@@ -193,6 +193,7 @@ const App = ()=> {
         setLoggedInUsername(data.username)
         setLoggedInPassword(data.password)
         setLoggedIn(true);
+        setUserData(element);
       }else{
         console.log("Failure");
       }

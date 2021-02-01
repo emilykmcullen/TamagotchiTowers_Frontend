@@ -4,14 +4,6 @@ import { BrowserRouter as Router, Route, Switch, Redirect, Link } from "react-ro
 
 const CreatePage = ({allAnimals, setCurrentCharacter, userData, loggedInUsername, loggedInPassword, currentCharacter, getUserData}) => {
 
-  // const [user, setUser] = useState({
-  //   userName: "",
-  //   password: "",
-  //   imageURL: "",
-  //   animals: []
-  // })
-
-
 
   const handleClick = (animal) => {
     setCurrentCharacter(animal)
@@ -35,23 +27,35 @@ const CreatePage = ({allAnimals, setCurrentCharacter, userData, loggedInUsername
 
 
 
-//   // const saveNewUser = () => {
-//   // // Simple POST request with a JSON body using fetch
-//   // const requestOptions = {
-//   //     mode: 'no-cors',
-//   //     method: 'POST',
-//   //     headers: { 'Content-Type': 'application/json' },
-//   //     body: JSON.stringify({ 
-//   //       userName: loggedInUsername,
-//   //       password: loggedInPassword,
-//   //       imageURL: "fakeImgUrl",
-//   //       animals: []
-//   //     })
-//   // };
-//   // fetch('http://localhost:8080/api/users/', requestOptions)
-//   //     .then(response => response.json())
-//   //     .then(data => this.setState({ postId: data.id }));
-// }
+const saveNewAnimal = () => {
+  // Simple POST request with a JSON body using fetch
+  const requestOptions = {
+      
+      method: 'POST',
+      headers: {'Content-Type': 'application/json' },
+      body: JSON.stringify({ 
+        "animalName": currentCharacter.name,
+        "animalType": currentCharacter.type,
+        "health": currentCharacter.health,
+        "happiness": currentCharacter.happiness,
+        "cleanliness": currentCharacter.cleanliness,
+        "fitness": currentCharacter.fitness,
+        "hunger": currentCharacter.hunger,
+        "user": {
+          "id": 5,
+          "userName": userData.userName,
+          "password": userData.password,
+          "imageURL": userData.imageURL
+                },
+        "images": [],
+        "appetite": currentCharacter.appetite,
+        "grooming": currentCharacter.grooming,
+        "cheeriness": currentCharacter.cheeriness,
+        "activityLevel": currentCharacter.activityLevel
+      })
+  };
+  return fetch('http://localhost:8080/api/animals', requestOptions)
+}
 
   
   
@@ -63,7 +67,7 @@ const CreatePage = ({allAnimals, setCurrentCharacter, userData, loggedInUsername
     </div>
     <div className="link_container">
     <Link  from="/createpage" to="/character">
-      <button type="button">
+      <button type="button" onClick={saveNewAnimal}>
         Look after this pet
       </button>
     </Link>
