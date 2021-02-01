@@ -22,6 +22,7 @@ import SaveForm from "./components/LoadCreateComponents/SaveForm";
 
 const App = ()=> {
 
+  const [allUserData, setAllUserData] = useState([]);
   const [loggedInUsername, setLoggedInUsername] = useState();
   const [loggedInPassword, setLoggedInPassword] = useState();
   const [userData, setUserData] = useState({});
@@ -87,6 +88,17 @@ const App = ()=> {
   //if they are unhappy animals, cheeriness = high
   //if they need a lot of exercise, activity level = high
 
+  const getAllUserData = () => {
+    console.log("getting all user data");
+    return fetch('http://localhost:8080/api/users')
+    .then(res => res.json())
+    .then(data => setAllUserData(data))
+}
+
+    useEffect(() => {
+      getAllUserData();
+    }, [])
+
   const reduceStats = () => {
     if (currentCharacter.happiness>0){
       
@@ -138,8 +150,8 @@ const App = ()=> {
   }
 
   const handleSubmit = (data) => {
-    usernameAndPassword.forEach(element => {
-      if (element.username === data.username && element.password === data.password){
+    allUserData.forEach(element => {
+      if (element.userName === data.username && element.password === data.password){
         console.log("Success");
         setLoggedInUsername(data.username)
         setLoggedInPassword(data.password)
@@ -159,19 +171,18 @@ const App = ()=> {
   const getUserData = () => {
     console.log("getting user data");
     if (loggedIn){
-      setUserData(usernameAndPassword.find(element => element.username === loggedInUsername))
+      setUserData(usernameAndPassword.find(element => element.username === loggedInUsername && element.password === loggedInPassword))
     }
 //this would mean there cannot be duplicate usernames!
-
-    // fetch(`https://localhost:3000/tamagotchi?username=${loggedInUsername}`)
-    // .then(res => res.json())
-    // .then(data => setUserData(data))
-    // .then(() => setLoaded(true))
+    return fetch(`http://localhost:8080/api/users?username=${loggedInUsername}`)
+    .then(res => res.json())
+    .then(data => setUserData(data))
+    .then(() => setLoggedIn(true))
 }
 
-  useEffect(() => {
-    getUserData();
-  }, [loggedInUsername])
+  // useEffect(() => {
+  //   getUserData();
+  // }, [loggedInUsername && loggedInPassword])
 
   useEffect(() => {
     if (currentCharacter){
@@ -182,7 +193,7 @@ const App = ()=> {
   const logInNewUser = (userDeets) => {
     setLoggedInUsername(userDeets.username);
     setLoggedInPassword(userDeets.password);
-    setLoggedIn(true);
+    setLoggedIn(false);
   }
 
 
@@ -198,8 +209,8 @@ const App = ()=> {
         <Switch>
         <Route exact path="/" render={() => loggedIn? <Redirect to= "/choicepage" /> : <LandingPage onSubmit = {handleSubmit}></LandingPage>} />
         <Route path="/choicepage" component={ChoicePage} />
-        <Route path="/newuser" render={() => <SaveForm onNewUserSubmit={(userDeets) => logInNewUser(userDeets)} allAnimals={animals} currentCharacter={currentCharacter} setCurrentCharacter={setCurrentCharacter} userData={userData} loggedInUsername={loggedInUsername} setLoggedInPassword={loggedInPassword} getUserData={getUserData}/>}/>
-        <Route path="/createpage" render={() => <CreatePage allAnimals={animals} currentCharacter={currentCharacter} setCurrentCharacter={setCurrentCharacter} userData={userData} loggedInUsername={loggedInUsername} setLoggedInPassword={loggedInPassword} getUserData={getUserData}/>}/>
+        <Route path="/newuser" render={() => loggedIn? <Redirect to= "/choicepage" /> :<SaveForm onNewUserSubmit={(userDeets) => logInNewUser(userDeets)} allAnimals={animals} currentCharacter={currentCharacter} setCurrentCharacter={setCurrentCharacter} userData={userData} loggedInUsername={loggedInUsername} setLoggedInPassword={loggedInPassword} getUserData={getUserData}/>}/>
+        <Route path="/createpage" render={() => <CreatePage allAnimals={animals} currentCharacter={currentCharacter} setCurrentCharacter={setCurrentCharacter} userData={userData} loggedInUsername={loggedInUsername} setLoggedInPassword={loggedInPassword} getUserData={getUserData} setLoggedIn={setLoggedIn}/>}/>
         <Route path="/loadpage"  render={() => <LoadPage userAnimals={userData.animals} selectCurrentCharacter={selectCurrentCharacter}/>} />
         <Route path="/character" render={() => <Character currentCharacter={currentCharacter} increaseStat={increaseStat}/>}/>
         

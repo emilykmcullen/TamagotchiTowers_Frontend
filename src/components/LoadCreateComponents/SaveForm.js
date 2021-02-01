@@ -1,16 +1,16 @@
 import React, {useState} from 'react';
 import { BrowserRouter as Router, Route, Switch, Redirect, Link } from "react-router-dom";
 
-const SaveForm = ({onNewUserSubmit, animals, currentCharacter, setCurrentCharacter, userData, loggedInUsername, loggedInPassword, setLoggedInPassword, getUserData}) => {
+const SaveForm = ({onNewUserSubmit, animals, currentCharacter, setCurrentCharacter, userData, loggedInUsername, loggedInPassword, setLoggedInPassword, getUserData, setLoggedIn}) => {
 
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
-    const [user, setUser] = useState({
-        userName: "",
-        password: "",
-        imageURL: "",
-        animals: []
-      })
+    // const [user, setUser] = useState({
+    //     userName: "",
+    //     password: "",
+    //     imageURL: "",
+    //     animals: []
+    //   })
 
     const handleUsernameChange = (evt) => {
         setUsername(evt.target.value);
@@ -20,7 +20,7 @@ const SaveForm = ({onNewUserSubmit, animals, currentCharacter, setCurrentCharact
         setPassword(evt.target.value);
     };
 
-    const handleSubmit = (evt) => {
+    const handleFormSubmit = (evt) => {
         evt.preventDefault();
         const usernameToSubmit = username.trim();
         const passwordToSubmit = password.trim();
@@ -29,33 +29,32 @@ const SaveForm = ({onNewUserSubmit, animals, currentCharacter, setCurrentCharact
             password: passwordToSubmit
         });
         
-        setUsername("");
-        setPassword("");
+        // setUsername("");
+        // setPassword("");
     }
 
     const saveNewUser = () => {
         // Simple POST request with a JSON body using fetch
         const requestOptions = {
-            mode: 'no-cors',
+            
             method: 'POST',
             headers: {'Content-Type': 'application/json' },
             body: JSON.stringify({ 
-              userName: loggedInUsername,
-              password: loggedInPassword,
+              userName: username,
+              password: password,
               imageURL: "fakeImgUrl",
               animals: []
             })
         };
         return fetch('http://localhost:8080/api/users', requestOptions)
-            // .then(response => response.json())
+            .then(setLoggedIn(true))
             // .then(data => this.setState({ postId: data.id }));
       }
 
       const handleClick = () => {
-        if (!userData && loggedInUsername){
+        if (!userData && username && password){
           console.log("Saving new user");
           saveNewUser();
-          // getUserData();
         }
       }
 
@@ -68,7 +67,7 @@ const SaveForm = ({onNewUserSubmit, animals, currentCharacter, setCurrentCharact
                 Continue without creating account
             </button>
         </Link>
-        <form className="comment-form" onSubmit={handleSubmit}>
+        <form className="comment-form" onSubmit={handleFormSubmit}>
             <input type="text"
             placeholder="Your username"
             value={username}
