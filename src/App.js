@@ -28,43 +28,44 @@ const App = ()=> {
   const [currentCharacter, setCurrentCharacter] = useState({});
   const [loggedIn, setLoggedIn] = useState(false);
   const [intervalId, setIntervalId] = useState(null);
+  const [currentImage, setCurrentImage] = useState('');
   
 
 
   const animals = [
     {id: 1, animal_type: { animal: "dog" , stats: {
       appetite: 0.5, grooming: 0.6, cheeriness: 0.2, activity_level: 0.9
-    }}, images: [dogHeart],
+    }}, images: "https://i.gifer.com/4xjK.gif",
     name: "Jellibobs", health: 100, happiness:100, cleanliness:100,
     fitness:100, hunger:100
     },
     {id: 2, animal_type: {animal: "cat" , stats: {
       appetite: 0.3, grooming: 0.2, cheeriness: 0.7, activity_level: 0.6
-    }}, images: [catMeow],
+    }}, main_image: "https://i.gifer.com/4xjK.gif", sad_image:"https://i.pinimg.com/originals/20/67/65/20676527bc584f82177d749c59cfdc70.gif",
     name: "Kitty Fursbags", health: 100, happiness:100, cleanliness:100,
     fitness:100, hunger:100
     },
     {id: 3, animal_type: {animal: "monkey" , stats: {
       appetite: 0.9, grooming: 0.7, cheeriness: 0.5, activity_level: 1
-    }}, images: [monkeySpeak],
+    }}, images: "https://i.gifer.com/4xjK.gif",
     name: "Cheeky Chops", health: 100, happiness:100, cleanliness:100,
     fitness:100, hunger:100
     },
     {id: 4, animal_type: {animal: "unicorn" , stats: {
       appetite: 0.5, grooming: 0.9, cheeriness: 0.6, activity_level: 0.7
-    }}, images: [unicornRainbow],
+    }}, images: "https://i.gifer.com/4xjK.gif",
     name: "Dolly", health: 100, happiness:100, cleanliness:100,
     fitness:100, hunger:100
     },
     {id: 5, animal_type: {animal: "dinosaur" , stats: {
       appetite: 0.9, grooming: 0.1, cheeriness: 0.1, activity_level: 0.7
-    }}, images: [dinoRawr],
+    }}, images: "https://i.gifer.com/4xjK.gif",
     name: "Mr. Flamez", health: 100, happiness:100, cleanliness:100,
     fitness:100, hunger:100
     },
     {id: 6, animal_type: {animal: "penguin" , stats: {
       appetite: 0.5, grooming: 0.9, cheeriness: 0.6, activity_level: 0.7
-    }}, images: [penguinHeart],
+    }}, images: "https://i.gifer.com/4xjK.gif",
     name: "Beany", health: 100, happiness:100, cleanliness:100,
     fitness:100, hunger:100
   }  
@@ -118,6 +119,18 @@ const App = ()=> {
   }
   }
 
+  
+  const characterGif = () => {
+    if (currentCharacter){
+      if (currentCharacter.happiness<80){
+      setCurrentImage(currentCharacter.sad_image)
+      } 
+      else{
+      setCurrentImage(currentCharacter.main_image)
+      }  
+    }
+  }
+
 
 
   clearInterval(intervalId);
@@ -128,6 +141,8 @@ const App = ()=> {
     }
     else (currentCharacter[stat] = 100)
   }
+
+
 
   const handleSubmit = (data) => {
     usernameAndPassword.forEach(element => {
@@ -166,8 +181,9 @@ const App = ()=> {
   useEffect(() => {
     if (currentCharacter){
     reduceStats()
+    characterGif()
     }
-  }, [currentCharacter.happiness, currentCharacter.fitness, currentCharacter.cleanliness, currentCharacter.hunger])
+  }, [currentCharacter.happiness, currentCharacter.fitness, currentCharacter.cleanliness, currentCharacter.hunger, currentCharacter.health])
 
   const logInNewUser = (userDeets) => {
     setLoggedInUsername(userDeets.username);
@@ -191,7 +207,7 @@ const App = ()=> {
         <Route path="/newuser" render={() => loggedIn? <Redirect to="/createpage" /> : <SaveForm onNewUserSubmit={(userDeets) => logInNewUser(userDeets)}/>}/>
         <Route path="/createpage" render={() => <CreatePage allAnimals={animals} currentCharacter={currentCharacter} setCurrentCharacter={setCurrentCharacter} userData={userData} loggedInUsername={loggedInUsername} setLoggedInPassword={loggedInPassword} getUserData={getUserData}/>}/>
         <Route path="/loadpage"  render={() => <LoadPage userAnimals={userData.animals} selectCurrentCharacter={selectCurrentCharacter}/>} />
-        <Route path="/character" render={() => <Character currentCharacter={currentCharacter} increaseStat={increaseStat}/>}/>
+        <Route path="/character" render={() => <Character currentCharacter={currentCharacter} currentImage={currentImage} increaseStat={increaseStat}/>}/>
         
         </Switch>
       </>
