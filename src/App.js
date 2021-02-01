@@ -131,6 +131,8 @@ const App = ()=> {
   }
   }
 
+  clearInterval(intervalId);
+
   
   const characterGif = () => {
     if (currentCharacter){
@@ -149,7 +151,7 @@ const App = ()=> {
 
 
 
-  clearInterval(intervalId);
+  
 
   const increaseStat = (stat) => {
     if (currentCharacter[stat]<95){
@@ -199,7 +201,7 @@ const App = ()=> {
     reduceStats()
     characterGif()
     }
-  }, [currentCharacter.happiness, currentCharacter.fitness, currentCharacter.cleanliness, currentCharacter.hunger, currentCharacter.health])
+  }, [currentCharacter.happiness || currentCharacter.fitness || currentCharacter.cleanliness || currentCharacter.hunger || currentCharacter.health])
 
   const logInNewUser = (userDeets) => {
     setLoggedInUsername(userDeets.username);
