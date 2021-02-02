@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
+import Loading from "./containers/LoadCreateContainer/Loading";
 import NavBar from "./containers/LandingPageContainer/NavBar";
 import LandingPage from "./containers/LandingPageContainer/LandingPage";
 import ChoicePage from "./containers/LoadCreateContainer/ChoicePage";
@@ -44,6 +45,7 @@ const App = ()=> {
   const [intervalId, setIntervalId] = useState(null);
   const [hasSelectedCharacter, setHasSelectedCharacter] = useState(false);
   const [currentImage, setCurrentImage] = useState('');
+  const [loaded, setLoaded] = useState(false);
   
   
   const adoptableAnimals = [
@@ -189,11 +191,7 @@ const App = ()=> {
         setCurrentImage(currentCharacter.speak)
       } 
       else{
-<<<<<<< HEAD
-      setCurrentImage("./src/gifs/cat/cat_heart.gif")
-=======
         setCurrentImage(currentCharacter.heart)
->>>>>>> develop
       }  
     }
   }
@@ -275,9 +273,9 @@ const App = ()=> {
         </header>
         <Switch>
         <Route exact path="/" render={() => loggedIn? <Redirect to= "/choicepage" /> : <LandingPage onSubmit = {handleSubmit}></LandingPage>} />
-        <Route path="/choicepage" render={() => <ChoicePage unsetSelectedCharacter={unsetSelectedCharacter} />}/>
+        <Route path="/choicepage" render={() => loaded? <ChoicePage unsetSelectedCharacter={unsetSelectedCharacter} loaded={loaded}/> : <Loading ></Loading>}/>
         
-        <Route path="/newuser" render={() => loggedIn? <Redirect to= "/choicepage" /> :<SaveForm logInNewUser={(userDeets) => logInNewUser(userDeets)} allAnimals={animals} currentCharacter={currentCharacter} setCurrentCharacter={setCurrentCharacter} userData={userData} loggedInUsername={loggedInUsername} setLoggedInPassword={loggedInPassword} getUserData={getUserData}/>}/>
+        <Route path="/newuser" render={() => loggedIn? <Redirect to= "/choicepage" /> :<SaveForm logInNewUser={(userDeets) => logInNewUser(userDeets)} allAnimals={animals} currentCharacter={currentCharacter} setCurrentCharacter={setCurrentCharacter} userData={userData} loggedInUsername={loggedInUsername} setLoggedInPassword={loggedInPassword} getUserData={getUserData} setLoaded={setLoaded}/>}/>
        
        <Route path="/createpage" render={() => hasSelectedCharacter? <Redirect to="/loadpage"/>: <CreatePage allAnimals={adoptableAnimals}
                     setCurrentCharacter={setCurrentCharacter} setHasSelectedCharacter={setHasSelectedCharacter} getUserData={getUserData} userData={userData}/>}/>

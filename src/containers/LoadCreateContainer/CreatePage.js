@@ -31,14 +31,9 @@ const CreatePage = ({allAnimals, userData, handleAdoptAnimal, currentCharacter, 
 
   const animalArray = allAnimals.map((animal, index) => {
     return(
-<<<<<<< HEAD
-      <div className="animal_container">
-        <p className="animal_type" key>{animal.animal}</p>
-=======
       
       <div className="animal_container" key={index}>
         <p className="animal_type">{animal.animal} {userData[0].id}</p>
->>>>>>> develop
         <img src={animal.image[0]} alt="animal pic" width="200"></img>
         <button id="choose_animal_button" onClick={() => handleClick(animal)} >Adopt</button>
       </div>
