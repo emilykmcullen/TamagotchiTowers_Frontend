@@ -180,13 +180,19 @@ const App = ()=> {
     if (currentCharacter){
 
       if (currentCharacter.health<50){
-      setCurrentImage(currentCharacter.images[1])
+      setCurrentImage(currentCharacter.RIP)
       } 
       else if (currentCharacter.health<80){
-        setCurrentImage(currentCharacter.images[2])
+        setCurrentImage(currentCharacter.speak)
       } 
+      else if (currentCharacter.health === 0){
+        setCurrentImage(currentCharacter.rip)
+      }
+      else if (currentCharacter.happiness === 0){
+        setCurrentImage(currentCharacter.rip)
+      }
       else{
-      setCurrentImage(currentCharacter.images[0])
+      setCurrentImage(currentCharacter.heart)
       }  
     }
   }
