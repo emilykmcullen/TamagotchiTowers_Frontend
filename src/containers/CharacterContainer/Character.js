@@ -4,8 +4,11 @@ import StatBar from "../../components/CharacterComponents/StatBar";
 
 
 
-const Character = ({currentCharacter, increaseStat, currentImage}) => {
+const Character = ({currentCharacter, increaseStat, currentImage, loaded}) => {
 
+    if(loaded === false){
+      return <p>Loading...</p>
+    }
 
     return(
         <div>
