@@ -11,11 +11,11 @@ const LoadPage = ({userAnimals, selectCurrentCharacter}) => {
   }
 
 
-  const characters = userAnimals.map((animal, index) => {
+  const characters = userAnimals.map((animal) => {
     return (
     <>
-      <DisplayAllCharacters animal={animal} key={index}/>
-      <Link  from="/loadpage" to="/character" key={index}>
+      <DisplayAllCharacters animal={animal} key={animal.id}/>
+      <Link  from="/loadpage" to="/character" key={animal.id}>
           <button type="button" onClick={() => selectCurrentCharacter(animal.id)}>
               Look after your pet
           </button>
