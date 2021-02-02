@@ -241,6 +241,7 @@ const App = ()=> {
   const selectCurrentCharacter = (characterId) => {
     setCurrentCharacter(allAnimalData.find(animal => animal.id === characterId))
     setHasSelectedCharacter(true)
+    setLoaded(true)
   }
 
   const unsetSelectedCharacter = () => {
@@ -273,16 +274,16 @@ const App = ()=> {
         </header>
         <Switch>
         <Route exact path="/" render={() => loggedIn? <Redirect to= "/choicepage" /> : <LandingPage onSubmit = {handleSubmit}></LandingPage>} />
-        <Route path="/choicepage" render={() => loaded? <ChoicePage unsetSelectedCharacter={unsetSelectedCharacter} loaded={loaded}/> : <Loading ></Loading>}/>
+        <Route path="/choicepage" render={() => <ChoicePage unsetSelectedCharacter={unsetSelectedCharacter} loaded={loaded}/>}/>
         
         <Route path="/newuser" render={() => loggedIn? <Redirect to= "/choicepage" /> :<SaveForm logInNewUser={(userDeets) => logInNewUser(userDeets)} allAnimals={animals} currentCharacter={currentCharacter} setCurrentCharacter={setCurrentCharacter} userData={userData} loggedInUsername={loggedInUsername} setLoggedInPassword={loggedInPassword} getUserData={getUserData} setLoaded={setLoaded}/>}/>
        
        <Route path="/createpage" render={() => hasSelectedCharacter? <Redirect to="/loadpage"/>: <CreatePage allAnimals={adoptableAnimals}
                     setCurrentCharacter={setCurrentCharacter} setHasSelectedCharacter={setHasSelectedCharacter} getUserData={getUserData} userData={userData}/>}/>
 
-        <Route path="/loadpage"  render={() => <LoadPage userAnimals={userData[0].animals} selectCurrentCharacter={selectCurrentCharacter}/>} />
+        <Route path="/loadpage"  render={() => <LoadPage userAnimals={userData[0].animals} selectCurrentCharacter={selectCurrentCharacter} setLoaded={setLoaded}/>} />
 
-        <Route path="/character" render={() => <Character currentCharacter={currentCharacter} currentImage={currentImage} increaseStat={increaseStat}/>}/>
+        <Route path="/character" render={() => loaded? <Character currentCharacter={currentCharacter} currentImage={currentImage} increaseStat={increaseStat}/> : <Loading></Loading>}/>
         
         </Switch>
       </>
