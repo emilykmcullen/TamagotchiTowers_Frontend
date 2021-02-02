@@ -1,8 +1,16 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import DisplayAllCharacters from '../../components/LoadCreateComponents/DisplayAllCharacters'
 import { BrowserRouter as Router, Route, Switch, Redirect, Link } from "react-router-dom";
 
-const LoadPage = ({userAnimals, selectCurrentCharacter}) => {
+const LoadPage = ({userAnimals, selectCurrentCharacter, getUserData, getAllAnimalData}) => {
+
+  useEffect(() => {
+    getUserData()
+  }, [])
+
+  useEffect(() => {
+    getAllAnimalData()
+  }, [])
 
   if(!userAnimals){
     return (
@@ -13,15 +21,15 @@ const LoadPage = ({userAnimals, selectCurrentCharacter}) => {
 
   const characters = userAnimals.map((animal) => {
     return (
-    <>
-      <DisplayAllCharacters animal={animal} key={animal.id}/>
-      <Link  from="/loadpage" to="/character" key={animal.id}>
+    <div key={animal.id}>
+      <DisplayAllCharacters animal={animal} />
+      <Link  from="/loadpage" to="/character" >
           <button type="button" onClick={() => selectCurrentCharacter(animal.id)}>
               Look after your pet
           </button>
       </Link>
       
-    </>)
+    </div>)
   })
 
   

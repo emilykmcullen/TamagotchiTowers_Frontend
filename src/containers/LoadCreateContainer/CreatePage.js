@@ -64,7 +64,6 @@ const saveNewAnimal = (data) => {
       })
   };
   return fetch('http://localhost:8080/api/animals', requestOptions)
-  .then(getUserData())
   .then(setHasSelectedCharacter(true))
   
 }
