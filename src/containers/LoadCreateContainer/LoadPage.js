@@ -22,7 +22,7 @@ const LoadPage = ({userAnimals, selectCurrentCharacter, getUserData, getAllAnima
 
   if (loaded === false){
       return(
-        <h2>Loading....</h2>
+        <img src="../src/gifs/loading.gif" alt=""/>
       )
     }
 
