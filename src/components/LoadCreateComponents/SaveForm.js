@@ -33,7 +33,7 @@ const SaveForm = ({logInNewUser, animals, currentCharacter, setCurrentCharacter,
             method: 'POST',
             headers: {'Content-Type': 'application/json' },
             body: JSON.stringify({ 
-              userName: loggedInUsername,
+              userName: newUsername,
               password: newPassword,
               imageURL: "fakeImgUrl",
               animals: []
@@ -46,11 +46,9 @@ const SaveForm = ({logInNewUser, animals, currentCharacter, setCurrentCharacter,
       }
 
       const handleClick = () => {
-        if (loggedInUsername && newPassword){
           console.log("Saving new user");
           saveNewUser();
           getUserData();
-        }
       }
 
     return(

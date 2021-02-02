@@ -33,7 +33,7 @@ const StatBar = ({stat, statName, increaseStat, buttonLabel}) => {
                 <div style={fillerStyle}>
                     <span style={labelStyles}>{statName}: {`${statLabel}%`}</span>
                 </div>
-                <Button statName={statName} increaseStat={increaseStat} buttonLabel={buttonLabel}/>
+                {statName !== "Health" ? <Button statName={statName} increaseStat={increaseStat} buttonLabel={buttonLabel}/> : <p></p>}
             </div>
       </div>
   )

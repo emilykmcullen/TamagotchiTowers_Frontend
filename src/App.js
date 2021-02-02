@@ -47,12 +47,12 @@ const App = ()=> {
   
   
   const adoptableAnimals = [
-    {animal: "dog", image: [dogHeart]},
-    {animal: "cat", image: [catMeow]},
-    {animal: "monkey", image: [monkeySpeak]},
-    {animal: "dragon", image: [dinoRawr]},
-    {animal: "unicorn", image: [unicornRainbow]},
-    {animal: "penguin", image: [penguinHeart]}
+    {animal: "DOG", image: [dogHeart]},
+    {animal: "CAT", image: [catMeow]},
+    {animal: "MONKEY", image: [monkeySpeak]},
+    {animal: "DINOSAUR", image: [dinoRawr]},
+    {animal: "UNICORN", image: [unicornRainbow]},
+    {animal: "PENGUIN", image: [penguinHeart]}
   ]
 
   const animals = [
@@ -138,7 +138,7 @@ const App = ()=> {
     if (currentCharacter.happiness>0){
       
     const interval = setInterval(() => {
-      currentCharacter.happiness -= currentCharacter.animal_type.stats.cheeriness*0.01;
+      currentCharacter.happiness -= currentCharacter.cheeriness*0.05;
       setIntervalId(interval)
       if(currentCharacter.happiness === 0) {
         
@@ -148,7 +148,7 @@ const App = ()=> {
       
     const interval = setInterval(() => {
       
-      currentCharacter.cleanliness -= currentCharacter.animal_type.stats.grooming*0.01;
+      currentCharacter.cleanliness -= currentCharacter.grooming*0.05;
       setIntervalId(interval)
       if(currentCharacter.cleanliness === 0) {
         
@@ -157,7 +157,7 @@ const App = ()=> {
   if (currentCharacter.hunger>0){
       
     const interval = setInterval(() => {
-      currentCharacter.hunger -= currentCharacter.animal_type.stats.appetite*0.01;
+      currentCharacter.hunger -= currentCharacter.appetite*0.05;
       setIntervalId(interval)
       if(currentCharacter.hunger === 0) {
         
@@ -166,27 +166,34 @@ const App = ()=> {
   if (currentCharacter.fitness>0){
       
     const interval = setInterval(() => {
-      currentCharacter.fitness -=currentCharacter.animal_type.stats.activity_level*0.01;
+      currentCharacter.fitness -=currentCharacter.activityLevel*0.05;
       setIntervalId(interval)
       if(currentCharacter.fitness === 0) {
-       
     }}, 10);
   }
   }
 
   clearInterval(intervalId);
   
+  
   const characterGif = () => {
     if (currentCharacter){
 
-      if (currentCharacter.health<50){
-      setCurrentImage(currentCharacter.images[1])
+      if (currentCharacter.health<1){
+        setCurrentImage(currentCharacter.rip)
+      }
+      else if (currentCharacter.health<50){
+        setCurrentImage(currentCharacter.exclamation)
       } 
       else if (currentCharacter.health<80){
-        setCurrentImage(currentCharacter.images[2])
+        setCurrentImage(currentCharacter.speak)
       } 
       else{
+<<<<<<< HEAD
       setCurrentImage("./src/gifs/cat/cat_heart.gif")
+=======
+        setCurrentImage(currentCharacter.heart)
+>>>>>>> develop
       }  
     }
   }
@@ -230,29 +237,11 @@ const App = ()=> {
 
   useEffect(() => {
     getUserData();
-  }, [loggedInUsername && loggedInPassword])
+  }, [loggedInUsername && loggedInPassword || hasSelectedCharacter===true])
 
-  const handleAdoptAnimal = (data) => {
-    const newAnimal = 
-    {id: 1, animal_type: { animal: data.animaltype , stats: {
-      appetite: 0.5, grooming: 0.6, cheeriness: 0.2, activity_level: 0.9
-    }}, images: [dogHeart],
-    name: data.name, health: 100, happiness:100, cleanliness:100,
-    fitness:100, hunger:100
-    }
-
-    animals.push(newAnimal)
-    const index = animals.indexOf(newAnimal)
-
-    const user = usernameAndPassword.find(user => user.username === loggedInUsername)
-    user.animals.push(animals[index])
-    setCurrentCharacter(animals[index])
-    setHasSelectedCharacter(true)
-    getUserData();
-  }
 
   const selectCurrentCharacter = (characterId) => {
-    setCurrentCharacter(animals.find(animal => animal.id === characterId))
+    setCurrentCharacter(allAnimalData.find(animal => animal.id === characterId))
     setHasSelectedCharacter(true)
   }
 
@@ -261,14 +250,8 @@ const App = ()=> {
     setHasSelectedCharacter(false)
   }
 
-
-
-
-
-  
-
   useEffect(() => {
-    if (currentCharacter){
+    if (loggedIn===true){
     reduceStats()
     characterGif()
     }
@@ -294,9 +277,13 @@ const App = ()=> {
         <Route exact path="/" render={() => loggedIn? <Redirect to= "/choicepage" /> : <LandingPage onSubmit = {handleSubmit}></LandingPage>} />
         <Route path="/choicepage" render={() => <ChoicePage unsetSelectedCharacter={unsetSelectedCharacter} />}/>
         
-        <Route path="/newuser" render={() => loggedIn? <Redirect to= "/choicepage" /> :<SaveForm onNewUserSubmit={(userDeets) => logInNewUser(userDeets)} allAnimals={animals} currentCharacter={currentCharacter} setCurrentCharacter={setCurrentCharacter} userData={userData} loggedInUsername={loggedInUsername} setLoggedInPassword={loggedInPassword} getUserData={getUserData}/>}/>
-        <Route path="/createpage" render={() => hasSelectedCharacter? <Redirect to="/character"/>: <CreatePage allAnimals={adoptableAnimals} handleAdoptAnimal={handleAdoptAnimal}/>} />
+        <Route path="/newuser" render={() => loggedIn? <Redirect to= "/choicepage" /> :<SaveForm logInNewUser={(userDeets) => logInNewUser(userDeets)} allAnimals={animals} currentCharacter={currentCharacter} setCurrentCharacter={setCurrentCharacter} userData={userData} loggedInUsername={loggedInUsername} setLoggedInPassword={loggedInPassword} getUserData={getUserData}/>}/>
+       
+       <Route path="/createpage" render={() => hasSelectedCharacter? <Redirect to="/loadpage"/>: <CreatePage allAnimals={adoptableAnimals}
+                    setCurrentCharacter={setCurrentCharacter} setHasSelectedCharacter={setHasSelectedCharacter} getUserData={getUserData} userData={userData}/>}/>
+
         <Route path="/loadpage"  render={() => <LoadPage userAnimals={userData[0].animals} selectCurrentCharacter={selectCurrentCharacter}/>} />
+
         <Route path="/character" render={() => <Character currentCharacter={currentCharacter} currentImage={currentImage} increaseStat={increaseStat}/>}/>
         
         </Switch>

@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import { BrowserRouter as Router, Route, Switch, Redirect, Link } from "react-router-dom";
 
 
-const CreatePage = ({allAnimals, handleAdoptAnimal, userData, currentCharacter}) => {
+const CreatePage = ({allAnimals, userData, handleAdoptAnimal, currentCharacter, setCurrentCharacter, setHasSelectedCharacter, getUserData}) => {
 
   const [formData, setFormData] = useState({
     name: '',
@@ -12,6 +12,7 @@ const CreatePage = ({allAnimals, handleAdoptAnimal, userData, currentCharacter})
 
   const handleClick = (animal) => {
     formData.animaltype = animal.animal
+    
     // if (!userData && loggedInUsername){
     //   console.log("Saving new user");
     // }
@@ -25,49 +26,52 @@ const CreatePage = ({allAnimals, handleAdoptAnimal, userData, currentCharacter})
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    handleAdoptAnimal(formData)
+    saveNewAnimal(formData)
   }
 
-  const animalArray = allAnimals.map(animal => {
+  const animalArray = allAnimals.map((animal, index) => {
     return(
+<<<<<<< HEAD
       <div className="animal_container">
         <p className="animal_type" key>{animal.animal}</p>
+=======
+      
+      <div className="animal_container" key={index}>
+        <p className="animal_type">{animal.animal} {userData[0].id}</p>
+>>>>>>> develop
         <img src={animal.image[0]} alt="animal pic" width="200"></img>
-        <button id="choose_animal_button" onClick={() => handleClick(animal)}>Adopt</button>
+        <button id="choose_animal_button" onClick={() => handleClick(animal)} >Adopt</button>
       </div>
     )
 })
 
 
 
-const saveNewAnimal = () => {
+const saveNewAnimal = (data) => {
   // Simple POST request with a JSON body using fetch
   const requestOptions = {
       
       method: 'POST',
       headers: {'Content-Type': 'application/json' },
       body: JSON.stringify({ 
-        animalName: currentCharacter.name,
-        animalType: currentCharacter.type,
-        health: currentCharacter.health,
-        happiness: currentCharacter.happiness,
-        cleanliness: currentCharacter.cleanliness,
-        fitness: currentCharacter.fitness,
-        hunger: currentCharacter.hunger,
+        animalName: data.name,
+        animalType: data.animaltype,
+        health: 100,
+        happiness: 100,
+        cleanliness: 100,
+        fitness: 100,
+        hunger: 100,
         user: {
-          id: 5,
-          userName: userData.userName,
-          password: userData.password,
-          imageURL: userData.imageURL
-                },
-        images: [],
-        appetite: 0.05,
-        grooming: 0.06,
-        cheeriness: 0.02,
-        activityLevel: 0.09
+          id: userData[0].id,
+          userName: userData[0].userName,
+          password: userData[0].password,
+          imageURL: userData[0].imageURL}
       })
   };
   return fetch('http://localhost:8080/api/animals', requestOptions)
+  .then(getUserData())
+  .then(setHasSelectedCharacter(true))
+  
 }
 
   
