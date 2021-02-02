@@ -186,7 +186,7 @@ const App = ()=> {
         setCurrentImage(currentCharacter.images[2])
       } 
       else{
-      setCurrentImage(currentCharacter.images[0])
+      setCurrentImage("./src/gifs/cat/cat_heart.gif")
       }  
     }
   }
