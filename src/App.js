@@ -169,12 +169,12 @@ const App = ()=> {
       currentCharacter.fitness -=currentCharacter.activityLevel*0.05;
       setIntervalId(interval)
       if(currentCharacter.fitness === 0) {
-       
     }}, 10);
   }
   }
 
   clearInterval(intervalId);
+  
   
   const characterGif = () => {
     if (currentCharacter){
@@ -183,13 +183,13 @@ const App = ()=> {
         setCurrentImage(currentCharacter.rip)
       }
       else if (currentCharacter.health<50){
-      setCurrentImage(currentCharacter.exclamation)
+        setCurrentImage(currentCharacter.exclamation)
       } 
       else if (currentCharacter.health<80){
         setCurrentImage(currentCharacter.speak)
       } 
       else{
-      setCurrentImage(currentCharacter.heart)
+        setCurrentImage(currentCharacter.heart)
       }  
     }
   }
