@@ -138,7 +138,7 @@ const App = ()=> {
     if (currentCharacter.happiness>0){
       
     const interval = setInterval(() => {
-      currentCharacter.happiness -= currentCharacter.animal_type.stats.cheeriness*0.1;
+      currentCharacter.happiness -= currentCharacter.cheeriness*0.1;
       setIntervalId(interval)
       if(currentCharacter.happiness === 0) {
         
@@ -148,7 +148,7 @@ const App = ()=> {
       
     const interval = setInterval(() => {
       
-      currentCharacter.cleanliness -= currentCharacter.animal_type.stats.grooming*0.1;
+      currentCharacter.cleanliness -= currentCharacter.grooming*0.1;
       setIntervalId(interval)
       if(currentCharacter.cleanliness === 0) {
         
@@ -157,7 +157,7 @@ const App = ()=> {
   if (currentCharacter.hunger>0){
       
     const interval = setInterval(() => {
-      currentCharacter.hunger -= currentCharacter.animal_type.stats.appetite*0.1;
+      currentCharacter.hunger -= currentCharacter.appetite*0.1;
       setIntervalId(interval)
       if(currentCharacter.hunger === 0) {
         
@@ -166,7 +166,7 @@ const App = ()=> {
   if (currentCharacter.fitness>0){
       
     const interval = setInterval(() => {
-      currentCharacter.fitness -=currentCharacter.animal_type.stats.activity_level*0.1;
+      currentCharacter.fitness -=currentCharacter.activityLevel*0.1;
       setIntervalId(interval)
       if(currentCharacter.fitness === 0) {
        
@@ -186,7 +186,7 @@ const App = ()=> {
         setCurrentImage(currentCharacter.images[2])
       } 
       else{
-      setCurrentImage("./src/gifs/cat/cat_heart.gif")
+      setCurrentImage(currentCharacter.images[0])
       }  
     }
   }
@@ -252,7 +252,7 @@ const App = ()=> {
   }
 
   const selectCurrentCharacter = (characterId) => {
-    setCurrentCharacter(animals.find(animal => animal.id === characterId))
+    setCurrentCharacter(allAnimalData.find(animal => animal.id === characterId))
     setHasSelectedCharacter(true)
   }
 
@@ -268,7 +268,7 @@ const App = ()=> {
   
 
   useEffect(() => {
-    if (currentCharacter){
+    if (loggedIn===true){
     reduceStats()
     characterGif()
     }

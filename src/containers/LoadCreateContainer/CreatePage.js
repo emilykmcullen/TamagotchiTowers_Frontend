@@ -11,7 +11,7 @@ const CreatePage = ({allAnimals, handleAdoptAnimal, userData, currentCharacter})
 
 
   const handleClick = (animal) => {
-    formData.animaltype = animal.animal
+    formData.animaltype = animal.animalType
     // if (!userData && loggedInUsername){
     //   console.log("Saving new user");
     // }
