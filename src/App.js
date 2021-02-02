@@ -50,7 +50,7 @@ const App = ()=> {
     {animal: "DOG", image: [dogHeart]},
     {animal: "CAT", image: [catMeow]},
     {animal: "MONKEY", image: [monkeySpeak]},
-    {animal: "DRAGON", image: [dinoRawr]},
+    {animal: "DINOSAUR", image: [dinoRawr]},
     {animal: "UNICORN", image: [unicornRainbow]},
     {animal: "PENGUIN", image: [penguinHeart]}
   ]
