@@ -6,7 +6,7 @@ const DisplayAllCharacters = ({animal}) => {
 
     return(
         <div>
-            <h1>{animal.name}</h1>
+            <h1>{animal.animalName}</h1>
         </div>
     )
   };

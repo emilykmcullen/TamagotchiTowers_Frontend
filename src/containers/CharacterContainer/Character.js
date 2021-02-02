@@ -4,17 +4,17 @@ import StatBar from "../../components/CharacterComponents/StatBar";
 
 
 
-const Character = ({currentCharacter, increaseStat, currentImage}) => {
+const Character = ({currentCharacter, increaseStat}) => {
 
 
     return(
         <div>
           <h2>
-          {currentCharacter.name}
+          {currentCharacter.animalName}
           
           </h2>
-          <p>Species: {currentCharacter.animal_type.animal}</p>
-          <img src={currentImage} alt="animal pic" width="200"></img>
+          <p>Species: {currentCharacter.animalType}</p>
+          <img src={currentCharacter.images[0]} alt="animal pic" width="200"></img>
             <StatBar stat={currentCharacter.health} statName="Health"
              increaseStat={increaseStat}/>
             <StatBar stat={currentCharacter.happiness} statName="Happiness" 
