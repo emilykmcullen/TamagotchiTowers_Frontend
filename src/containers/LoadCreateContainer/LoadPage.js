@@ -2,10 +2,12 @@ import React, {useEffect, useState} from "react";
 import DisplayAllCharacters from '../../components/LoadCreateComponents/DisplayAllCharacters'
 import { BrowserRouter as Router, Route, Switch, Redirect, Link } from "react-router-dom";
 
-const LoadPage = ({userAnimals, selectCurrentCharacter, getUserData, getAllAnimalData}) => {
+const LoadPage = ({userAnimals, selectCurrentCharacter, getUserData, getAllAnimalData, setLoaded, loaded}) => {
+
 
   useEffect(() => {
     getUserData()
+    setLoaded(true)
   }, [])
 
   useEffect(() => {
@@ -17,6 +19,12 @@ const LoadPage = ({userAnimals, selectCurrentCharacter, getUserData, getAllAnima
       <h1>You don't have any animals yet!</h1>
     )
   }
+
+  if (loaded === false){
+      return(
+        <h2>Loading....</h2>
+      )
+    }
 
 
   const characters = userAnimals.map((animal) => {
