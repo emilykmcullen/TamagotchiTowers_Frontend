@@ -235,24 +235,6 @@ const App = ()=> {
     getUserData();
   }, [loggedInUsername && loggedInPassword || hasSelectedCharacter===true])
 
-  // const handleAdoptAnimal = (data) => {
-  //   const newAnimal = 
-  //   {id: 1, animal_type: { animal: data.animaltype , stats: {
-  //     appetite: 0.5, grooming: 0.6, cheeriness: 0.2, activity_level: 0.9
-  //   }}, images: [dogHeart],
-  //   name: data.name, health: 100, happiness:100, cleanliness:100,
-  //   fitness:100, hunger:100
-  //   }
-
-  //   animals.push(newAnimal)
-  //   const index = animals.indexOf(newAnimal)
-
-  //   const user = usernameAndPassword.find(user => user.username === loggedInUsername)
-  //   user.animals.push(animals[index])
-  //   setCurrentCharacter(animals[index])
-  //   setHasSelectedCharacter(true)
-  //   getUserData();
-  // }
 
   const selectCurrentCharacter = (characterId) => {
     setCurrentCharacter(allAnimalData.find(animal => animal.id === characterId))
@@ -263,12 +245,6 @@ const App = ()=> {
     setCurrentCharacter({})
     setHasSelectedCharacter(false)
   }
-
-
-
-
-
-  
 
   useEffect(() => {
     if (loggedIn===true){
