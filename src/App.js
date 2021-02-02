@@ -138,7 +138,7 @@ const App = ()=> {
     if (currentCharacter.happiness>0){
       
     const interval = setInterval(() => {
-      currentCharacter.happiness -= currentCharacter.cheeriness*0.1;
+      currentCharacter.happiness -= currentCharacter.cheeriness*0.05;
       setIntervalId(interval)
       if(currentCharacter.happiness === 0) {
         
@@ -148,7 +148,7 @@ const App = ()=> {
       
     const interval = setInterval(() => {
       
-      currentCharacter.cleanliness -= currentCharacter.grooming*0.1;
+      currentCharacter.cleanliness -= currentCharacter.grooming*0.05;
       setIntervalId(interval)
       if(currentCharacter.cleanliness === 0) {
         
@@ -157,7 +157,7 @@ const App = ()=> {
   if (currentCharacter.hunger>0){
       
     const interval = setInterval(() => {
-      currentCharacter.hunger -= currentCharacter.appetite*0.1;
+      currentCharacter.hunger -= currentCharacter.appetite*0.05;
       setIntervalId(interval)
       if(currentCharacter.hunger === 0) {
         
@@ -166,27 +166,30 @@ const App = ()=> {
   if (currentCharacter.fitness>0){
       
     const interval = setInterval(() => {
-      currentCharacter.fitness -=currentCharacter.activityLevel*0.1;
+      currentCharacter.fitness -=currentCharacter.activityLevel*0.05;
       setIntervalId(interval)
       if(currentCharacter.fitness === 0) {
-       
     }}, 10);
   }
   }
 
   clearInterval(intervalId);
   
+  
   const characterGif = () => {
     if (currentCharacter){
 
-      if (currentCharacter.health<50){
-      setCurrentImage(currentCharacter.images[1])
+      if (currentCharacter.health<1){
+        setCurrentImage(currentCharacter.rip)
+      }
+      else if (currentCharacter.health<50){
+        setCurrentImage(currentCharacter.exclamation)
       } 
       else if (currentCharacter.health<80){
-        setCurrentImage(currentCharacter.images[2])
+        setCurrentImage(currentCharacter.speak)
       } 
       else{
-      setCurrentImage(currentCharacter.images[0])
+        setCurrentImage(currentCharacter.heart)
       }  
     }
   }
