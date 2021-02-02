@@ -47,12 +47,12 @@ const App = ()=> {
   
   
   const adoptableAnimals = [
-    {animal: "dog", image: [dogHeart]},
-    {animal: "cat", image: [catMeow]},
-    {animal: "monkey", image: [monkeySpeak]},
-    {animal: "dragon", image: [dinoRawr]},
-    {animal: "unicorn", image: [unicornRainbow]},
-    {animal: "penguin", image: [penguinHeart]}
+    {animal: "DOG", image: [dogHeart]},
+    {animal: "CAT", image: [catMeow]},
+    {animal: "MONKEY", image: [monkeySpeak]},
+    {animal: "DRAGON", image: [dinoRawr]},
+    {animal: "UNICORN", image: [unicornRainbow]},
+    {animal: "PENGUIN", image: [penguinHeart]}
   ]
 
   const animals = [
@@ -230,26 +230,26 @@ const App = ()=> {
 
   useEffect(() => {
     getUserData();
-  }, [loggedInUsername && loggedInPassword])
+  }, [loggedInUsername && loggedInPassword || hasSelectedCharacter===true])
 
-  const handleAdoptAnimal = (data) => {
-    const newAnimal = 
-    {id: 1, animal_type: { animal: data.animaltype , stats: {
-      appetite: 0.5, grooming: 0.6, cheeriness: 0.2, activity_level: 0.9
-    }}, images: [dogHeart],
-    name: data.name, health: 100, happiness:100, cleanliness:100,
-    fitness:100, hunger:100
-    }
+  // const handleAdoptAnimal = (data) => {
+  //   const newAnimal = 
+  //   {id: 1, animal_type: { animal: data.animaltype , stats: {
+  //     appetite: 0.5, grooming: 0.6, cheeriness: 0.2, activity_level: 0.9
+  //   }}, images: [dogHeart],
+  //   name: data.name, health: 100, happiness:100, cleanliness:100,
+  //   fitness:100, hunger:100
+  //   }
 
-    animals.push(newAnimal)
-    const index = animals.indexOf(newAnimal)
+  //   animals.push(newAnimal)
+  //   const index = animals.indexOf(newAnimal)
 
-    const user = usernameAndPassword.find(user => user.username === loggedInUsername)
-    user.animals.push(animals[index])
-    setCurrentCharacter(animals[index])
-    setHasSelectedCharacter(true)
-    getUserData();
-  }
+  //   const user = usernameAndPassword.find(user => user.username === loggedInUsername)
+  //   user.animals.push(animals[index])
+  //   setCurrentCharacter(animals[index])
+  //   setHasSelectedCharacter(true)
+  //   getUserData();
+  // }
 
   const selectCurrentCharacter = (characterId) => {
     setCurrentCharacter(allAnimalData.find(animal => animal.id === characterId))
@@ -295,8 +295,12 @@ const App = ()=> {
         <Route path="/choicepage" render={() => <ChoicePage unsetSelectedCharacter={unsetSelectedCharacter} />}/>
         
         <Route path="/newuser" render={() => loggedIn? <Redirect to= "/choicepage" /> :<SaveForm onNewUserSubmit={(userDeets) => logInNewUser(userDeets)} allAnimals={animals} currentCharacter={currentCharacter} setCurrentCharacter={setCurrentCharacter} userData={userData} loggedInUsername={loggedInUsername} setLoggedInPassword={loggedInPassword} getUserData={getUserData}/>}/>
-        <Route path="/createpage" render={() => hasSelectedCharacter? <Redirect to="/character"/>: <CreatePage allAnimals={adoptableAnimals} handleAdoptAnimal={handleAdoptAnimal}/>} />
+       
+       <Route path="/createpage" render={() => hasSelectedCharacter? <Redirect to="/loadpage"/>: <CreatePage allAnimals={adoptableAnimals}
+                    setCurrentCharacter={setCurrentCharacter} setHasSelectedCharacter={setHasSelectedCharacter} getUserData={getUserData} userData={userData}/>}/>
+
         <Route path="/loadpage"  render={() => <LoadPage userAnimals={userData[0].animals} selectCurrentCharacter={selectCurrentCharacter}/>} />
+
         <Route path="/character" render={() => <Character currentCharacter={currentCharacter} currentImage={currentImage} increaseStat={increaseStat}/>}/>
         
         </Switch>
