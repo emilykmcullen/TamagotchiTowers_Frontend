@@ -29,12 +29,13 @@ const CreatePage = ({allAnimals, userData, handleAdoptAnimal, currentCharacter, 
     saveNewAnimal(formData)
   }
 
-  const animalArray = allAnimals.map(animal => {
+  const animalArray = allAnimals.map((animal, index) => {
     return(
-      <div className="animal_container">
+      
+      <div className="animal_container" key={index}>
         <p className="animal_type">{animal.animal} {userData[0].id}</p>
         <img src={animal.image[0]} alt="animal pic" width="200"></img>
-        <button id="choose_animal_button" onClick={() => handleClick(animal)}>Adopt</button>
+        <button id="choose_animal_button" onClick={() => handleClick(animal)} >Adopt</button>
       </div>
     )
 })
