@@ -58,10 +58,12 @@ const App = ()=> {
   }, [])
 
   const getAllAnimalData = () => {
+    console.log("getting animal data");
     return fetch('http://localhost:8080/api/animals')
     .then(res => res.json())
     .then(data => setAllAnimalData(data))
     .then(setAnimalDataLoaded(true))
+    .then(console.log("ANIMALS ARE" + allAnimalData))
   }
 
   useEffect(() => {
@@ -172,7 +174,7 @@ const App = ()=> {
 
   useEffect(() => {
     getUserData();
-  }, [loggedInUsername && loggedInPassword || hasSelectedCharacter===true])
+  }, [loggedInUsername && loggedInPassword || currentCharacter])
 
   const selectCurrentCharacter = (characterId) => {
     setCurrentCharacter(allAnimalData.find(animal => animal.id === characterId))

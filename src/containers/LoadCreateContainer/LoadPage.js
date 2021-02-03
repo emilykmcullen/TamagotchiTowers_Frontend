@@ -6,13 +6,14 @@ const LoadPage = ({userAnimals, selectCurrentCharacter, getUserData, getAllAnima
 
 
   useEffect(() => {
-    getUserData()
     setLoaded(true)
+    getAllAnimalData()
+    getUserData()
   }, [])
 
-  useEffect(() => {
-    getAllAnimalData()
-  }, [userAnimals])
+  // useEffect(() => {
+  //   getAllAnimalData()
+  // }, [userAnimals])
 
   if(!userAnimals){
     return (
