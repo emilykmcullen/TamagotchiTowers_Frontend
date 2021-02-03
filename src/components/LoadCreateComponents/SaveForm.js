@@ -1,11 +1,7 @@
 import React, {useState} from 'react';
 import { BrowserRouter as Router, Route, Switch, Redirect, Link } from "react-router-dom";
 
-<<<<<<< HEAD
-const SaveForm = ({logInNewUser, animals, currentCharacter, setCurrentCharacter, userData, loggedInUsername, loggedInPassword, setLoggedInPassword, setLoggedIn, getUserData, setLoaded}) => {
-=======
 const SaveForm = ({logInNewUser, currentCharacter, setCurrentCharacter, userData, loggedInUsername, loggedInPassword, setLoggedInPassword, setLoggedIn, getUserData}) => {
->>>>>>> develop
 
     const [newUsername, setNewUsername] = useState("");
     const [newPassword, setNewPassword] = useState("");
@@ -47,8 +43,8 @@ const SaveForm = ({logInNewUser, currentCharacter, setCurrentCharacter, userData
         return fetch('http://localhost:8080/api/users', requestOptions)
             .then(setNewUsername(""))
             .then(setNewPassword(""))
-            .then(getUserData())
-            .then(() => setLoaded(true));
+            .then(() => getUserData())
+            // .then(() => setLoaded(true));
           
 
       }

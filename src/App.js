@@ -165,7 +165,7 @@ const App = ()=> {
     return fetch(`http://localhost:8080/api/users?username=${loggedInUsername}`)
     .then(res => res.json())
     .then(data => setUserData(data))
-    .then(setUserDataLoaded(true))
+    .then(() => setUserDataLoaded(true))
   }
 
   useEffect(() => {
