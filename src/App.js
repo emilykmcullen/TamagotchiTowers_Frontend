@@ -59,6 +59,7 @@ const App = ()=> {
   }, [])
 
   const getAllAnimalData = () => {
+    console.log("getting animal data");
     return fetch('http://localhost:8080/api/animals')
     .then(res => res.json())
     .then(data => setAllAnimalData(data))
@@ -71,7 +72,7 @@ const App = ()=> {
 
   const speed = () => {
     if (easyDifficulty === true) {
-      return 0.0005
+      return 0.0010
     }else{
       return 0.05
     }
