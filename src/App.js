@@ -151,6 +151,7 @@ const App = ()=> {
         setLoggedIn(true);
         getUserData()
         setLoggedIn(true)
+        setUserDataLoaded(true)
       }else{
         console.log("Failure");
       }
