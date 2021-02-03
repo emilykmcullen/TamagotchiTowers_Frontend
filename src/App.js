@@ -35,6 +35,9 @@ const App = ()=> {
   const [loaded, setLoaded] = useState(false);
   const [userDataLoaded, setUserDataLoaded] = useState(false);
   const [animalDataLoaded, setAnimalDataLoaded] = useState(false);
+  const [currentUserAnimals, setCurrentUserAnimals] = useState([]);
+  const [usersAnimalsLoaded, setUsersAnimalsLoaded] = useState(false);
+
 
   
   const adoptableAnimals = [
@@ -57,6 +60,10 @@ const App = ()=> {
     getAllUserData();
   }, [])
 
+  useEffect(() => {
+    getAllAnimalData();
+  }, [])
+
   const getAllAnimalData = () => {
     return fetch('http://localhost:8080/api/animals')
     .then(res => res.json())
@@ -64,9 +71,10 @@ const App = ()=> {
     .then(setAnimalDataLoaded(true))
   }
 
-  useEffect(() => {
-    getAllAnimalData();
-  }, [])
+  // useEffect(() => {
+  //   if(userData !== undefined){
+  //   getAllAnimalData()}
+  // }, [userData])
 
   const reduceStats = () => {
     if (currentCharacter.health>0){
@@ -167,12 +175,28 @@ const App = ()=> {
     .then(res => res.json())
     .then(data => setUserData(data))
     .then(setUserDataLoaded(true))
+    // .then(()=>getUsersAnimals())
     
+  }
+
+
+  const getUsersAnimals = () => {
+    console.log("getting user data");
+    console.log("NAME IS TWO" + loggedInUsername)
+    return fetch(`http://localhost:8080/api/animals/users?username=${loggedInUsername}`)
+    .then(res => res.json())
+    .then(data => setCurrentUserAnimals(data))
+    .then(setUsersAnimalsLoaded(true))
   }
 
   useEffect(() => {
     getUserData();
   }, [loggedInUsername && loggedInPassword || hasSelectedCharacter===true])
+
+  useEffect(() => {
+    getUsersAnimals();
+  }, [userData])
+
 
   const selectCurrentCharacter = (characterId) => {
     setCurrentCharacter(allAnimalData.find(animal => animal.id === characterId))
@@ -214,9 +238,9 @@ const App = ()=> {
         <Route path="/newuser" render={() => loggedIn? <Redirect to= "/choicepage" /> :<SaveForm logInNewUser={(userDeets) => logInNewUser(userDeets)} currentCharacter={currentCharacter} setCurrentCharacter={setCurrentCharacter} userData={userData} loggedInUsername={loggedInUsername} setLoggedInPassword={loggedInPassword} getUserData={getUserData} setLoaded={setLoaded}/>}/>
        
        <Route path="/createpage" render={() => hasSelectedCharacter? <Redirect to="/loadpage"/>: <CreatePage allAnimals={adoptableAnimals}
-                    setCurrentCharacter={setCurrentCharacter} setHasSelectedCharacter={setHasSelectedCharacter} getUserData={getUserData} userData={userData} setLoaded={setLoaded} userDataLoaded={userDataLoaded} getAllAnimalData={getAllAnimalData}/>}/>
+                    setCurrentCharacter={setCurrentCharacter} setHasSelectedCharacter={setHasSelectedCharacter} getUserData={getUserData} userData={userData} setLoaded={setLoaded} userDataLoaded={userDataLoaded} getAllAnimalData={getAllAnimalData} getUsersAnimals={getUsersAnimals}/>}/>
 
-        <Route path="/loadpage"  render={() => <LoadPage userAnimals={userData[0] !== undefined ? userData[0].animals : undefined} selectCurrentCharacter={selectCurrentCharacter} getUserData={getUserData} getAllAnimalData={getAllAnimalData} setLoaded={setLoaded} loaded={loaded} animalDataLoaded={animalDataLoaded}/>} />
+        <Route path="/loadpage"  render={() => <LoadPage userAnimals={userData[0] !== undefined ? userData[0].animals : undefined} selectCurrentCharacter={selectCurrentCharacter} getUserData={getUserData} getAllAnimalData={getAllAnimalData} setLoaded={setLoaded} loaded={loaded} animalDataLoaded={animalDataLoaded} userData={userData} getUsersAnimals={getUsersAnimals} currentUserAnimals={currentUserAnimals} usersAnimalsLoaded={usersAnimalsLoaded}/>} />
 
         <Route path="/character" render={() => <Character currentCharacter={currentCharacter} currentImage={currentImage} increaseStat={increaseStat} loaded={loaded}/>}/>
         

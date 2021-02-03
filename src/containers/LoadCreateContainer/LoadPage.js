@@ -2,17 +2,20 @@ import React, {useEffect, useState} from "react";
 import DisplayAllCharacters from '../../components/LoadCreateComponents/DisplayAllCharacters'
 import { BrowserRouter as Router, Route, Switch, Redirect, Link } from "react-router-dom";
 
-const LoadPage = ({userAnimals, selectCurrentCharacter, getUserData, getAllAnimalData, setLoaded, loaded, animalDataLoaded}) => {
+const LoadPage = ({userAnimals, selectCurrentCharacter, getUserData, getAllAnimalData, setLoaded, loaded, animalDataLoaded, userData, getUsersAnimals, currentUserAnimals}) => {
 
+ 
 
   useEffect(() => {
     getUserData()
     setLoaded(true)
   }, [])
 
-  useEffect(() => {
-    getAllAnimalData()
-  }, [userAnimals])
+  // useEffect(() => {
+  //   getUsersAnimals()
+  //   console.log(currentUserAnimals)
+  // }, [userData])
+
 
   if(!userAnimals){
     return (
@@ -30,8 +33,8 @@ const LoadPage = ({userAnimals, selectCurrentCharacter, getUserData, getAllAnima
       return <p>Loading....</p>
     }
 
-
-  const characters = userAnimals.map((animal) => {
+   
+  const characters = currentUserAnimals.map((animal) => {
     return (
     <div key={animal.id}>
       <DisplayAllCharacters animal={animal} />

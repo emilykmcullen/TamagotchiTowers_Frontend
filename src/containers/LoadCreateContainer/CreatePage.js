@@ -2,9 +2,8 @@ import React, {useEffect, useState} from "react";
 import { BrowserRouter as Router, Route, Switch, Redirect, Link } from "react-router-dom";
 
 
-const CreatePage = ({allAnimals, userData, handleAdoptAnimal, currentCharacter, setCurrentCharacter, setHasSelectedCharacter, getUserData, setLoaded, userDataLoaded, getAllAnimalData}) => {
+const CreatePage = ({allAnimals, userData, handleAdoptAnimal, currentCharacter, setCurrentCharacter, setHasSelectedCharacter, getUserData, setLoaded, userDataLoaded, getAllAnimalData, getUsersAnimals}) => {
 
-  
 
   const [formData, setFormData] = useState({
     name: '',
@@ -30,8 +29,7 @@ const CreatePage = ({allAnimals, userData, handleAdoptAnimal, currentCharacter, 
   const handleSubmit = (event) => {
     event.preventDefault();
     saveNewAnimal(formData)
-    getUserData()
-    getAllAnimalData()
+    // getUserData()
   }
 
   const animalArray = allAnimals.map((animal, index) => {
@@ -72,6 +70,8 @@ const saveNewAnimal = (data) => {
   .then(setHasSelectedCharacter(true))
   .then(() => setLoaded(true))
   .then(getUserData())
+  .then(getAllAnimalData())
+  .then(getUsersAnimals())
   
   
 }
