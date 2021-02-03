@@ -137,39 +137,38 @@ const App = ()=> {
     }
     if (currentCharacter.happiness>0){
       
-    const interval = setInterval(() => {
-      currentCharacter.happiness -= currentCharacter.cheeriness*0.05;
-      setIntervalId(interval)
-      if(currentCharacter.happiness === 0) {
+      const interval = setInterval(() => {
+        currentCharacter.happiness -= currentCharacter.cheeriness*0.05;
+        setIntervalId(interval)
+        if(currentCharacter.happiness === 0) {
         
-    }}, 10);
+        }}, 10);
   }
-  if (currentCharacter.cleanliness>0){
+    if (currentCharacter.cleanliness>0){
       
-    const interval = setInterval(() => {
-      
-      currentCharacter.cleanliness -= currentCharacter.grooming*0.05;
-      setIntervalId(interval)
-      if(currentCharacter.cleanliness === 0) {
+      const interval = setInterval(() => {
+        currentCharacter.cleanliness -= currentCharacter.grooming*0.05;
+        setIntervalId(interval)
+        if(currentCharacter.cleanliness === 0) {
         
-    }}, 10);
+        }}, 10);
   }
-  if (currentCharacter.hunger>0){
+    if (currentCharacter.hunger>0){
       
-    const interval = setInterval(() => {
-      currentCharacter.hunger -= currentCharacter.appetite*0.05;
-      setIntervalId(interval)
-      if(currentCharacter.hunger === 0) {
+      const interval = setInterval(() => {
+        currentCharacter.hunger -= currentCharacter.appetite*0.05;
+        setIntervalId(interval)
+        if(currentCharacter.hunger === 0) {
         
-    }}, 10);
+        }}, 10);
   }
-  if (currentCharacter.fitness>0){
+    if (currentCharacter.fitness>0){
       
-    const interval = setInterval(() => {
-      currentCharacter.fitness -=currentCharacter.activityLevel*0.05;
-      setIntervalId(interval)
-      if(currentCharacter.fitness === 0) {
-    }}, 10);
+      const interval = setInterval(() => {
+        currentCharacter.fitness -=currentCharacter.activityLevel*0.05;
+        setIntervalId(interval)
+        if(currentCharacter.fitness === 0) {
+      }}, 10);
   }
   }
 
