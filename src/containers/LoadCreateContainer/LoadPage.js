@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import DisplayAllCharacters from '../../components/LoadCreateComponents/DisplayAllCharacters'
 import { BrowserRouter as Router, Route, Switch, Redirect, Link } from "react-router-dom";
 
-const LoadPage = ({userAnimals, selectCurrentCharacter, getUserData, getAllAnimalData, setLoaded, loaded}) => {
+const LoadPage = ({userAnimals, selectCurrentCharacter, getUserData, getAllAnimalData, setLoaded, loaded, animalDataLoaded}) => {
 
 
   useEffect(() => {
@@ -24,6 +24,10 @@ const LoadPage = ({userAnimals, selectCurrentCharacter, getUserData, getAllAnima
       return(
         <img src="../src/gifs/loading.gif" alt=""/>
       )
+    }
+
+    if(animalDataLoaded === false){
+      return <p>Loading....</p>
     }
 
 

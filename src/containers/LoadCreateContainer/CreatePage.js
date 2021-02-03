@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import { BrowserRouter as Router, Route, Switch, Redirect, Link } from "react-router-dom";
 
 
-const CreatePage = ({allAnimals, userData, handleAdoptAnimal, currentCharacter, setCurrentCharacter, setHasSelectedCharacter, getUserData, setLoaded, userDataLoaded}) => {
+const CreatePage = ({allAnimals, userData, handleAdoptAnimal, currentCharacter, setCurrentCharacter, setHasSelectedCharacter, getUserData, setLoaded, userDataLoaded, getAllAnimalData}) => {
 
   
 
@@ -31,6 +31,7 @@ const CreatePage = ({allAnimals, userData, handleAdoptAnimal, currentCharacter, 
     event.preventDefault();
     saveNewAnimal(formData)
     getUserData()
+    getAllAnimalData()
   }
 
   const animalArray = allAnimals.map((animal, index) => {
@@ -70,6 +71,8 @@ const saveNewAnimal = (data) => {
   return fetch('http://localhost:8080/api/animals', requestOptions)
   .then(setHasSelectedCharacter(true))
   .then(() => setLoaded(true))
+  .then(getUserData())
+  
   
 }
 
