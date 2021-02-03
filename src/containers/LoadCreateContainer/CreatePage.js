@@ -37,7 +37,7 @@ const CreatePage = ({allAnimals, userData, handleAdoptAnimal, currentCharacter, 
     return(
       
       <div className="animal_container" key={index}>
-        <p className="animal_type">{animal.animal} {userData[0].id}</p>
+        <p className="animal_type">{animal.animal} </p>
         <img src={animal.image[0]} alt="animal pic" width="200"></img>
         <button id="choose_animal_button" onClick={() => handleClick(animal)} >Adopt</button>
       </div>
