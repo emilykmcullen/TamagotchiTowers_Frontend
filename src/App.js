@@ -257,7 +257,8 @@ const App = ()=> {
   const logInNewUser = (userDeets) => {
     setLoggedInUsername(userDeets.username);
     setLoggedInPassword(userDeets.password);
-    setLoggedIn(false);
+    setLoggedIn(true);
+    getUserData()
   }
 
 

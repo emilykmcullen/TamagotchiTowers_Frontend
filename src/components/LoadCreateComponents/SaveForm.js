@@ -18,9 +18,10 @@ const SaveForm = ({logInNewUser, animals, currentCharacter, setCurrentCharacter,
         evt.preventDefault();
         const usernameToSubmit = newUsername.trim();
         const passwordToSubmit = newPassword.trim();
+        saveNewUser(); 
         logInNewUser({
-            newUsername: usernameToSubmit,
-            newPassword: passwordToSubmit
+            username: usernameToSubmit,
+            password: passwordToSubmit
         });
         
         // setNewUsername("");
@@ -45,11 +46,6 @@ const SaveForm = ({logInNewUser, animals, currentCharacter, setCurrentCharacter,
             .then(getUserData());
       }
 
-      const handleClick = () => {
-          console.log("Saving new user");
-          saveNewUser();
-          getUserData();
-      }
 
     return(
         <>
@@ -75,12 +71,11 @@ const SaveForm = ({logInNewUser, animals, currentCharacter, setCurrentCharacter,
             <input type="submit"
             value="Create Account and Log in"/>
         </form>
-        <button onClick={handleClick}>Save user</button>
-        <Link  from="/newuser" to="/createpage">
+        {/* <Link  from="/newuser" to="/createpage">
             <button type="button">
                 Create a new pet
             </button>
-        </Link>
+        </Link> */}
         </>
     )
 };
