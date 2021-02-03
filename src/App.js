@@ -168,9 +168,9 @@ const App = ()=> {
     .then(setUserDataLoaded(true))
   }
 
-  useEffect(() => {
-    getUserData();
-  }, [loggedInUsername && loggedInPassword || hasSelectedCharacter===true])
+  // useEffect(() => {
+  //   getUserData();
+  // }, [loggedInUsername && loggedInPassword || hasSelectedCharacter===true])
 
 
   const selectCurrentCharacter = (characterId) => {
@@ -209,7 +209,7 @@ const App = ()=> {
         </header>
         <Switch>
         <Route exact path="/" render={() => loggedIn? <Redirect to= "/choicepage" /> : <LandingPage onSubmit = {handleSubmit}></LandingPage>} />
-        <Route path="/choicepage" render={() => <ChoicePage unsetSelectedCharacter={unsetSelectedCharacter} userDataLoaded={userDataLoaded}/>}/>
+        <Route path="/choicepage" render={() => <ChoicePage unsetSelectedCharacter={unsetSelectedCharacter} userDataLoaded={userDataLoaded} userData={userData}/>}/>
         
         <Route path="/newuser" render={() => loggedIn? <Redirect to= "/choicepage" /> :<SaveForm logInNewUser={(userDeets) => logInNewUser(userDeets)} currentCharacter={currentCharacter} setCurrentCharacter={setCurrentCharacter} userData={userData} loggedInUsername={loggedInUsername} setLoggedInPassword={loggedInPassword} getUserData={getUserData} setLoaded={setLoaded}/>}/>
        
