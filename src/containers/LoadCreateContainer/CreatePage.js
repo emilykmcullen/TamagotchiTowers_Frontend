@@ -2,7 +2,9 @@ import React, {useEffect, useState} from "react";
 import { BrowserRouter as Router, Route, Switch, Redirect, Link } from "react-router-dom";
 
 
-const CreatePage = ({allAnimals, userData, handleAdoptAnimal, currentCharacter, setCurrentCharacter, setHasSelectedCharacter, getUserData, setLoaded}) => {
+const CreatePage = ({allAnimals, userData, handleAdoptAnimal, currentCharacter, setCurrentCharacter, setHasSelectedCharacter, getUserData, setLoaded, userDataLoaded}) => {
+
+  
 
   const [formData, setFormData] = useState({
     name: '',
@@ -69,6 +71,10 @@ const saveNewAnimal = (data) => {
   .then(setHasSelectedCharacter(true))
   .then(() => setLoaded(true))
   
+}
+
+if(userDataLoaded === false){
+  return <p>Loading....</p>
 }
 
   

@@ -33,6 +33,8 @@ const App = ()=> {
   const [hasSelectedCharacter, setHasSelectedCharacter] = useState(false);
   const [currentImage, setCurrentImage] = useState('');
   const [loaded, setLoaded] = useState(false);
+  const [userDataLoaded, setUserDataLoaded] = useState(false);
+
   
   const adoptableAnimals = [
     {animal: "DOG", image: [dogHeart]},
@@ -189,6 +191,7 @@ const App = ()=> {
     setLoggedInPassword(userDeets.password);
     setLoggedIn(true);
     getUserData()
+    setUserDataLoaded(true)
   }
 
 
@@ -208,9 +211,9 @@ const App = ()=> {
         <Route path="/newuser" render={() => loggedIn? <Redirect to= "/choicepage" /> :<SaveForm logInNewUser={(userDeets) => logInNewUser(userDeets)} currentCharacter={currentCharacter} setCurrentCharacter={setCurrentCharacter} userData={userData} loggedInUsername={loggedInUsername} setLoggedInPassword={loggedInPassword} getUserData={getUserData} setLoaded={setLoaded}/>}/>
        
        <Route path="/createpage" render={() => hasSelectedCharacter? <Redirect to="/loadpage"/>: <CreatePage allAnimals={adoptableAnimals}
-                    setCurrentCharacter={setCurrentCharacter} setHasSelectedCharacter={setHasSelectedCharacter} getUserData={getUserData} userData={userData} setLoaded={setLoaded}/>}/>
+                    setCurrentCharacter={setCurrentCharacter} setHasSelectedCharacter={setHasSelectedCharacter} getUserData={getUserData} userData={userData} setLoaded={setLoaded} userDataLoaded={userDataLoaded} />}/>
 
-        <Route path="/loadpage"  render={() => <LoadPage userAnimals={userData[0].animals} selectCurrentCharacter={selectCurrentCharacter} getUserData={getUserData} getAllAnimalData={getAllAnimalData} setLoaded={setLoaded} loaded={loaded}/>} />
+        <Route path="/loadpage"  render={() => <LoadPage userAnimals={userData[0] !== undefined ? userData[0].animals : undefined} selectCurrentCharacter={selectCurrentCharacter} getUserData={getUserData} getAllAnimalData={getAllAnimalData} setLoaded={setLoaded} loaded={loaded}/>} />
 
         <Route path="/character" render={() => <Character currentCharacter={currentCharacter} currentImage={currentImage} increaseStat={increaseStat} loaded={loaded}/>}/>
         
