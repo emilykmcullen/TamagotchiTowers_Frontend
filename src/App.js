@@ -34,6 +34,7 @@ const App = ()=> {
   const [currentImage, setCurrentImage] = useState('');
   const [loaded, setLoaded] = useState(false);
   const [userDataLoaded, setUserDataLoaded] = useState(false);
+  const [animalDataLoaded, setAnimalDataLoaded] = useState(false);
 
   
   const adoptableAnimals = [
@@ -163,6 +164,7 @@ const App = ()=> {
     return fetch(`http://localhost:8080/api/users?username=${loggedInUsername}`)
     .then(res => res.json())
     .then(data => setUserData(data))
+    .then(setUserDataLoaded(true))
   }
 
   useEffect(() => {
@@ -192,7 +194,6 @@ const App = ()=> {
     setLoggedInPassword(userDeets.password);
     setLoggedIn(true);
     getUserData()
-    setUserDataLoaded(true)
   }
 
 
