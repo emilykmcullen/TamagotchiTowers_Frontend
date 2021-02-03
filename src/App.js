@@ -35,6 +35,7 @@ const App = ()=> {
   const [loaded, setLoaded] = useState(false);
   const [userDataLoaded, setUserDataLoaded] = useState(false);
   const [animalDataLoaded, setAnimalDataLoaded] = useState(false);
+  const [easyDifficulty, setEasyDifficulty] = useState(false);
 
   
   const adoptableAnimals = [
@@ -68,6 +69,14 @@ const App = ()=> {
     getAllAnimalData();
   }, [])
 
+  const speed = () => {
+    if (easyDifficulty === true) {
+      return 0.0005
+    }else{
+      return 0.05
+    }
+  }
+
   const reduceStats = () => {
     if (currentCharacter.health>0){
       
@@ -79,7 +88,7 @@ const App = ()=> {
     if (currentCharacter.happiness>0){
       
     const interval = setInterval(() => {
-      currentCharacter.happiness -= currentCharacter.cheeriness*0.05;
+      currentCharacter.happiness -= currentCharacter.cheeriness*speed();
       setIntervalId(interval)
       if(currentCharacter.happiness === 0) {
         
@@ -89,7 +98,7 @@ const App = ()=> {
       
     const interval = setInterval(() => {
       
-      currentCharacter.cleanliness -= currentCharacter.grooming*0.05;
+      currentCharacter.cleanliness -= currentCharacter.grooming*speed();
       setIntervalId(interval)
       if(currentCharacter.cleanliness === 0) {
         
@@ -98,7 +107,7 @@ const App = ()=> {
   if (currentCharacter.hunger>0){
       
     const interval = setInterval(() => {
-      currentCharacter.hunger -= currentCharacter.appetite*0.05;
+      currentCharacter.hunger -= currentCharacter.appetite*speed();
       setIntervalId(interval)
       if(currentCharacter.hunger === 0) {
         
@@ -107,7 +116,7 @@ const App = ()=> {
   if (currentCharacter.fitness>0){
       
     const interval = setInterval(() => {
-      currentCharacter.fitness -=currentCharacter.activityLevel*0.05;
+      currentCharacter.fitness -=currentCharacter.activityLevel*speed();
       setIntervalId(interval)
       if(currentCharacter.fitness === 0) {
     }}, 10);
@@ -218,7 +227,7 @@ const App = ()=> {
 
         <Route path="/loadpage"  render={() => <LoadPage userAnimals={userData[0] !== undefined ? userData[0].animals : undefined} selectCurrentCharacter={selectCurrentCharacter} getUserData={getUserData} getAllAnimalData={getAllAnimalData} setLoaded={setLoaded} loaded={loaded} animalDataLoaded={animalDataLoaded}/>} />
 
-        <Route path="/character" render={() => <Character currentCharacter={currentCharacter} currentImage={currentImage} increaseStat={increaseStat} loaded={loaded}/>}/>
+        <Route path="/character" render={() => <Character currentCharacter={currentCharacter} currentImage={currentImage} increaseStat={increaseStat} loaded={loaded} setEasyDifficulty={setEasyDifficulty}/>}/>
         
         </Switch>
       </>
