@@ -183,6 +183,9 @@ const App = ()=> {
       if (currentCharacter.health<1){
         setCurrentImage(currentCharacter.rip)
       }
+      else if (currentCharacter.hunger<2){
+        setCurrentImage(currentCharacter.rip)
+      }
       else if (currentCharacter.health<50){
         setCurrentImage(currentCharacter.exclamation)
       } 
@@ -252,7 +255,7 @@ const App = ()=> {
     reduceStats()
     characterGif()
     }
-  }, [ currentCharacter.happiness || currentCharacter.fitness || currentCharacter.cleanliness || currentCharacter.hunger ])
+  }, [ currentCharacter.hunger || currentCharacter.fitness || currentCharacter.cleanliness || currentCharacter.happiness ])
 
   const logInNewUser = (userDeets) => {
     setLoggedInUsername(userDeets.username);
