@@ -168,9 +168,9 @@ const App = ()=> {
     .then(() => setUserDataLoaded(true))
   }
 
-  useEffect(() => {
-    getUserData();
-  }, [loggedInUsername && loggedInPassword || hasSelectedCharacter===true])
+  // useEffect(() => {
+  //   getUserData();
+  // }, [loggedInUsername && loggedInPassword || hasSelectedCharacter===true])
 
 
   const selectCurrentCharacter = (characterId) => {
@@ -195,7 +195,7 @@ const App = ()=> {
     setLoggedInUsername(userDeets.username);
     setLoggedInPassword(userDeets.password);
     setLoggedIn(true);
-    getUserData()
+    getUserData();
   }
 
 
