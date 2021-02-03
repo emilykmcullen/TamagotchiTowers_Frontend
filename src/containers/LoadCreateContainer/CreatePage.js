@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import { BrowserRouter as Router, Route, Switch, Redirect, Link } from "react-router-dom";
 
 
-const CreatePage = ({allAnimals, userData, handleAdoptAnimal, currentCharacter, setCurrentCharacter, setHasSelectedCharacter, getUserData}) => {
+const CreatePage = ({allAnimals, userData, handleAdoptAnimal, currentCharacter, setCurrentCharacter, setHasSelectedCharacter, getUserData, setLoaded}) => {
 
   const [formData, setFormData] = useState({
     name: '',
@@ -67,6 +67,7 @@ const saveNewAnimal = (data) => {
   };
   return fetch('http://localhost:8080/api/animals', requestOptions)
   .then(setHasSelectedCharacter(true))
+  .then(() => setLoaded(true))
   
 }
 
