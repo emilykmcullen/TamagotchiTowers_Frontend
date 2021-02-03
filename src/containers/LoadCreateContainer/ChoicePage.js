@@ -1,13 +1,17 @@
 import React, {useState, useEffect} from "react";
 import { BrowserRouter as Router, Route, Switch, Redirect, Link } from "react-router-dom";
 
-const ChoicePage = ({unsetSelectedCharacter, userDataLoaded, userData}) => {
+const ChoicePage = ({unsetSelectedCharacter, userDataLoaded, userData, getNewUserData}) => {
 
   useEffect(() => {
     unsetSelectedCharacter();
   }, [])
-  
-  if(userData){
+
+  // if(userData){
+  //   return <p>Loading....</p>
+  // }
+
+  if(userDataLoaded===false){
     return <p>Loading....</p>
   }
   

@@ -18,17 +18,14 @@ const SaveForm = ({logInNewUser, currentCharacter, setCurrentCharacter, userData
         evt.preventDefault();
         const usernameToSubmit = newUsername.trim();
         const passwordToSubmit = newPassword.trim();
-        saveNewUser(); 
-        logInNewUser({
-            username: usernameToSubmit,
-            password: passwordToSubmit
-        });
+        saveNewUser(usernameToSubmit, passwordToSubmit); 
+        
         
         // setNewUsername("");
         // setNewPassword("");
     }
 
-    const saveNewUser = () => {
+    const saveNewUser = (usernameToSubmit, passwordToSubmit) => {
         // Simple POST request with a JSON body using fetch
         const requestOptions = {
             method: 'POST',
@@ -41,9 +38,12 @@ const SaveForm = ({logInNewUser, currentCharacter, setCurrentCharacter, userData
             })
         };
         return fetch('http://localhost:8080/api/users', requestOptions)
+            .then(() => logInNewUser({
+                username: usernameToSubmit,
+                password: passwordToSubmit
+            }))
             .then(setNewUsername(""))
             .then(setNewPassword(""))
-            .then(getUserData());
       }
 
 

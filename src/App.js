@@ -162,16 +162,17 @@ const App = ()=> {
 
   const getUserData = () => {
     console.log("getting user data");
+    console.log("NAME IS" + loggedInUsername)
     return fetch(`http://localhost:8080/api/users?username=${loggedInUsername}`)
     .then(res => res.json())
     .then(data => setUserData(data))
     .then(setUserDataLoaded(true))
+    
   }
 
-  // useEffect(() => {
-  //   getUserData();
-  // }, [loggedInUsername && loggedInPassword || hasSelectedCharacter===true])
-
+  useEffect(() => {
+    getUserData();
+  }, [loggedInUsername && loggedInPassword || hasSelectedCharacter===true])
 
   const selectCurrentCharacter = (characterId) => {
     setCurrentCharacter(allAnimalData.find(animal => animal.id === characterId))
@@ -194,7 +195,6 @@ const App = ()=> {
     setLoggedInUsername(userDeets.username);
     setLoggedInPassword(userDeets.password);
     setLoggedIn(true);
-    getUserData()
   }
 
 
