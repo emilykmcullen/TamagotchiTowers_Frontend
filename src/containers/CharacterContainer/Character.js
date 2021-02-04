@@ -24,14 +24,16 @@ const Character = ({currentCharacter, increaseStat, currentImage, loaded, setLog
   //   }
 
     
-      // Get the checkbox
+      const setTheDifficulty = () => {
       var slider = document.getElementById("myRange");
+      var output = document.getElementById("demo");
       setDifficulty(slider.value); // Display the default slider value
       
       // Update the current slider value (each time you drag the slider handle)
       slider.oninput = function() {
         setDifficulty(this.value);
       }
+    }
 
 
     const logout = (data) => {
@@ -79,7 +81,7 @@ const Character = ({currentCharacter, increaseStat, currentImage, loaded, setLog
           <img src={currentImage} alt="animal pic" width="200"></img>
           <p>Easy Mode</p>
           <div class="slidecontainer">
-            <input type="range" min="0.0010" max="0.1" value="0.0010" class="slider" id="myRange"></input>
+            <input type="range" min="0.0010" max="0.1" value="" class="slider" id="myRange" onChange={setTheDifficulty}></input>
           </div>
             <StatBar stat={currentCharacter.health} statName="Health"
              increaseStat={increaseStat}/>
