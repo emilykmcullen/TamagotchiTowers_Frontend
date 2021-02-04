@@ -19,11 +19,18 @@ const LandingPage = ({onSubmit}) => {
   };
 
   return (
+<>
+  <div id="welcome_message">
+    <h2>Welcome to our magical homepage</h2>
+  </div>
+  <br></br>
   <div className="page_container">
-    <div id="welcome_message">
-      <h2>Welcome to our magical homepage</h2>
-    </div>
+
     <br></br>
+    <div className="left_side">
+      <img src="https://i.imgur.com/pPd3cb3.gif"/>
+    </div>
+    <div className="right_side">
     <form>
       <div className="form_wrap">
         <p>Username</p>
@@ -36,6 +43,7 @@ const LandingPage = ({onSubmit}) => {
           value={formData.username} />
       </div>
 
+      
       <div className="form_wrap">
         <p>Password</p>
         <label htmlFor="password"></label>
@@ -50,14 +58,21 @@ const LandingPage = ({onSubmit}) => {
         <input onClick={handleSubmit} type="submit" value="submit" />
       </div>
     </form>
-    <br/>
-    <br/>
+    
+ 
+ 
     <Link className="form_wrap" style={{ textDecoration: 'none' }} from="/" to="/newuser">
       <button type="button">
           I'm new here!
       </button>
     </Link>
+    </div>
+
+
+
   </div>
+  </>
+  
   )};
 
 export default LandingPage;
