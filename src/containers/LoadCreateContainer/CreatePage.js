@@ -2,7 +2,7 @@ import React, {useEffect, useState} from "react";
 import { BrowserRouter as Router, Route, Switch, Redirect, Link } from "react-router-dom";
 
 
-const CreatePage = ({allAnimals, userData, handleAdoptAnimal, currentCharacter, setCurrentCharacter, setHasSelectedCharacter, getUserData, setLoaded, userDataLoaded, getAllAnimalData}) => {
+const CreatePage = ({allAnimals, userData, setHasSelectedCharacter, getUserData, setLoaded, userDataLoaded, getAllAnimalData}) => {
 
   
 
@@ -14,11 +14,6 @@ const CreatePage = ({allAnimals, userData, handleAdoptAnimal, currentCharacter, 
 
   const handleClick = (animal) => {
     formData.animaltype = animal.animal
-    
-    
-    // if (!userData && loggedInUsername){
-    //   console.log("Saving new user");
-    // }
   }
 
   const handleChange = (event) => {

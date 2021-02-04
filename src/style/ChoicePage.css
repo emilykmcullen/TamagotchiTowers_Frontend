@@ -33,3 +33,32 @@
 #egg_gif {
     padding-top: 25px;
 }
+
+
+.create_text {
+    margin-left: 50px;
+    padding-top:25px;
+    color: darkgreen;
+    opacity: 0.7;
+  }
+
+.create_text:hover {
+    margin-left: 50px;
+    padding-top:25px;
+    color: darkgreen;
+    opacity: 1;
+  }
+
+.load_text {
+    margin-left: 80px; 
+    color: darkgreen;
+    text-decoration: none;
+    opacity: 0.7;
+}
+
+.load_text:hover {
+    margin-left: 80px; 
+    color: darkgreen;
+    text-decoration: none;
+    opacity: 1;
+}

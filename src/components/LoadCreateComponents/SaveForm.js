@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import { BrowserRouter as Router, Route, Switch, Redirect, Link } from "react-router-dom";
 
-const SaveForm = ({logInNewUser, currentCharacter, setCurrentCharacter, userData, loggedInUsername, loggedInPassword, setLoggedInPassword, setLoggedIn, getUserData}) => {
+const SaveForm = ({logInNewUser}) => {
 
     const [newUsername, setNewUsername] = useState("");
     const [newPassword, setNewPassword] = useState("");

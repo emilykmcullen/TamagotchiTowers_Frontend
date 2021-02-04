@@ -5,7 +5,7 @@ import StatBar from "../../components/CharacterComponents/StatBar";
 
 
 
-const Character = ({currentCharacter, increaseStat, currentImage, loaded, setLoggedInUsername, setLoggedInPassword, setUserData, setCurrentCharacter, setLoggedIn, setHasSelectedCharacter, setLoaded, setUserDataLoaded, setAnimalDataLoaded, setEasyDifficulty}) => {
+const Character = ({currentCharacter, increaseStat, currentImage, loaded, setLoggedInUsername, setLoggedInPassword, setUserData, setCurrentCharacter, setLoggedIn, setHasSelectedCharacter, setLoaded, setUserDataLoaded, setAnimalDataLoaded, setEasyDifficulty, getAllUserData}) => {
 
     if(loaded === false){
       return <p>Loading...</p>
@@ -42,6 +42,7 @@ const Character = ({currentCharacter, increaseStat, currentImage, loaded, setLog
       .then(setLoaded(false))
       .then(setUserDataLoaded(false))
       .then(setAnimalDataLoaded(false))
+      .then(getAllUserData())
     };
 
     const saveProgress = (data) => {

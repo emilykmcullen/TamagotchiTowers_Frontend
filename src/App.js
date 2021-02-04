@@ -221,16 +221,16 @@ const App = ()=> {
         </header>
         <Switch>
         <Route exact path="/" render={() => loggedIn? <Redirect to= "/choicepage" /> : <LandingPage onSubmit = {handleSubmit}></LandingPage>} />
-        <Route path="/choicepage" render={() => <ChoicePage unsetSelectedCharacter={unsetSelectedCharacter} userDataLoaded={userDataLoaded} userData={userData}/>}/>
+        <Route path="/choicepage" render={() => <ChoicePage unsetSelectedCharacter={unsetSelectedCharacter} userDataLoaded={userDataLoaded}/>}/>
         
-        <Route path="/newuser" render={() => loggedIn? <Redirect to= "/createpage" /> :<SaveForm logInNewUser={(userDeets) => logInNewUser(userDeets)} currentCharacter={currentCharacter} setCurrentCharacter={setCurrentCharacter} userData={userData} loggedInUsername={loggedInUsername} setLoggedInPassword={loggedInPassword} getUserData={getUserData} setLoaded={setLoaded}/>}/>
+        <Route path="/newuser" render={() => loggedIn? <Redirect to= "/createpage" /> :<SaveForm logInNewUser={(userDeets) => logInNewUser(userDeets)} />}/>
        
        <Route path="/createpage" render={() => hasSelectedCharacter? <Redirect to="/choicepage"/>: <CreatePage allAnimals={adoptableAnimals}
                     setCurrentCharacter={setCurrentCharacter} setHasSelectedCharacter={setHasSelectedCharacter} getUserData={getUserData} userData={userData} setLoaded={setLoaded} userDataLoaded={userDataLoaded} getAllAnimalData={getAllAnimalData}/>}/>
 
         <Route path="/loadpage"  render={() => <LoadPage userAnimals={userData[0] !== undefined ? userData[0].animals : undefined} selectCurrentCharacter={selectCurrentCharacter} getUserData={getUserData} getAllAnimalData={getAllAnimalData} setLoaded={setLoaded} loaded={loaded} animalDataLoaded={animalDataLoaded}/>} />
 
-        <Route path="/character" render={() => <Character currentCharacter={currentCharacter} currentImage={currentImage} increaseStat={increaseStat} loaded={loaded} setLoggedInUsername={setLoggedInUsername} setLoggedInPassword={setLoggedInPassword} setUserData={setUserData} setCurrentCharacter={setCurrentCharacter} setLoggedIn={setLoggedIn} setHasSelectedCharacter={setHasSelectedCharacter} setLoaded={setLoaded} setUserDataLoaded={setUserDataLoaded} setAnimalDataLoaded={setAnimalDataLoaded} setEasyDifficulty={setEasyDifficulty}/>}/>
+        <Route path="/character" render={() => <Character currentCharacter={currentCharacter} currentImage={currentImage} increaseStat={increaseStat} loaded={loaded} setLoggedInUsername={setLoggedInUsername} setLoggedInPassword={setLoggedInPassword} setUserData={setUserData} setCurrentCharacter={setCurrentCharacter} setLoggedIn={setLoggedIn} setHasSelectedCharacter={setHasSelectedCharacter} setLoaded={setLoaded} setUserDataLoaded={setUserDataLoaded} setAnimalDataLoaded={setAnimalDataLoaded} setEasyDifficulty={setEasyDifficulty} getAllUserData={getAllUserData}/>}/>
         
         </Switch>
       </>
