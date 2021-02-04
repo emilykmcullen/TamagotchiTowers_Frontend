@@ -49,26 +49,21 @@ const SaveForm = ({logInNewUser, currentCharacter, setCurrentCharacter, userData
 
     return(
         <>
-        <p>If you would like to save your pet please create a username and password in the form below</p>
-        <p>Otherwise, just click the button below to continue without creating an account</p>
-        <Link  from="/newuser" to="/createpage">
-            <button type="button">
-                Continue without creating account
-            </button>
-        </Link>
+        <p>If you would like to create a pet please provide a username and password in the form below</p>
+       
         <form className="comment-form" onSubmit={handleFormSubmit}>
-            <input type="text"
+            <input className="new_user_button" type="text"
             placeholder="Your username"
             value={newUsername}
             onChange={handleUsernameChange}/>
             
 
-            <input type="password"
+            <input className="new_user_button" type="password"
             placeholder="Your password"
             value={newPassword}
             onChange={handlePasswordChange}/>
 
-            <input type="submit"
+            <input className="new_user_button" type="submit"
             value="Create Account and Log in"/>
         </form>
         {/* <Link  from="/newuser" to="/createpage">
