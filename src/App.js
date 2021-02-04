@@ -36,6 +36,7 @@ const App = ()=> {
   const [loaded, setLoaded] = useState(false);
   const [userDataLoaded, setUserDataLoaded] = useState(false);
   const [animalDataLoaded, setAnimalDataLoaded] = useState(false);
+  const [easyDifficulty, setEasyDifficulty] = useState(false);
 
   
   const adoptableAnimals = [
@@ -59,6 +60,7 @@ const App = ()=> {
   }, [])
 
   const getAllAnimalData = () => {
+    console.log("getting animal data");
     return fetch('http://localhost:8080/api/animals')
     .then(res => res.json())
     .then(data => setAllAnimalData(data))
@@ -68,6 +70,14 @@ const App = ()=> {
   useEffect(() => {
     getAllAnimalData();
   }, [])
+
+  const speed = () => {
+    if (easyDifficulty === true) {
+      return 0.0010
+    }else{
+      return 0.05
+    }
+  }
 
   const reduceStats = () => {
     if (currentCharacter.health>0){
@@ -80,7 +90,7 @@ const App = ()=> {
     if (currentCharacter.happiness>0){
       
     const interval = setInterval(() => {
-      currentCharacter.happiness -= currentCharacter.cheeriness*0.05;
+      currentCharacter.happiness -= currentCharacter.cheeriness*speed();
       setIntervalId(interval)
       if(currentCharacter.happiness === 0) {
         
@@ -90,7 +100,7 @@ const App = ()=> {
       
     const interval = setInterval(() => {
       
-      currentCharacter.cleanliness -= currentCharacter.grooming*0.05;
+      currentCharacter.cleanliness -= currentCharacter.grooming*speed();
       setIntervalId(interval)
       if(currentCharacter.cleanliness === 0) {
         
@@ -99,7 +109,7 @@ const App = ()=> {
   if (currentCharacter.hunger>0){
       
     const interval = setInterval(() => {
-      currentCharacter.hunger -= currentCharacter.appetite*0.05;
+      currentCharacter.hunger -= currentCharacter.appetite*speed();
       setIntervalId(interval)
       if(currentCharacter.hunger === 0) {
         
@@ -108,7 +118,7 @@ const App = ()=> {
   if (currentCharacter.fitness>0){
       
     const interval = setInterval(() => {
-      currentCharacter.fitness -=currentCharacter.activityLevel*0.05;
+      currentCharacter.fitness -=currentCharacter.activityLevel*speed();
       setIntervalId(interval)
       if(currentCharacter.fitness === 0) {
     }}, 10);
@@ -212,14 +222,14 @@ const App = ()=> {
         <Route exact path="/" render={() => loggedIn? <Redirect to= "/choicepage" /> : <LandingPage onSubmit = {handleSubmit}></LandingPage>} />
         <Route path="/choicepage" render={() => <ChoicePage unsetSelectedCharacter={unsetSelectedCharacter} userDataLoaded={userDataLoaded} userData={userData}/>}/>
         
-        <Route path="/newuser" render={() => loggedIn? <Redirect to= "/choicepage" /> :<SaveForm logInNewUser={(userDeets) => logInNewUser(userDeets)} currentCharacter={currentCharacter} setCurrentCharacter={setCurrentCharacter} userData={userData} loggedInUsername={loggedInUsername} setLoggedInPassword={loggedInPassword} getUserData={getUserData} setLoaded={setLoaded}/>}/>
+        <Route path="/newuser" render={() => loggedIn? <Redirect to= "/createpage" /> :<SaveForm logInNewUser={(userDeets) => logInNewUser(userDeets)} currentCharacter={currentCharacter} setCurrentCharacter={setCurrentCharacter} userData={userData} loggedInUsername={loggedInUsername} setLoggedInPassword={loggedInPassword} getUserData={getUserData} setLoaded={setLoaded}/>}/>
        
-       <Route path="/createpage" render={() => hasSelectedCharacter? <Redirect to="/loadpage"/>: <CreatePage allAnimals={adoptableAnimals}
+       <Route path="/createpage" render={() => hasSelectedCharacter? <Redirect to="/choicepage"/>: <CreatePage allAnimals={adoptableAnimals}
                     setCurrentCharacter={setCurrentCharacter} setHasSelectedCharacter={setHasSelectedCharacter} getUserData={getUserData} userData={userData} setLoaded={setLoaded} userDataLoaded={userDataLoaded} getAllAnimalData={getAllAnimalData}/>}/>
 
         <Route path="/loadpage"  render={() => <LoadPage userAnimals={userData[0] !== undefined ? userData[0].animals : undefined} selectCurrentCharacter={selectCurrentCharacter} getUserData={getUserData} getAllAnimalData={getAllAnimalData} setLoaded={setLoaded} loaded={loaded} animalDataLoaded={animalDataLoaded}/>} />
 
-        <Route path="/character" render={() => <Character currentCharacter={currentCharacter} currentImage={currentImage} increaseStat={increaseStat} loaded={loaded}/>}/>
+        <Route path="/character" render={() => <Character currentCharacter={currentCharacter} currentImage={currentImage} increaseStat={increaseStat} loaded={loaded} setLoggedInUsername={setLoggedInUsername} setLoggedInPassword={setLoggedInPassword} setUserData={setUserData} setCurrentCharacter={setCurrentCharacter} setLoggedIn={setLoggedIn} setHasSelectedCharacter={setHasSelectedCharacter} setLoaded={setLoaded} setUserDataLoaded={setUserDataLoaded} setAnimalDataLoaded={setAnimalDataLoaded} setEasyDifficulty={setEasyDifficulty}/>}/>
         
         </Switch>
       </>
