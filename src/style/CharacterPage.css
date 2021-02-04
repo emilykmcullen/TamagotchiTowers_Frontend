@@ -30,3 +30,9 @@
 .save_button {
     margin-right: 15px;
 }
+
+.stat_buttons {
+    max-height: fit-content;
+    padding: 5px;
+    border: none;
+}

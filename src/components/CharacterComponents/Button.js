@@ -8,7 +8,7 @@ const Button = ({statName, increaseStat, buttonLabel}) => {
 
   return(
       <div>
-        <button type="button" onClick={() => increaseStat(lowerCaseStatName)}>{buttonLabel}</button>
+        <button className="stat_buttons" type="button" onClick={() => increaseStat(lowerCaseStatName)}>{buttonLabel}</button>
       </div>
   )
 };
