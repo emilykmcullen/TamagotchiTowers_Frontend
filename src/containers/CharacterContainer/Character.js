@@ -11,48 +11,15 @@ const Character = ({currentCharacter, increaseStat, currentImage, loaded, setLog
       return <p>Loading...</p>
     }
 
-    // const logout = () => {
-    //   setLoggedInUsername();
-    //   setLoggedInPassword();
-    //   setUserData([]);
-    //   setCurrentCharacter({});
-    //   setLoggedIn(false);
-    //   setHasSelectedCharacter(false);
-    //   setLoaded(false);
-    //   setUserDataLoaded(false);
-    //   setAnimalDataLoaded(false);
-    // }
 
     const logout = (data) => {
-      // Simple POST request with a JSON body using fetch
       const requestOptions = {
           
           method: 'PUT',
           headers: {'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            id: data.id, 
-            animalName: data.name,
-            animalType: data.animaltype,
-            health: data.health,
-            happiness: data.happiness,
-            cleanliness: data.cleanliness,
-            fitness: data.fitness,
-            hunger: data.hunger,
-            user: {
-              id: data.user.id,
-              userName: data.user.userName,
-              password: data.user.password,
-              imageURL: data.user.imageURL
-            },
-            appetite: data.appetite,
-            grooming: data.grooming,
-            cheeriness: data.cheeriness,
-            activityLevel: data.activityLevel,
-            speak: data.speak,
-            exclamation: data.exclamation,
-            heart: data.heart,
-            RIP: data.rip
-          })
+          body: JSON.stringify(
+            data
+          )
       };
       return fetch(`http://localhost:8080/api/animals/${data.id}`, requestOptions)
       .then(setLoggedInUsername())
