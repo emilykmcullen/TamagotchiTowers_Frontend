@@ -11,17 +11,28 @@ const Character = ({currentCharacter, increaseStat, currentImage, loaded, setLog
       return <p>Loading...</p>
     }
 
-    const difficulty = () => {
+  //   const setEasy = () => {
+  //     // Get the checkbox
+  // var checkBox = document.getElementById("myCheck");
+
+  // // If the checkbox is checked, display the output text
+  // if (checkBox.checked == true){
+  //   setEasyDifficulty(true)
+  // } else {
+  //   setEasyDifficulty(false)
+  // }
+  //   }
+
+    
       // Get the checkbox
       var slider = document.getElementById("myRange");
-      var output = document.getElementById("demo");
-      output.innerHTML = slider.value; // Display the default slider value
+      setDifficulty(slider.value); // Display the default slider value
       
       // Update the current slider value (each time you drag the slider handle)
       slider.oninput = function() {
-        output.innerHTML = this.value;
+        setDifficulty(this.value);
       }
-    }
+
 
     const logout = (data) => {
       const requestOptions = {
