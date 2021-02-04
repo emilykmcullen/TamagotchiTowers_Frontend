@@ -21,7 +21,7 @@ const ChoicePage = ({unsetSelectedCharacter, userDataLoaded, userData, getNewUse
   return (
   <div>
     <h4>Create or Load</h4>
-    <p>Choose whether to create a new Tamagotchi or load a previously saved Tamagotchi</p>
+    <p>Choose whether to create a new Tamagotchi or load your saved Tamagotchi</p>
     <br></br>
     <Link  from="/choicepage" to="/createpage">
       <button type="button">
