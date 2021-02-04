@@ -18,3 +18,15 @@
     flex-direction: row;
 
 }
+
+.card{
+    margin-bottom:20px;
+}
+
+.save_button_div {
+    padding-left: 50px;
+}
+
+.save_button {
+    margin-right: 15px;
+}

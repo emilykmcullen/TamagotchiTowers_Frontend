@@ -98,6 +98,7 @@ if(userDataLoaded === false){
       <form>
         <label htmlFor="name"></label>
           <input 
+            className="create_page_input"
             onChange={handleChange}
             name="name"
             id="name"
@@ -105,7 +106,7 @@ if(userDataLoaded === false){
             value={formData.name}
             placeholder="Enter name"/>
           <input type="hidden" id="animaltype" name="animaltype" value={formData.animaltype} onChange={handleChange}></input>
-          <input type="submit" value="Look after this pet" onClick={handleSubmit}/>
+          <input className="create_page_input" type="submit" value="Look after this pet" onClick={handleSubmit}/>
         </form>
     </div>
     </>

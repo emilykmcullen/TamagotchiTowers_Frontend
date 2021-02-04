@@ -35,3 +35,7 @@
 .animal_type {
     text-transform: capitalize;
 }
+
+.create_page_input {
+    margin: 15px;
+}

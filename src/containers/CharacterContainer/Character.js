@@ -61,18 +61,21 @@ const Character = ({currentCharacter, increaseStat, currentImage, loaded, setLog
     return(
         <div className="character_sheet">
           <div className="left_side_character">
-          <h4>
-          {currentCharacter.animalName}
-          </h4>
-          <p><h5>Species: {currentCharacter.animalType}</h5></p>
-          <img src={currentImage} alt="animal pic" width="200"></img>
-          </div>
-          <div className="right_side_character">
+            <div className="card">
+                <h4>
+                {currentCharacter.animalName}
+                </h4>
+                <p><h6>Species: {currentCharacter.animalType}</h6></p>
+                <img src={currentImage} alt="animal pic" width="200"></img>
+            </div>
+          <br></br>
           <p>Easy Mode</p>
           <label className="switch">
             <input type="checkbox" id="myCheck" onClick={setEasy}></input>
             <span className="slider round"></span>
           </label>
+          </div>
+          <div className="right_side_character">
             <StatBar stat={currentCharacter.health} statName="Health"
               increaseStat={increaseStat}/>
             <StatBar stat={currentCharacter.happiness} statName="Happiness" 
@@ -84,17 +87,21 @@ const Character = ({currentCharacter, increaseStat, currentImage, loaded, setLog
             <StatBar stat={currentCharacter.hunger} statName="Hunger"
               increaseStat={increaseStat} buttonLabel="Feed"/>
           <br/>
+          
+          <div className="save_button_div">
           <Link  from="/character" to="/" >
-          <button type="button" onClick={() => logout(currentCharacter)}>
+          <button className="save_button" type="button" onClick={() => logout(currentCharacter)}>
               Save and log out
           </button>
           </Link>
           <Link  from="/character" to="/choicepage" >
-          <button type="button" onClick={() => saveProgress(currentCharacter)}>
+          <button className="save_button" type="button" onClick={() => saveProgress(currentCharacter)}>
               Save progress!
           </button>
           </Link>
-        </div>
+          </div>
+          </div>
+        
         </div>
     )
   };

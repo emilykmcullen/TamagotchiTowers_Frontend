@@ -55,7 +55,7 @@ const LandingPage = ({onSubmit}) => {
           value={formData.password} />
       </div>
       <div className="form_wrap">
-        <input onClick={handleSubmit} type="submit" value="submit" />
+        <input onClick={handleSubmit} type="submit" value="Submit" />
       </div>
     </form>
     
