@@ -15,6 +15,7 @@ import penguinHeart from "./gifs/penguin/penguin_heart.gif"
 import "./App.css"
 import "./style/LandingPage.css"
 import "./style/CreatePage.css"
+import "./style/CharacterPage.css"
 import SaveForm from "./components/LoadCreateComponents/SaveForm";
 
 
