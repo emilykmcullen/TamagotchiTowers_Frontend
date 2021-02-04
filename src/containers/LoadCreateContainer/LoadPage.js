@@ -33,15 +33,19 @@ const LoadPage = ({userAnimals, selectCurrentCharacter, getUserData, getAllAnima
 
   const characters = userAnimals.map((animal) => {
     return (
-    <div key={animal.id}>
+      // <div>
+      <div className="animal_container"><div key={animal.id}>
       <DisplayAllCharacters animal={animal} />
       <Link  from="/loadpage" to="/character" >
           <button type="button" onClick={() => selectCurrentCharacter(animal.id)}>
-              Look after your pet
+              <h6>Look after your pet</h6>
           </button>
       </Link>
-      
-    </div>)
+      </div>
+      <div><img src={animal.speak} alt="animal pic" width="200"/>
+    </div></div>
+    // </div>
+    )
   })
 
   
@@ -50,8 +54,9 @@ const LoadPage = ({userAnimals, selectCurrentCharacter, getUserData, getAllAnima
   return(
     <div>
     <h1>Your Pets</h1>
+    <div className="load_array_container">
     {characters}
-  </div>
+  </div></div>
   )
 };
 
