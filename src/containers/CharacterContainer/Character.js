@@ -44,6 +44,20 @@ const Character = ({currentCharacter, increaseStat, currentImage, loaded, setLog
       .then(setAnimalDataLoaded(false))
     };
 
+    const saveProgress = (data) => {
+      const requestOptions = {
+          
+          method: 'PUT',
+          headers: {'Content-Type': 'application/json' },
+          body: JSON.stringify(
+            data
+          )
+      };
+      return fetch(`http://localhost:8080/api/animals/${data.id}`, requestOptions)
+      .then(setCurrentCharacter({}))
+      .then(setHasSelectedCharacter(false))
+    };
+
     return(
         <div>
           <h2>
@@ -70,7 +84,12 @@ const Character = ({currentCharacter, increaseStat, currentImage, loaded, setLog
           <br/>
           <Link  from="/character" to="/" >
           <button type="button" onClick={() => logout(currentCharacter)}>
-              Log out
+              Save and log out
+          </button>
+          </Link>
+          <Link  from="/character" to="/choicepage" >
+          <button type="button" onClick={() => saveProgress(currentCharacter)}>
+              Save progress!
           </button>
           </Link>
         </div>
