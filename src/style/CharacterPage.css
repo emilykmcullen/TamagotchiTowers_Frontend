@@ -1,6 +1,6 @@
 .right_side_character {
     width: 100%;
-    /* margin-left: 40px; */
+
 }
 
 .left_side_character {
@@ -16,5 +16,5 @@
 .character_sheet {
     display: flex;
     flex-direction: row;
-    /* flex-wrap: wrap; */
+
 }

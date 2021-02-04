@@ -28,7 +28,7 @@ const LandingPage = ({onSubmit}) => {
 
     <br></br>
     <div className="left_side">
-      <img src="https://i.imgur.com/pPd3cb3.gif"/>
+      <img src="https://i.imgur.com/chKjcRm.gif"/>
     </div>
     <div className="right_side">
     <form>
