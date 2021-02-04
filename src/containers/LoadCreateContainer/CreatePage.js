@@ -112,5 +112,6 @@ if(userDataLoaded === false){
     </>
       )
 };
+// button type="button" onClick={() => selectCurrentCharacter(animal.id)}
 
 export default CreatePage;
