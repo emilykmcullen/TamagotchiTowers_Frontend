@@ -5,21 +5,21 @@ import StatBar from "../../components/CharacterComponents/StatBar";
 
 
 
-const Character = ({currentCharacter, increaseStat, currentImage, loaded, setLoggedInUsername, setLoggedInPassword, setUserData, setCurrentCharacter, setLoggedIn, setHasSelectedCharacter, setLoaded, setUserDataLoaded, setAnimalDataLoaded, setEasyDifficulty, getAllUserData}) => {
+const Character = ({currentCharacter, increaseStat, currentImage, loaded, setLoggedInUsername, setLoggedInPassword, setUserData, setCurrentCharacter, setLoggedIn, setHasSelectedCharacter, setLoaded, setUserDataLoaded, setAnimalDataLoaded, setHardDifficulty, getAllUserData}) => {
 
     if(loaded === false){
       return <p>Loading...</p>
     }
 
-    const setEasy = () => {
+    const setHard = () => {
       // Get the checkbox
   var checkBox = document.getElementById("myCheck");
 
   // If the checkbox is checked, display the output text
   if (checkBox.checked == true){
-    setEasyDifficulty(true)
+    setHardDifficulty(true)
   } else {
-    setEasyDifficulty(false)
+    setHardDifficulty(false)
   }
     }
 
@@ -70,9 +70,9 @@ const Character = ({currentCharacter, increaseStat, currentImage, loaded, setLog
                 <img src={currentImage} alt="animal pic" width="200"></img>
             </div>
           <br></br>
-          <p>Easy Mode</p>
+          <p>Hard Mode</p>
           <label className="switch">
-            <input type="checkbox" id="myCheck" onClick={setEasy}></input>
+            <input type="checkbox" id="myCheck" onClick={setHard}></input>
             <span className="slider round"></span>
           </label>
           </div>

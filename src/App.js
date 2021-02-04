@@ -38,7 +38,7 @@ const App = ()=> {
   const [loaded, setLoaded] = useState(false);
   const [userDataLoaded, setUserDataLoaded] = useState(false);
   const [animalDataLoaded, setAnimalDataLoaded] = useState(false);
-  const [easyDifficulty, setEasyDifficulty] = useState(false);
+  const [hardDifficulty, setHardDifficulty] = useState(false);
 
   
   const adoptableAnimals = [
@@ -74,10 +74,10 @@ const App = ()=> {
   }, [])
 
   const speed = () => {
-    if (easyDifficulty === true) {
-      return 0.0010
-    }else{
+    if (hardDifficulty === true) {
       return 0.05
+    }else{
+      return 0.0010
     }
   }
 
@@ -231,7 +231,7 @@ const App = ()=> {
 
         <Route path="/loadpage"  render={() => <LoadPage userAnimals={userData[0] !== undefined ? userData[0].animals : undefined} selectCurrentCharacter={selectCurrentCharacter} getUserData={getUserData} getAllAnimalData={getAllAnimalData} setLoaded={setLoaded} loaded={loaded} animalDataLoaded={animalDataLoaded}/>} />
 
-        <Route path="/character" render={() => <Character currentCharacter={currentCharacter} currentImage={currentImage} increaseStat={increaseStat} loaded={loaded} setLoggedInUsername={setLoggedInUsername} setLoggedInPassword={setLoggedInPassword} setUserData={setUserData} setCurrentCharacter={setCurrentCharacter} setLoggedIn={setLoggedIn} setHasSelectedCharacter={setHasSelectedCharacter} setLoaded={setLoaded} setUserDataLoaded={setUserDataLoaded} setAnimalDataLoaded={setAnimalDataLoaded} setEasyDifficulty={setEasyDifficulty} getAllUserData={getAllUserData}/>}/>
+        <Route path="/character" render={() => <Character currentCharacter={currentCharacter} currentImage={currentImage} increaseStat={increaseStat} loaded={loaded} setLoggedInUsername={setLoggedInUsername} setLoggedInPassword={setLoggedInPassword} setUserData={setUserData} setCurrentCharacter={setCurrentCharacter} setLoggedIn={setLoggedIn} setHasSelectedCharacter={setHasSelectedCharacter} setLoaded={setLoaded} setUserDataLoaded={setUserDataLoaded} setAnimalDataLoaded={setAnimalDataLoaded} setHardDifficulty={setHardDifficulty} getAllUserData={getAllUserData}/>}/>
         
         </Switch>
       </>
