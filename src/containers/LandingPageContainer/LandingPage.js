@@ -21,7 +21,7 @@ const LandingPage = ({onSubmit}) => {
   return (
 <>
   <div id="welcome_message">
-    <h2>Welcome to our magical homepage</h2>
+    <h2>Welcome to our magical home!</h2>
   </div>
   <br></br>
   <div className="page_container">
