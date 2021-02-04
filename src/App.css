@@ -98,6 +98,9 @@ input:checked + .slider:before {
   opacity: 1;
 }
 
+.new_user_button {
+  margin:15px;
+}
 
 
 
