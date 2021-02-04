@@ -8,6 +8,14 @@
     grid-template-columns: auto auto auto;
 }
 
+.load_array_container {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row wrap;
+    text-align: center;
+    font-family: 'Press Start 2P', cursive;
+}
+
 .animal_container {
     display: flex;
     flex-direction: column;
