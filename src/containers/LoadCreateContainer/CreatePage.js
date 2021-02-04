@@ -34,14 +34,18 @@ const CreatePage = ({allAnimals, userData, handleAdoptAnimal, currentCharacter, 
     getAllAnimalData()
   }
 
+  
+
   const animalArray = allAnimals.map((animal, index) => {
     return(
-      
+      <>
       <div className="animal_container" key={index}>
         <p className="animal_type">{animal.animal} </p>
         <img src={animal.image[0]} alt="animal pic" width="200"></img>
         <button id="choose_animal_button" onClick={() => handleClick(animal)} >Adopt</button>
       </div>
+      
+      </>
     )
 })
 
@@ -85,6 +89,7 @@ if(userDataLoaded === false){
 
   return(
     <>
+    <p id="instruction"> <b>Select a Tamagotchi you would like to adopt and give it a name below! </b></p>
     <div className="animal_array_container">
         {animalArray}
     </div>

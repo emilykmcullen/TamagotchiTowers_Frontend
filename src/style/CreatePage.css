@@ -18,9 +18,12 @@
 }
 
 .link_container {
-    display: flex;
-    justify-content: center;
+    display: flex; 
+    justify-content: space-evenly;
     padding-top: 20px;
+    
+    
+
 }
 
 #choose_animal_button:focus {
