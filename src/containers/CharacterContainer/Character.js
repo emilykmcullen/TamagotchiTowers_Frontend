@@ -5,22 +5,22 @@ import StatBar from "../../components/CharacterComponents/StatBar";
 
 
 
-const Character = ({currentCharacter, increaseStat, currentImage, loaded, setLoggedInUsername, setLoggedInPassword, setUserData, setCurrentCharacter, setLoggedIn, setHasSelectedCharacter, setLoaded, setUserDataLoaded, setAnimalDataLoaded, setEasyDifficulty}) => {
+const Character = ({currentCharacter, increaseStat, currentImage, loaded, setLoggedInUsername, setLoggedInPassword, setUserData, setCurrentCharacter, setLoggedIn, setHasSelectedCharacter, setLoaded, setUserDataLoaded, setAnimalDataLoaded, setDifficulty}) => {
 
     if(loaded === false){
       return <p>Loading...</p>
     }
 
-    const setEasy = () => {
+    const difficulty = () => {
       // Get the checkbox
-  var checkBox = document.getElementById("myCheck");
-
-  // If the checkbox is checked, display the output text
-  if (checkBox.checked == true){
-    setEasyDifficulty(true)
-  } else {
-    setEasyDifficulty(false)
-  }
+      var slider = document.getElementById("myRange");
+      var output = document.getElementById("demo");
+      output.innerHTML = slider.value; // Display the default slider value
+      
+      // Update the current slider value (each time you drag the slider handle)
+      slider.oninput = function() {
+        output.innerHTML = this.value;
+      }
     }
 
     const logout = (data) => {
@@ -67,10 +67,9 @@ const Character = ({currentCharacter, increaseStat, currentImage, loaded, setLog
           <p>Species: {currentCharacter.animalType}</p>
           <img src={currentImage} alt="animal pic" width="200"></img>
           <p>Easy Mode</p>
-          <label className="switch">
-            <input type="checkbox" id="myCheck" onClick={setEasy}></input>
-            <span className="slider round"></span>
-          </label>
+          <div class="slidecontainer">
+            <input type="range" min="0.0010" max="0.1" value="0.0010" class="slider" id="myRange"></input>
+          </div>
             <StatBar stat={currentCharacter.health} statName="Health"
              increaseStat={increaseStat}/>
             <StatBar stat={currentCharacter.happiness} statName="Happiness" 
