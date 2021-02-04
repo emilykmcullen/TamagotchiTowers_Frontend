@@ -37,7 +37,7 @@ const LoadPage = ({userAnimals, selectCurrentCharacter, getUserData, getAllAnima
       <div className="animal_container"><div key={animal.id}>
       <DisplayAllCharacters animal={animal} />
       <Link  from="/loadpage" to="/character" >
-          <button type="button" onClick={() => selectCurrentCharacter(animal.id)}>
+          <button className="look_after_button" type="button" onClick={() => selectCurrentCharacter(animal.id)}>
               <h6>Look after your pet</h6>
           </button>
       </Link>

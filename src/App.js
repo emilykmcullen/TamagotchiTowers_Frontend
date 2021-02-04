@@ -17,6 +17,7 @@ import "./style/LandingPage.css"
 import "./style/CreatePage.css"
 import "./style/CharacterPage.css"
 import "./style/ChoicePage.css"
+import "./style/LoadPage.css"
 import SaveForm from "./components/LoadCreateComponents/SaveForm";
 
 
