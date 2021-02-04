@@ -228,7 +228,7 @@ const App = ()=> {
 
         <Route path="/loadpage"  render={() => <LoadPage userAnimals={userData[0] !== undefined ? userData[0].animals : undefined} selectCurrentCharacter={selectCurrentCharacter} getUserData={getUserData} getAllAnimalData={getAllAnimalData} setLoaded={setLoaded} loaded={loaded} animalDataLoaded={animalDataLoaded}/>} />
 
-        <Route path="/character" render={() => <Character currentCharacter={currentCharacter} currentImage={currentImage} increaseStat={increaseStat} loaded={loaded} setEasyDifficulty={setEasyDifficulty}/>}/>
+        <Route path="/character" render={() => <Character currentCharacter={currentCharacter} currentImage={currentImage} increaseStat={increaseStat} loaded={loaded} setLoggedInUsername={setLoggedInUsername} setLoggedInPassword={setLoggedInPassword} setUserData={setUserData} setCurrentCharacter={setCurrentCharacter} setLoggedIn={setLoggedIn} setHasSelectedCharacter={setHasSelectedCharacter} setLoaded={setLoaded} setUserDataLoaded={setUserDataLoaded} setAnimalDataLoaded={setAnimalDataLoaded} setEasyDifficulty={setEasyDifficulty}/>}/>
         
         </Switch>
       </>

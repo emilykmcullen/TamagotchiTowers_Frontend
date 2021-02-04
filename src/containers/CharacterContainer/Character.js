@@ -1,10 +1,11 @@
 import React, {useState} from "react";
+import { Link } from "react-router-dom";
 import StatBar from "../../components/CharacterComponents/StatBar";
 
 
 
 
-const Character = ({currentCharacter, increaseStat, currentImage, loaded, setEasyDifficulty}) => {
+const Character = ({currentCharacter, increaseStat, currentImage, loaded, setLoggedInUsername, setLoggedInPassword, setUserData, setCurrentCharacter, setLoggedIn, setHasSelectedCharacter, setLoaded, setUserDataLoaded, setAnimalDataLoaded, setEasyDifficulty}) => {
 
     if(loaded === false){
       return <p>Loading...</p>
@@ -21,6 +22,27 @@ const Character = ({currentCharacter, increaseStat, currentImage, loaded, setEas
     setEasyDifficulty(false)
   }
     }
+
+    const logout = (data) => {
+      const requestOptions = {
+          
+          method: 'PUT',
+          headers: {'Content-Type': 'application/json' },
+          body: JSON.stringify(
+            data
+          )
+      };
+      return fetch(`http://localhost:8080/api/animals/${data.id}`, requestOptions)
+      .then(setLoggedInUsername())
+      .then(setLoggedInPassword())
+      .then(setUserData([]))
+      .then(setCurrentCharacter({}))
+      .then(setLoggedIn(false))
+      .then(setHasSelectedCharacter(false))
+      .then(setLoaded(false))
+      .then(setUserDataLoaded(false))
+      .then(setAnimalDataLoaded(false))
+    };
 
     return(
         <div>
@@ -45,7 +67,12 @@ const Character = ({currentCharacter, increaseStat, currentImage, loaded, setEas
              increaseStat={increaseStat} buttonLabel="Take for walk"/>
             <StatBar stat={currentCharacter.hunger} statName="Hunger"
              increaseStat={increaseStat} buttonLabel="Feed"/>
-            
+          <br/>
+          <Link  from="/character" to="/" >
+          <button type="button" onClick={() => logout(currentCharacter)}>
+              Log out
+          </button>
+          </Link>
         </div>
     )
   };
