@@ -55,13 +55,15 @@ const SaveForm = ({logInNewUser}) => {
             <input className="new_user_button" type="text"
             placeholder="Your username"
             value={newUsername}
-            onChange={handleUsernameChange}/>
+            onChange={handleUsernameChange}
+            autoComplete="off"/>
             
 
             <input className="new_user_button" type="password"
             placeholder="Your password"
             value={newPassword}
-            onChange={handlePasswordChange}/>
+            onChange={handlePasswordChange}
+            autoComplete="off"/>
 
             <input className="new_user_button" type="submit"
             value="Create Account and Log in"/>

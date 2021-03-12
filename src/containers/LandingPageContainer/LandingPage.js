@@ -40,7 +40,8 @@ const LandingPage = ({onSubmit}) => {
           name="username"
           id="username"
           type="text"
-          value={formData.username} />
+          value={formData.username} 
+          autoComplete="off"/>
       </div>
 
       
@@ -52,7 +53,8 @@ const LandingPage = ({onSubmit}) => {
           name="password"
           id="password"
           type="password"
-          value={formData.password} />
+          value={formData.password} 
+          autoComplete="off"/>
       </div>
       <div className="form_wrap">
         <input onClick={handleSubmit} type="submit" value="Log In" />
